@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sobey</groupId>
+	<artifactId>sobey-cmop</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Sobey :: cmop</name>
+	<packaging>pom</packaging>
+
+	<description>成都索贝视频云计算有限公司JavaEE开发框架</description>
+	<inceptionYear>2013-2015</inceptionYear>
+
+	<developers>
+		<developer>
+			<id>liukai</id>
+			<name>刘凯</name>
+			<email>kai8406@gmail.com</email>
+			<organization>Sobey</organization>
+			<roles>
+				<role>Developers leader</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>sobey-modules</module>
+		<module>sobey-projects</module>
+	</modules>
+</project>

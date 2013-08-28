@@ -1,0 +1,20 @@
+# Eclipse project files
+.classpath
+.project
+.settings
+.springBeans
+.externalToolBuilders
+.gitattributes
+.svn
+.mymetadata
+
+# Intellij project files
+*.iml
+.idea/
+
+# Others
+target/
+logs/
+/support/jmeter/*.jtl
+/support/jmeter/*.log
+/support/local-script/
