@@ -12,42 +12,47 @@
 		<!-- 主要依赖库的版本定义 -->
 		<sobey-cmop.version>0.0.1-SNAPSHOT</sobey-cmop.version>
 		<spring.version>3.2.4.RELEASE</spring.version>
-		<hibernate.version>4.2.4.Final</hibernate.version>
+		<hibernate.version>4.2.6.Final</hibernate.version>
 		<mybatis.version>3.2.2</mybatis.version>
-		<spring-data-jpa.version>1.3.4.RELEASE</spring-data-jpa.version>
+		<spring-data-jpa.version>1.4.1.RELEASE</spring-data-jpa.version>
 		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<shiro.version>1.2.2</shiro.version>
 		<cxf.version>2.7.6</cxf.version>
 		<activemq.version>5.7.0</activemq.version>
 		<quartz.version>2.2.0</quartz.version>
-		<jedis.version>2.1.0</jedis.version>
+		<jedis.version>2.2.1</jedis.version>
 		<ehcache.version>2.6.6</ehcache.version>
-		<spymemcached.version>2.9.1</spymemcached.version>
+		<spymemcached.version>2.10.0</spymemcached.version>
 		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<jolokia.version>1.1.3</jolokia.version>
-		<jackson.version>2.2.2</jackson.version>
+		<jackson.version>2.2.3</jackson.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
-		<guava.version>14.0.1</guava.version>
-		<joda-time.version>2.2</joda-time.version>
+		<guava.version>15.0</guava.version>
+		<joda-time.version>2.3</joda-time.version>
 		<dozer.version>5.4.0</dozer.version>
-		<httpclient.version>4.2.5</httpclient.version>
+		<httpclient.version>4.3</httpclient.version>
 		<freemarker.version>2.3.20</freemarker.version>
 		<javasimon.version>3.4.0</javasimon.version>
+		<aspectj.version>1.7.3</aspectj.version>
 		<junit.version>4.11</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<powermock.version>1.5.1</powermock.version>
-		<selenium.version>2.34.0</selenium.version>
-		<jetty.version>7.6.12.v20130726</jetty.version>
+		<selenium.version>2.35.0</selenium.version>
+		<jetty.version>7.6.13.v20130916</jetty.version>
 		<h2.version>1.3.173</h2.version>
 
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
 	</properties>
+	
+	<prerequisites>
+  		<maven>3.0.0</maven>
+	</prerequisites>
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
@@ -82,6 +87,7 @@
 				<artifactId>sobey-core</artifactId>
 				<version>${sobey-cmop.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>com.sobey</groupId>
 				<artifactId>sobey-extension</artifactId>
@@ -101,11 +107,13 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
@@ -118,22 +126,26 @@
 				<artifactId>spring-aop</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjrt</artifactId>
-				<version>1.7.3</version>
+				<version>${aspectj.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.7.3</version>
+				<version>${aspectj.version}</version>
 				<scope>runtime</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
 			<!-- email/scheduler/freemarker -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -149,15 +161,24 @@
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-ehcache</artifactId>
 				<version>${hibernate.version}</version>
+			</dependency>
+			
+			<!-- 定义隐式依赖的版本 -->
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.18.0-GA</version>
 			</dependency>
 			
 			<!-- spring data jpa -->
@@ -179,6 +200,7 @@
 				<artifactId>mybatis</artifactId>
 				<version>${mybatis.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis-spring</artifactId>
@@ -191,6 +213,7 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
@@ -213,6 +236,7 @@
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
@@ -234,6 +258,7 @@
 				<version>2.5</version>
 				<scope>provided</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
@@ -247,16 +272,19 @@
 				<artifactId>shiro-core</artifactId>
 				<version>${shiro.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-spring</artifactId>
 				<version>${shiro.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-web</artifactId>
 				<version>${shiro.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-ehcache</artifactId>
@@ -282,6 +310,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
@@ -298,6 +327,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http</artifactId>
@@ -311,6 +341,7 @@
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 				<version>${cxf.version}</version>
 			</dependency>
+			
 			<dependency>
 	            <groupId>com.fasterxml.jackson.jaxrs</groupId>
 	            <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -402,7 +433,8 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
-			</dependency>			
+			</dependency>	
+					
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -490,16 +522,19 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>${commons-io.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>1.8</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
@@ -525,11 +560,13 @@
 				<artifactId>joda-time</artifactId>
 				<version>${joda-time.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time-jsptags</artifactId>
 				<version>1.1.1</version>
 			</dependency>
+			
 			<!-- joda for jackson -->
 			<dependency>
 	            <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -585,6 +622,7 @@
 				<artifactId>mail</artifactId>
 				<version>1.4.7</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>javax.activation</groupId>
 				<artifactId>activation</artifactId>
@@ -598,11 +636,13 @@
 				<artifactId>javasimon-spring</artifactId>
 				<version>${javasimon.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.javasimon</groupId>
 				<artifactId>javasimon-jdbc4</artifactId>
 				<version>${javasimon.version}</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.javasimon</groupId>
 				<artifactId>javasimon-console-embed</artifactId>
@@ -618,6 +658,7 @@
 				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
+			
 			<!-- mockito -->
 			<dependency>
 				<groupId>org.mockito</groupId>
@@ -625,12 +666,14 @@
 				<version>${mockito.version}</version>
 				<scope>test</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-module-junit4</artifactId>
 				<version>${powermock.version}</version>
 				<scope>test</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-api-mockito</artifactId>
@@ -689,6 +732,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-remote-driver</artifactId>
@@ -713,6 +757,7 @@
 				<version>${jetty.version}</version>
 				<scope>test</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-jsp</artifactId>
@@ -743,10 +788,25 @@
 				<version>1.3.1b</version>
 				<scope>test</scope>
 			</dependency>
+			
+			<!-- 定义隐式依赖的版本 -->
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+				<version>1.3</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.objenesis</groupId>
+				<artifactId>objenesis</artifactId>
+				<version>1.2</version>
+				<scope>test</scope>
+			</dependency>
 			<!-- TEST end -->
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<!-- 插件配置 -->
 	<build>
 		<pluginManagement>
@@ -774,7 +834,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.15</version>
+					<version>2.16</version>
 					<configuration>
 						<includes>
 							<include>**/*Test.java</include>
@@ -784,7 +844,7 @@
 						<dependency>
 							<groupId>org.apache.maven.surefire</groupId>
 							<artifactId>surefire-junit47</artifactId>
-							<version>2.15</version>
+							<version>2.16</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -800,7 +860,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.5.2</version>
+					<version>2.6</version>
 				</plugin>
 
 				<!-- war打包插件, 设定war包名称不带版本号 -->
@@ -826,6 +886,7 @@
 						</archive>
 					</configuration>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -843,7 +904,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.5</version>
 				</plugin>
 				
 				<!-- enforcer插件, 避免被依赖的依赖引入过期的jar包 -->
@@ -865,6 +926,7 @@
                 					<requireJavaVersion>
                   						<version>1.6</version>
                 					</requireJavaVersion>
+                					<requireUpperBoundDeps/>
 									<bannedDependencies>
 										<searchTransitive>true</searchTransitive>
 										<excludes>
@@ -901,6 +963,7 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.8</version>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
@@ -923,7 +986,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	
 	<profiles>
 		<!-- 执行@Category(Smoke.class)的TestCase -->
 		<profile>
@@ -973,5 +1036,5 @@
 			</build>
 		</profile>
 	</profiles>
-
+	 
 </project>
