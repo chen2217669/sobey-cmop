@@ -25,14 +25,6 @@
 			<artifactId>spring-context</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- WEB begin -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!-- WEB end -->
 
 		<!-- CACHE -->
 		<dependency>
@@ -47,6 +39,7 @@
             <artifactId>jedis</artifactId>
             <optional>true</optional>
         </dependency>
+        
         <dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -66,16 +59,19 @@
 			<artifactId>commons-lang3</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
