@@ -44,6 +44,7 @@
 		<selenium.version>2.37.1</selenium.version>
 		<jetty.version>7.6.13.v20130916</jetty.version>
 		<h2.version>1.3.174</h2.version>
+		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
