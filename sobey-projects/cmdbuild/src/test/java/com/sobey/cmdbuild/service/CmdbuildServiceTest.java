@@ -16,7 +16,7 @@ import com.sobey.cmdbuild.entity.Company;
 import com.sobey.test.spring.SpringTransactionalTestCase;
 
 /**
- * OrganisationService的测试用例,测试sevice层的业务逻辑
+ * CmdbuildService的测试用例,测试sevice层的业务逻辑
  * 
  * @author Administrator
  * 
@@ -24,14 +24,14 @@ import com.sobey.test.spring.SpringTransactionalTestCase;
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager")
-public class OrganisationServiceTest extends SpringTransactionalTestCase {
+public class CmdbuildServiceTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private OrganisationService organisationService;
+	private CmdbuildService service;
 
 	@Test
 	public void getCompany() {
-		List<Company> list = organisationService.getCompany();
+		List<Company> list = service.getCompany();
 		System.out.println(list.size());
 		assertNotNull(list);
 	}
@@ -40,7 +40,7 @@ public class OrganisationServiceTest extends SpringTransactionalTestCase {
 	@Ignore
 	public void saveCompany() {
 		Company company = CompanyData.randomCompany();
-		organisationService.saveOrUpdate(company);
+		service.saveOrUpdate(company);
 		assertNotNull(company.getCode());
 	}
 

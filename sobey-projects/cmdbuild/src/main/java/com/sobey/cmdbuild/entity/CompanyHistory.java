@@ -7,7 +7,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,21 +18,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "company_history", schema = "public")
-public class CompanyHistory implements java.io.Serializable {
+public class CompanyHistory extends BasicEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
 	private Company company;
-	private String idClass;
-	private String code;
-	private String description;
-	private Character status;
-	private String user;
-	private Date beginDate;
-	private String notes;
 	private Date endDate;
 	private String zip;
 	private String phone;
@@ -70,17 +57,6 @@ public class CompanyHistory implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "\"Id\"", nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "\"CurrentId\"", nullable = false)
 	public Company getCompany() {
@@ -89,70 +65,6 @@ public class CompanyHistory implements java.io.Serializable {
 
 	public void setCompany(Company company) {
 		this.company = company;
-	}
-
-	@Column(name = "\"IdClass\"", nullable = false)
-	public String getIdClass() {
-		return this.idClass;
-	}
-
-	public void setIdClass(String idClass) {
-		this.idClass = idClass;
-	}
-
-	@Column(name = "\"Code\"", length = 100)
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Column(name = "\"Description\"", length = 250)
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	@Column(name = "\"Status\"", length = 1)
-	public Character getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(Character status) {
-		this.status = status;
-	}
-
-	@Column(name = "\"User\"", length = 40)
-	public String getUser() {
-		return this.user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
-
-	@Column(name = "\"Notes\"")
-	public String getNotes() {
-		return this.notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

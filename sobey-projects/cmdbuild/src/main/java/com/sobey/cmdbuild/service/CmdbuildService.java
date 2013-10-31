@@ -19,10 +19,12 @@ import com.sobey.core.persistence.SearchFilter;
 
 @Component
 @Transactional
-public class OrganisationService {
+public class CmdbuildService {
 
 	@Autowired
 	private CompanyDao companyDao;
+
+	// ==== Company ====//
 
 	public Company findCompany(Integer id) {
 		return companyDao.findOne(id);
@@ -34,6 +36,10 @@ public class OrganisationService {
 
 	public List<Company> getCompany() {
 		return (List<Company>) companyDao.findAll();
+	}
+
+	public void deleteCompany(Integer id) {
+		companyDao.delete(id);
 	}
 
 	/**

@@ -7,4 +7,7 @@
 	<!-- required  -->
 
 	<!-- optional -->
+	
+	<import resource="webservice/applicationContext-soap-server.xml" />
+	
 </beans>
