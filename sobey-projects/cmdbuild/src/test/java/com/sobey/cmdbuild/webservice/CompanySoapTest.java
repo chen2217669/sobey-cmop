@@ -3,6 +3,9 @@ package com.sobey.cmdbuild.webservice;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +20,7 @@ import com.sobey.cmdbuild.data.CompanyData;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.webservice.response.GetCompanyResult;
 import com.sobey.cmdbuild.webservice.response.base.IdResult;
+import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 import com.sobey.core.mapper.BeanMapper;
 
@@ -40,7 +44,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	 * 测试获取用户.
 	 */
 	@Test
-	// @Ignore
+	@Ignore
 	public void getCompany() {
 		GetCompanyResult response = service.getCompany(78);
 		assertEquals("sobey", response.getCompanyDTO().getCode());
@@ -75,7 +79,27 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	public void deleteCompany() {
 		Integer companyId = 78;
 		IdResult response = service.deleteCompany(companyId);
-		// assertNotNull(response.getId());
+		assertNotNull(response.getId());
+	}
+
+	@Test
+	public void getPagination() {
+
+		Map<String, Object> searchParams = new HashMap<String, Object>();
+
+		// searchParams.put("EQ_zip", "zip3631");
+
+		/**
+		 * TODO 查询有问题.本来 status = 'A' ,但是传递到下个方法后转换成了status = 65 . 存疑,但是将该参数放置在最后一步的分页查询还是OK的.
+		 */
+
+		// Character status = 'A';
+		// searchParams.put("EQ_status", status);
+
+		PaginationResult<CompanyDTO> result = service.getCompanyDaoPageable(searchParams, 1, 10);
+
+		assertNotNull(result.getGetTotalElements());
+		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());
 	}
 
 }

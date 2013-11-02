@@ -1,5 +1,7 @@
 package com.sobey.cmdbuild.webservice;
 
+import java.util.Map;
+
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.validation.ConstraintViolationException;
@@ -16,6 +18,7 @@ import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.service.CmdbuildService;
 import com.sobey.cmdbuild.webservice.response.GetCompanyResult;
 import com.sobey.cmdbuild.webservice.response.base.IdResult;
+import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.base.WSResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 import com.sobey.core.beanvalidator.BeanValidators;
@@ -155,6 +158,13 @@ public class CmdbuildSoapServiceImpl implements CmdbuildSoapService {
 		} catch (RuntimeException e) {
 			return handleGeneralError(result, e);
 		}
+	}
+
+	@Override
+	public PaginationResult<CompanyDTO> getCompanyDaoPageable(
+			@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize) {
+		return service.getCompanyDaoPageable(searchParams, pageNumber, pageSize);
 	}
 
 }
