@@ -13,7 +13,7 @@ import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 @WebService(name = "CmdbuildService", targetNamespace = WsConstants.NS)
 public interface CmdbuildSoapService {
 
-	GetCompanyResult getCompany(@WebParam(name = "id") Integer id);
+	GetCompanyResult getCompanies(@WebParam(name = "id") Integer id);
 
 	IdResult createCompany(@WebParam(name = "company") CompanyDTO company);
 

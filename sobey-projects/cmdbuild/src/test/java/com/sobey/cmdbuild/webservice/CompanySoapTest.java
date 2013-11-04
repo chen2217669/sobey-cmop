@@ -45,8 +45,8 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	 */
 	@Test
 	@Ignore
-	public void getCompany() {
-		GetCompanyResult response = service.getCompany(78);
+	public void getCompanies() {
+		GetCompanyResult response = service.getCompanies(78);
 		assertEquals("sobey", response.getCompanyDTO().getCode());
 	}
 
@@ -65,10 +65,10 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 
 		Integer companyId = 78;
 
-		GetCompanyResult getCompanyResult = service.getCompany(companyId);
+		GetCompanyResult getCompanyResult = service.getCompanies(companyId);
 		CompanyDTO companyDTO = getCompanyResult.getCompanyDTO();
 		companyDTO.setCode("codeliukai333");
-		companyDTO.setDescription("刘凯目前单身123!");
+		companyDTO.setDescription("刘凯目前单身,求一妹子~!");
 
 		IdResult response = service.updateCompany(companyId, companyDTO);
 		assertNotNull(response.getId());

@@ -1,4 +1,4 @@
-package com.sobey.cmdbuild.service;
+package com.sobey.cmdbuild.service.organisation;
 
 import java.util.List;
 import java.util.Map;
@@ -6,53 +6,71 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.repository.CompanyDao;
+import com.sobey.cmdbuild.service.BasicSevcie;
 import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 import com.sobey.core.mapper.BeanMapper;
 import com.sobey.core.persistence.DynamicSpecifications;
 import com.sobey.core.persistence.SearchFilter;
 
-@Component
+/**
+ * Company的service类.
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
 @Transactional
-public class CmdbuildService {
+public class CompanyService extends BasicSevcie {
 
 	@Autowired
 	private CompanyDao companyDao;
 
-	// ==== Company ====//
-
+	/**
+	 * 根据ID获得对象
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Company findCompany(Integer id) {
 		return companyDao.findOne(id);
 	}
 
+	/**
+	 * // * 新增、保存对象
+	 * 
+	 * @param company
+	 * @return
+	 */
 	public Company saveOrUpdate(Company company) {
 		return companyDao.save(company);
 	}
 
-	public List<Company> getCompany() {
-		return (List<Company>) companyDao.findAll();
-	}
-
+	/**
+	 * 根据ID删除对象
+	 * 
+	 * @param id
+	 */
 	public void deleteCompany(Integer id) {
 		companyDao.delete(id);
 	}
 
 	/**
-	 * 创建分页请求.
+	 * 获得所有对象集合
+	 * 
+	 * @return
 	 */
-	private PageRequest buildPageRequest(int pageNumber, int pagzSize) {
-		return new PageRequest(pageNumber - 1, pagzSize, new Sort(Direction.DESC, "id"));
+	public List<Company> getCompanies() {
+		return (List<Company>) companyDao.findAll();
 	}
 
-	private Page<Company> getCompanyPageable(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+	private Page<Company> getCompanyPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
 
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
 
@@ -64,7 +82,7 @@ public class CmdbuildService {
 	public PaginationResult<CompanyDTO> getCompanyDaoPageable(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
 
-		Page<Company> page = getCompanyPageable(searchParams, pageNumber, pageSize);
+		Page<Company> page = getCompanyPage(searchParams, pageNumber, pageSize);
 
 		List<CompanyDTO> dtos = BeanMapper.mapList(page.getContent(), CompanyDTO.class);
 
