@@ -3,6 +3,7 @@ package com.sobey.cmdbuild.data;
 import java.util.Date;
 
 import com.sobey.cmdbuild.entity.Company;
+import com.sobey.cmdbuild.utils.CMDBuildConstants;
 import com.sobey.test.data.RandomData;
 
 public class CompanyData {
@@ -17,13 +18,10 @@ public class CompanyData {
 		company.setAddress(RandomData.randomName("address"));
 		company.setZip(RandomData.randomName("zip"));
 		company.setRemark(RandomData.randomName("remark"));
-		company.setUser("admin");
-
+		company.setUser("admin");// 无法插入postgresql,估计和其数据类型有关系,太TMD坑爹了.
 		company.setBeginDate(new Date());
-		company.setIdClass(null);
-
-		char status = 'A';
-		company.setStatus(status);
+		company.setIdClass(Company.class.getSimpleName());
+		company.setStatus(CMDBuildConstants.STATUS_ACTIVE);
 
 		return company;
 	}

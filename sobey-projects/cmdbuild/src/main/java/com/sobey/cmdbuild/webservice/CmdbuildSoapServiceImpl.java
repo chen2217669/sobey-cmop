@@ -132,7 +132,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public PaginationResult<CompanyDTO> getCompanyDaoPageable(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize) {
-		return comm.companyService.getCompanyDTOPageable(searchParams, pageNumber, pageSize);
+		return comm.companyService.getCompanyDTOPagination(searchParams, pageNumber, pageSize);
 	}
 
 }

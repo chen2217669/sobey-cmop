@@ -51,7 +51,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	@Ignore
+	// @Ignore
 	public void saveCompany() {
 		Company company = CompanyData.randomCompany();
 		CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
@@ -83,18 +83,16 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
+	@Ignore
 	public void getPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		// searchParams.put("EQ_zip", "zip3631");
-
 		/**
-		 * TODO 查询有问题.本来 status = 'A' ,但是传递到下个方法后转换成了status = 65 . 存疑,但是将该参数放置在最后一步的分页查询还是OK的.
+		 * TODO 查询有问题.设置 status = 'A' , 但是传递到下个方法后转换成了status = 65 , 存疑. <br>
+		 * 将该参数放置在最后一步的分页查询还是OK的.
 		 */
-
-		// Character status = 'A';
-		// searchParams.put("EQ_status", status);
+		// searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 
 		PaginationResult<CompanyDTO> result = service.getCompanyDaoPageable(searchParams, 1, 10);
 

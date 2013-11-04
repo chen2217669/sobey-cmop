@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.repository.CompanyDao;
 import com.sobey.cmdbuild.service.BasicSevcie;
+import com.sobey.cmdbuild.utils.CMDBuildConstants;
 import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 import com.sobey.core.mapper.BeanMapper;
@@ -43,7 +44,7 @@ public class CompanyService extends BasicSevcie {
 	}
 
 	/**
-	 * // * 新增、保存对象
+	 * 新增、保存对象
 	 * 
 	 * @param company
 	 * @return
@@ -67,7 +68,7 @@ public class CompanyService extends BasicSevcie {
 	 * @return
 	 */
 	public List<Company> getCompanies() {
-		return (List<Company>) companyDao.findAll();
+		return companyDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 
 	/**
@@ -79,8 +80,11 @@ public class CompanyService extends BasicSevcie {
 	 * @return
 	 */
 	private Page<Company> getCompanyPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<Company> spec = buildSpecification(searchParams);
+
 		return companyDao.findAll(spec, pageRequest);
 	}
 
@@ -94,11 +98,13 @@ public class CompanyService extends BasicSevcie {
 	 */
 	private Specification<Company> buildSpecification(Map<String, Object> searchParams) {
 
-		Character status = 'A';
-		searchParams.put("EQ_status", status);
+		// 将条件查询放入Map中.查询条件可查询SearchFilter类.
+		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		Specification<Company> spec = DynamicSpecifications.bySearchFilter(filters.values(), Company.class);
+
 		return spec;
 	}
 
@@ -108,15 +114,19 @@ public class CompanyService extends BasicSevcie {
 	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
 	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
+	 *            当前页数,最小为1.
 	 * @param pageSize
+	 *            当前页大小,如果每页为10行
 	 * @return
 	 */
-	public PaginationResult<CompanyDTO> getCompanyDTOPageable(Map<String, Object> searchParams, int pageNumber,
+	public PaginationResult<CompanyDTO> getCompanyDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
 
 		Page<Company> page = getCompanyPage(searchParams, pageNumber, pageSize);
 
+		// 将List<Company>中的数据转换为List<CompanyDTO>
 		List<CompanyDTO> dtos = BeanMapper.mapList(page.getContent(), CompanyDTO.class);
 
 		PaginationResult<CompanyDTO> paginationResult = new PaginationResult<CompanyDTO>(page.getNumber(),

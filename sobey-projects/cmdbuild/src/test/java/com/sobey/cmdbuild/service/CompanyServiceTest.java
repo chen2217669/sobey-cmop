@@ -21,14 +21,6 @@ import com.sobey.test.spring.SpringTransactionalTestCase;
  * @author Administrator
  * 
  */
-/**
- * @author Administrator
- *
- */
-/**
- * @author Administrator
- * 
- */
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager")
@@ -47,7 +39,7 @@ public class CompanyServiceTest extends SpringTransactionalTestCase {
 	@Test
 	public void getCompanies() {
 		List<Company> list = service.getCompanies();
-		System.out.println(list.size());
+		System.out.println("列表数据数量:" + list.size());
 		assertNotNull(list);
 	}
 
