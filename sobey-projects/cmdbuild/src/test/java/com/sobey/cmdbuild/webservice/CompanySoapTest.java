@@ -18,10 +18,11 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.CompanyData;
 import com.sobey.cmdbuild.entity.Company;
-import com.sobey.cmdbuild.webservice.response.GetCompanyResult;
 import com.sobey.cmdbuild.webservice.response.base.IdResult;
 import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
+import com.sobey.cmdbuild.webservice.response.result.CompanyResult;
+import com.sobey.cmdbuild.webservice.response.result.plural.CompaniesResult;
 import com.sobey.core.mapper.BeanMapper;
 
 /**
@@ -40,14 +41,19 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Autowired
 	private CmdbuildSoapService service;
 
-	/**
-	 * 测试获取用户.
-	 */
+	@Test
+	@Ignore
+	public void findCompany() {
+		Integer companyId = 78;
+		CompanyResult response = service.findCompany(companyId);
+		assertEquals("sobey", response.getCompanyDTO().getCode());
+	}
+
 	@Test
 	@Ignore
 	public void getCompanies() {
-		GetCompanyResult response = service.getCompanies(78);
-		assertEquals("sobey", response.getCompanyDTO().getCode());
+		CompaniesResult result = service.getCompanies();
+		assertEquals("0", result.getCode());
 	}
 
 	@Test
@@ -63,13 +69,11 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void updateCompany() {
 
-		Integer companyId = 78;
-
-		GetCompanyResult getCompanyResult = service.getCompanies(companyId);
+		Integer companyId = 99;
+		CompanyResult getCompanyResult = service.findCompany(companyId);
 		CompanyDTO companyDTO = getCompanyResult.getCompanyDTO();
 		companyDTO.setCode("codeliukai333");
 		companyDTO.setDescription("刘凯目前单身,求一妹子~!");
-
 		IdResult response = service.updateCompany(companyId, companyDTO);
 		assertNotNull(response.getId());
 	}
@@ -94,7 +98,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 		 */
 		// searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 
-		PaginationResult<CompanyDTO> result = service.getCompanyDaoPageable(searchParams, 1, 10);
+		PaginationResult<CompanyDTO> result = service.getCompanyPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());

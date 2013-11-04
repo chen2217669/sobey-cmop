@@ -1,20 +1,16 @@
 package com.sobey.cmdbuild.webservice.response.dto;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.google.common.collect.Lists;
-import com.sobey.cmdbuild.webservice.WsConstants;
+import com.sobey.cmdbuild.constants.WsConstants;
 
 @XmlRootElement
-@XmlType(name = "Company", namespace = WsConstants.NS)
+@XmlType(name = "CompanyDTO", namespace = WsConstants.NS)
 public class CompanyDTO {
 
 	private Integer id;
@@ -25,7 +21,6 @@ public class CompanyDTO {
 	private String phone;
 	private String address;
 	private String remark;
-	private List<CompanyHistoryDTO> historyList = Lists.newArrayList();
 
 	public Integer getId() {
 		return id;
@@ -89,16 +84,6 @@ public class CompanyDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	@XmlElementWrapper(name = "historyList")
-	@XmlElement(name = "companyHistory")
-	public List<CompanyHistoryDTO> getHistoryList() {
-		return historyList;
-	}
-
-	public void setHistoryList(List<CompanyHistoryDTO> historyList) {
-		this.historyList = historyList;
 	}
 
 	/**

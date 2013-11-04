@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.sobey.cmdbuild.webservice.WsConstants;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.sobey.cmdbuild.constants.WsConstants;
 
 /**
- * webservice的分页
+ * 某个对象返回的通用分页PaginationResult.
  * 
  * @author Administrator
  * 
@@ -17,6 +19,7 @@ import com.sobey.cmdbuild.webservice.WsConstants;
 public class PaginationResult<T> extends WSResult {
 
 	// -- PaginationResult基本属性 --//
+
 	private int getNumber;
 	private int getSize;
 	private int getTotalPages;
@@ -26,7 +29,7 @@ public class PaginationResult<T> extends WSResult {
 	private boolean isFirstPage;
 	private boolean hasNextPage;
 	private boolean isLastPage;
-	private List<T> t;
+	private List<T> getContent;
 
 	public PaginationResult() {
 		super();
@@ -34,7 +37,7 @@ public class PaginationResult<T> extends WSResult {
 
 	public PaginationResult(int getNumber, int getSize, int getTotalPages, int getNumberOfElements,
 			int getTotalElements, boolean hasPreviousPage, boolean isFirstPage, boolean hasNextPage,
-			boolean isLastPage, List<T> t) {
+			boolean isLastPage, List<T> getContent) {
 		super();
 		this.getNumber = getNumber;
 		this.getSize = getSize;
@@ -45,7 +48,7 @@ public class PaginationResult<T> extends WSResult {
 		this.isFirstPage = isFirstPage;
 		this.hasNextPage = hasNextPage;
 		this.isLastPage = isLastPage;
-		this.t = t;
+		this.getContent = getContent;
 	}
 
 	public int getGetNumber() {
@@ -120,12 +123,20 @@ public class PaginationResult<T> extends WSResult {
 		this.isLastPage = isLastPage;
 	}
 
-	public List<T> getT() {
-		return t;
+	public List<T> getGetContent() {
+		return getContent;
 	}
 
-	public void setT(List<T> t) {
-		this.t = t;
+	public void setGetContent(List<T> getContent) {
+		this.getContent = getContent;
+	}
+
+	/**
+	 * 重新实现toString()函数方便在日志中打印DTO信息.
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }
