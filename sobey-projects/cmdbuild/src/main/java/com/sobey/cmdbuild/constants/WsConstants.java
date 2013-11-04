@@ -1,4 +1,4 @@
-package com.sobey.cmdbuild.webservice;
+package com.sobey.cmdbuild.constants;
 
 /**
  * WebService常量定义.

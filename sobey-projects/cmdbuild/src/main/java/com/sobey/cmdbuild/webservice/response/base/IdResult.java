@@ -2,15 +2,16 @@ package com.sobey.cmdbuild.webservice.response.base;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.sobey.cmdbuild.webservice.WsConstants;
+import com.sobey.cmdbuild.constants.WsConstants;
 
 /**
- * 创建某个对象返回的 通用IdResult.
+ * 某个对象返回的通用IdResult.
  * 
- * @author badqiu
+ * @author Administrator
  */
 @XmlType(name = "IdResult", namespace = WsConstants.NS)
 public class IdResult extends WSResult {
+
 	private Integer id;
 
 	public IdResult() {

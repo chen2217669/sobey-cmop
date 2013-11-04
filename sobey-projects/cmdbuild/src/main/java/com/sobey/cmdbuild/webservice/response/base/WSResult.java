@@ -2,7 +2,7 @@ package com.sobey.cmdbuild.webservice.response.base;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.sobey.cmdbuild.webservice.WsConstants;
+import com.sobey.cmdbuild.constants.WsConstants;
 
 /**
  * WebService返回结果基类,定义所有返回码.

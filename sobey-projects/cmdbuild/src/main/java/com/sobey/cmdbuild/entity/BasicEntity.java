@@ -8,6 +8,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Basic Entity 基本类 所有的entity皆继承该抽象类.
  * 
@@ -50,6 +52,7 @@ public abstract class BasicEntity {
 		this.idClass = idClass;
 	}
 
+	@NotBlank
 	@Column(name = "\"Code\"", length = 100)
 	public String getCode() {
 		return code;
@@ -59,6 +62,7 @@ public abstract class BasicEntity {
 		this.code = code;
 	}
 
+	@NotBlank
 	@Column(name = "\"Description\"", length = 250)
 	public String getDescription() {
 		return description;

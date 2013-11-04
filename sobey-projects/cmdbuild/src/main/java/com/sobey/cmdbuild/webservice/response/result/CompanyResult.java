@@ -1,13 +1,14 @@
-package com.sobey.cmdbuild.webservice.response;
+package com.sobey.cmdbuild.webservice.response.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.sobey.cmdbuild.webservice.WsConstants;
+import com.sobey.cmdbuild.constants.WsConstants;
 import com.sobey.cmdbuild.webservice.response.base.WSResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 
-@XmlType(name = "GetCompanyResult", namespace = WsConstants.NS)
-public class GetCompanyResult extends WSResult {
+@XmlType(name = "CompanyResult", namespace = WsConstants.NS)
+public class CompanyResult extends WSResult {
+
 	private CompanyDTO companyDTO;
 
 	public CompanyDTO getCompanyDTO() {

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.sobey.cmdbuild.webservice.WsConstants;
+import com.sobey.cmdbuild.constants.WsConstants;
 
 @XmlRootElement
 @XmlType(name = "CompanyHistory", namespace = WsConstants.NS)
