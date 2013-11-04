@@ -1,7 +1,7 @@
-package com.sobey.cmdbuild.utils;
+package com.sobey.cmdbuild.constants;
 
 /**
- * CMDBuild数据库中的一些配置常量.
+ * CMDBuild 常量定义.
  * 
  * @author Administrator
  * 
@@ -19,7 +19,7 @@ public class CMDBuildConstants {
 	public static final Character STATUS_UPDATE = 'U';
 
 	/**
-	 * "N" 非活跃
+	 * "N" 非活跃(删除)
 	 */
 	public static final Character STATUS_NON_ACTIVE = 'N';
 
