@@ -70,16 +70,49 @@ public class CompanyService extends BasicSevcie {
 		return (List<Company>) companyDao.findAll();
 	}
 
+	/**
+	 * Spring-data-jpa自带的分页查询
+	 * 
+	 * @param searchParams
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
 	private Page<Company> getCompanyPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
-
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
-
 		Specification<Company> spec = buildSpecification(searchParams);
-
 		return companyDao.findAll(spec, pageRequest);
 	}
 
-	public PaginationResult<CompanyDTO> getCompanyDaoPageable(Map<String, Object> searchParams, int pageNumber,
+	/**
+	 * 创建动态查询条件组合.
+	 * 
+	 * 自定义的查询在此进行组合.
+	 * 
+	 * @param searchParams
+	 * @return
+	 */
+	private Specification<Company> buildSpecification(Map<String, Object> searchParams) {
+
+		Character status = 'A';
+		searchParams.put("EQ_status", status);
+
+		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+		Specification<Company> spec = DynamicSpecifications.bySearchFilter(filters.values(), Company.class);
+		return spec;
+	}
+
+	/**
+	 * CompanyDTO webservice分页查询.
+	 * 
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
+	 * 
+	 * @param searchParams
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public PaginationResult<CompanyDTO> getCompanyDTOPageable(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
 
 		Page<Company> page = getCompanyPage(searchParams, pageNumber, pageSize);
@@ -91,18 +124,6 @@ public class CompanyService extends BasicSevcie {
 				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
 
 		return paginationResult;
-
-	}
-
-	/**
-	 * 创建动态查询条件组合.
-	 */
-	private Specification<Company> buildSpecification(Map<String, Object> searchParams) {
-		Character status = 'A';
-		searchParams.put("EQ_status", status);
-		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<Company> spec = DynamicSpecifications.bySearchFilter(filters.values(), Company.class);
-		return spec;
 	}
 
 }
