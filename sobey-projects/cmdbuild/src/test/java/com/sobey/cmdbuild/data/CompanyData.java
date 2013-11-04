@@ -2,8 +2,8 @@ package com.sobey.cmdbuild.data;
 
 import java.util.Date;
 
+import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Company;
-import com.sobey.cmdbuild.utils.CMDBuildConstants;
 import com.sobey.test.data.RandomData;
 
 public class CompanyData {
