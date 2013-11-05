@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sobey.cmdbuild.service.CommonService;
-import com.sobey.cmdbuild.webservice.response.base.WSResult;
+import com.sobey.cmdbuild.webservice.response.result.WSResult;
 
 /**
  * SoapSevcie的基本类.

@@ -15,11 +15,11 @@ import org.springframework.dao.DuplicateKeyException;
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.constants.WsConstants;
 import com.sobey.cmdbuild.entity.Company;
-import com.sobey.cmdbuild.webservice.response.base.IdResult;
-import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
-import com.sobey.cmdbuild.webservice.response.result.CompanyResult;
-import com.sobey.cmdbuild.webservice.response.result.plural.CompaniesResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOResult;
+import com.sobey.cmdbuild.webservice.response.result.IdResult;
+import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.beanvalidator.BeanValidators;
 import com.sobey.core.mapper.BeanMapper;
 import com.sobey.core.utils.Exceptions;
@@ -30,9 +30,9 @@ import com.sobey.core.utils.Exceptions;
 public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements CmdbuildSoapService {
 
 	@Override
-	public CompanyResult findCompany(@WebParam(name = "id") Integer id) {
+	public DTOResult<CompanyDTO> findCompany(@WebParam(name = "id") Integer id) {
 
-		CompanyResult result = new CompanyResult();
+		DTOResult<CompanyDTO> result = new DTOResult<CompanyDTO>();
 
 		try {
 
@@ -44,7 +44,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
 
-			result.setCompanyDTO(companyDTO);
+			result.setDto(companyDTO);
 
 			return result;
 
@@ -131,7 +131,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			Company company = comm.companyService.findCompany(id);
 
-			Company companyEntity = BeanMapper.map(findCompany(id).getCompanyDTO(), Company.class);
+			Company companyEntity = BeanMapper.map(findCompany(id).getDto(), Company.class);
 
 			BeanMapper.copy(companyEntity, company);
 
@@ -173,9 +173,9 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	}
 
 	@Override
-	public CompaniesResult getCompanies() {
+	public DTOListResult<CompanyDTO> getCompanies() {
 
-		CompaniesResult result = new CompaniesResult();
+		DTOListResult<CompanyDTO> result = new DTOListResult<CompanyDTO>();
 
 		try {
 

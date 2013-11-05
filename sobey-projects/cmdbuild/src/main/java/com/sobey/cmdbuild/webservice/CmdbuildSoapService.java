@@ -6,11 +6,11 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.sobey.cmdbuild.constants.WsConstants;
-import com.sobey.cmdbuild.webservice.response.base.IdResult;
-import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
-import com.sobey.cmdbuild.webservice.response.result.CompanyResult;
-import com.sobey.cmdbuild.webservice.response.result.plural.CompaniesResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOResult;
+import com.sobey.cmdbuild.webservice.response.result.IdResult;
+import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 
 /**
  * CMDBuild模块对外暴露的webservice接口.
@@ -25,7 +25,7 @@ public interface CmdbuildSoapService {
 	// =========== Comany ===========//
 	// ==============================//
 
-	CompanyResult findCompany(@WebParam(name = "id") Integer id);
+	DTOResult<CompanyDTO> findCompany(@WebParam(name = "id") Integer id);
 
 	IdResult createCompany(@WebParam(name = "companyDTO") CompanyDTO companyDTO);
 
@@ -33,7 +33,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteCompany(@WebParam(name = "id") Integer id);
 
-	CompaniesResult getCompanies();
+	DTOListResult<CompanyDTO> getCompanies();
 
 	PaginationResult<CompanyDTO> getCompanyPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,

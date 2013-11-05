@@ -18,11 +18,11 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.CompanyData;
 import com.sobey.cmdbuild.entity.Company;
-import com.sobey.cmdbuild.webservice.response.base.IdResult;
-import com.sobey.cmdbuild.webservice.response.base.PaginationResult;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
-import com.sobey.cmdbuild.webservice.response.result.CompanyResult;
-import com.sobey.cmdbuild.webservice.response.result.plural.CompaniesResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
+import com.sobey.cmdbuild.webservice.response.result.DTOResult;
+import com.sobey.cmdbuild.webservice.response.result.IdResult;
+import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
 
 /**
@@ -45,19 +45,19 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void findCompany() {
 		Integer companyId = 78;
-		CompanyResult response = service.findCompany(companyId);
-		assertEquals("sobey", response.getCompanyDTO().getCode());
-	}
-
-	@Test
-	@Ignore
-	public void getCompanies() {
-		CompaniesResult result = service.getCompanies();
-		assertEquals("0", result.getCode());
+		DTOResult<CompanyDTO> response = service.findCompany(companyId);
+		assertEquals("sobey", response.getDto().getCode());
 	}
 
 	@Test
 	// @Ignore
+	public void getCompanies() {
+		DTOListResult<CompanyDTO> result = service.getCompanies();
+		assertEquals("0", result.getCode());
+	}
+
+	@Test
+	@Ignore
 	public void saveCompany() {
 		Company company = CompanyData.randomCompany();
 		CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
@@ -70,12 +70,12 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	public void updateCompany() {
 
 		Integer companyId = 99;
-		CompanyResult getCompanyResult = service.findCompany(companyId);
-		CompanyDTO companyDTO = getCompanyResult.getCompanyDTO();
+		DTOResult<CompanyDTO> response = service.findCompany(companyId);
+		CompanyDTO companyDTO = response.getDto();
 		companyDTO.setCode("codeliukai333");
 		companyDTO.setDescription("刘凯目前单身,求一妹子~!");
-		IdResult response = service.updateCompany(companyId, companyDTO);
-		assertNotNull(response.getId());
+		IdResult result = service.updateCompany(companyId, companyDTO);
+		assertNotNull(result.getId());
 	}
 
 	@Test
