@@ -7,10 +7,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.validation.ConstraintViolationException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.cxf.feature.Features;
-import org.springframework.dao.DuplicateKeyException;
 
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.constants.WsConstants;
@@ -22,12 +20,15 @@ import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.beanvalidator.BeanValidators;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.Exceptions;
 
 @WebService(serviceName = "CmdbuildService", endpointInterface = "com.sobey.cmdbuild.webservice.CmdbuildSoapService", targetNamespace = WsConstants.NS)
 // 查看webservice的日志.
 @Features(features = "org.apache.cxf.feature.LoggingFeature")
 public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements CmdbuildSoapService {
+
+	private static final String DUPLICATE_ERROR = "对象存在唯一性冲突";
+	private static final String NULL_ERROR = "对象不存在";
+	private static final String INPUT_ERROR = "输入参数为空";
 
 	@Override
 	public DTOResult<CompanyDTO> findCompany(@WebParam(name = "id") Integer id) {
@@ -36,11 +37,11 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 		try {
 
-			Validate.notNull(id, "id参数为空");
+			Validate.notNull(id, INPUT_ERROR);
 
 			Company company = comm.companyService.findCompany(id);
 
-			Validate.notNull(company, "对象不存在");
+			Validate.notNull(company, NULL_ERROR);
 
 			CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
 
@@ -55,7 +56,31 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+	public DTOResult<CompanyDTO> findCompanyByCode(@WebParam(name = "code") String code) {
+		DTOResult<CompanyDTO> result = new DTOResult<CompanyDTO>();
+
+		try {
+
+			Validate.notNull(code, INPUT_ERROR);
+
+			Company company = comm.companyService.findByCode(code);
+
+			Validate.notNull(company, NULL_ERROR);
+
+			CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
+
+			result.setDto(companyDTO);
+
+			return result;
+
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
 	@Override
 	public IdResult createCompany(@WebParam(name = "companyDTO") CompanyDTO companyDTO) {
 
@@ -63,7 +88,10 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 		try {
 
-			Validate.notNull(companyDTO, "输入参数为空");
+			Validate.notNull(companyDTO, INPUT_ERROR);
+
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(comm.companyService.findByCode(companyDTO.getCode()) == null, DUPLICATE_ERROR);
 
 			Company company = BeanMapper.map(companyDTO, Company.class);
 
@@ -73,21 +101,14 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			return new IdResult(company.getId());
 
-		} catch (ConstraintViolationException e) {
-			String message = StringUtils.join(BeanValidators.extractPropertyAndMessageAsList(e, " "), "\n");
-			return handleParameterError(result, e, message);
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
 		} catch (RuntimeException e) {
-			if (Exceptions.isCausedBy(e, DuplicateKeyException.class)) {
-				String message = "对象存在唯一性冲突!";
-				return handleParameterError(result, e, message);
-			} else {
-				return handleGeneralError(result, e);
-			}
+			return handleGeneralError(result, e);
 		}
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public IdResult updateCompany(@WebParam(name = "id") Integer id,
 			@WebParam(name = "companyDTO") CompanyDTO companyDTO) {
@@ -96,7 +117,14 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 		try {
 
+			Validate.notNull(companyDTO, INPUT_ERROR);
+
 			Company company = comm.companyService.findCompany(id);
+
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(
+					comm.companyService.findByCode(companyDTO.getCode()) == null
+							|| company.getCode().equals(companyDTO.getCode()), DUPLICATE_ERROR);
 
 			Company companyEntity = BeanMapper.map(companyDTO, Company.class);
 
@@ -110,15 +138,9 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 			return new IdResult(company.getId());
 
 		} catch (ConstraintViolationException e) {
-			String message = StringUtils.join(BeanValidators.extractPropertyAndMessageAsList(e, " "), "\n");
-			return handleParameterError(result, e, message);
+			return handleParameterError(result, e);
 		} catch (RuntimeException e) {
-			if (Exceptions.isCausedBy(e, DuplicateKeyException.class)) {
-				String message = "对象存在唯一性冲突!";
-				return handleParameterError(result, e, message);
-			} else {
-				return handleGeneralError(result, e);
-			}
+			return handleGeneralError(result, e);
 		}
 	}
 
@@ -128,6 +150,8 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 		IdResult result = new IdResult();
 
 		try {
+
+			Validate.notNull(id, INPUT_ERROR);
 
 			Company company = comm.companyService.findCompany(id);
 
@@ -160,8 +184,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			result = comm.companyService.getCompanyDTOPagination(searchParams, pageNumber, pageSize);
 
-			Validate.notNull(result.getGetContent(), "对象不存在");
-
 			return result;
 
 		} catch (IllegalArgumentException e) {
@@ -180,8 +202,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 		try {
 
 			List<Company> companies = comm.companyService.getCompanies();
-
-			Validate.notNull(companies, "对象不存在");
 
 			List<CompanyDTO> dtos = BeanMapper.mapList(companies, CompanyDTO.class);
 

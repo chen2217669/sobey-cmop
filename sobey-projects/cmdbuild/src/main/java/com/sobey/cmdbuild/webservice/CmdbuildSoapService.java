@@ -27,6 +27,8 @@ public interface CmdbuildSoapService {
 
 	DTOResult<CompanyDTO> findCompany(@WebParam(name = "id") Integer id);
 
+	DTOResult<CompanyDTO> findCompanyByCode(@WebParam(name = "code") String code);
+
 	IdResult createCompany(@WebParam(name = "companyDTO") CompanyDTO companyDTO);
 
 	IdResult updateCompany(@WebParam(name = "id") Integer id, @WebParam(name = "companyDTO") CompanyDTO companyDTO);
