@@ -39,7 +39,7 @@ public class JpaMappingTest extends SpringTransactionalTestCase {
 
 		assertTrue("No entity mapping found", model.getEntities().size() > 0);
 
-		for (EntityType entityType : model.getEntities()) {
+		for (EntityType<?> entityType : model.getEntities()) {
 			String entityName = entityType.getName();
 			em.createQuery("select o from " + entityName + " o").getResultList();
 			logger.info("ok: " + entityName);
