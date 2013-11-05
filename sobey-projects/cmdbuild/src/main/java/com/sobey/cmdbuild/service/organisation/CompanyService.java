@@ -63,6 +63,16 @@ public class CompanyService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据code获得状态为"A"的有效对象
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public Company findByCode(String code) {
+		return companyDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
+	}
+
+	/**
 	 * 获得所有对象集合
 	 * 
 	 * @return
