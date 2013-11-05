@@ -16,6 +16,12 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.sobey.test.spring.SpringTransactionalTestCase;
 
+/**
+ * 会遍历所有Entity,执行一次select操作.看entity上的JPA annotation有没有问题,必备.
+ * 
+ * @author Administrator
+ * 
+ */
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 // 如果存在多个transactionManager，可以需显式指定
