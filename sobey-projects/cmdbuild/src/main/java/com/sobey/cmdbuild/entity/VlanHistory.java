@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,14 +25,9 @@ public class VlanHistory extends BasicEntity {
 	private String remark;
 	private String segment;
 	private Vlan vlan;
+	private Integer tenants;
 
 	public VlanHistory() {
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -72,6 +67,11 @@ public class VlanHistory extends BasicEntity {
 		return this.vlan;
 	}
 
+	@Column(name = "tenants")
+	public Integer getTenants() {
+		return tenants;
+	}
+
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
@@ -98,6 +98,10 @@ public class VlanHistory extends BasicEntity {
 
 	public void setVlan(Vlan vlan) {
 		this.vlan = vlan;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
 	}
 
 }

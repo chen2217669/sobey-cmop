@@ -1,6 +1,5 @@
 package com.sobey.cmdbuild.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "cs2", schema = "public")
@@ -26,12 +23,6 @@ public class Cs2 extends BasicEntity {
 	private Integer tenants;
 
 	public Cs2() {
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cs2")

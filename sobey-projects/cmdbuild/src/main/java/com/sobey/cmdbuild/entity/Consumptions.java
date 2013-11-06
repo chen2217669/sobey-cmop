@@ -29,12 +29,6 @@ public class Consumptions extends BasicEntity {
 	public Consumptions() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "consumptions")
 	public Set<ConsumptionsHistory> getConsumptionsHistories() {
 		return this.consumptionsHistories;

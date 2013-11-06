@@ -36,12 +36,6 @@ public class DeviceSpecHistory extends BasicEntity {
 	public DeviceSpecHistory() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "\"Brand\"")
 	public Integer getBrand() {
 		return this.brand;

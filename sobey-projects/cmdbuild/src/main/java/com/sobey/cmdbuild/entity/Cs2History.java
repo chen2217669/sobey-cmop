@@ -31,12 +31,6 @@ public class Cs2History extends BasicEntity {
 	public Cs2History() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "\"CurrentId\"", nullable = false)
 	public Cs2 getCs2() {
