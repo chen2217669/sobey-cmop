@@ -50,7 +50,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void getCompanies() {
 		DTOListResult<CompanyDTO> result = service.getCompanies();
 		assertEquals("0", result.getCode());
@@ -87,7 +87,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void getPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
