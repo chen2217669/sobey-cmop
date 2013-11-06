@@ -7,6 +7,8 @@ import javax.jws.WebService;
 
 import com.sobey.cmdbuild.constants.WsConstants;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
+import com.sobey.cmdbuild.webservice.response.dto.IdcDTO;
+import com.sobey.cmdbuild.webservice.response.dto.RackDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TagDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TenantsDTO;
 import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
@@ -92,39 +94,39 @@ public interface CmdbuildSoapService {
 	// ============ IDC =============//
 	// ==============================//
 
-	// DTOResult<IdcDTO> findIdc(@WebParam(name = "id") Integer id);
-	//
-	// DTOResult<IdcDTO> findIdcByCode(@WebParam(name = "code") String code);
-	//
-	// IdResult createIdc(@WebParam(name = "idcDTO") IdcDTO idcDTO);
-	//
-	// IdResult updateIdc(@WebParam(name = "id") Integer id, @WebParam(name = "idcDTO") IdcDTO idcDTO);
-	//
-	// IdResult deleteIdc(@WebParam(name = "id") Integer id);
-	//
-	// DTOListResult<IdcDTO> getIdcList();
-	//
-	// PaginationResult<IdcDTO> getIdcPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
-	// @WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
-	//
-	// // ==============================//
-	// // ============ Rack ============//
-	// // ==============================//
-	//
-	// DTOResult<RackDTO> findRack(@WebParam(name = "id") Integer id);
-	//
-	// DTOResult<RackDTO> findRackByCode(@WebParam(name = "code") String code);
-	//
-	// IdResult createRack(@WebParam(name = "rackDTO") RackDTO rackDTO);
-	//
-	// IdResult updateRack(@WebParam(name = "id") Integer id, @WebParam(name = "rackDTO") RackDTO rackDTO);
-	//
-	// IdResult deleteRack(@WebParam(name = "id") Integer id);
-	//
-	// DTOListResult<RackDTO> getRackList();
-	//
-	// PaginationResult<RackDTO> getRackPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
-	// @WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+	DTOResult<IdcDTO> findIdc(@WebParam(name = "id") Integer id);
+
+	DTOResult<IdcDTO> findIdcByCode(@WebParam(name = "code") String code);
+
+	IdResult createIdc(@WebParam(name = "idcDTO") IdcDTO idcDTO);
+
+	IdResult updateIdc(@WebParam(name = "id") Integer id, @WebParam(name = "idcDTO") IdcDTO idcDTO);
+
+	IdResult deleteIdc(@WebParam(name = "id") Integer id);
+
+	DTOListResult<IdcDTO> getIdcList();
+
+	PaginationResult<IdcDTO> getIdcPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ============ Rack ============//
+	// ==============================//
+
+	DTOResult<RackDTO> findRack(@WebParam(name = "id") Integer id);
+
+	DTOResult<RackDTO> findRackByCode(@WebParam(name = "code") String code);
+
+	IdResult createRack(@WebParam(name = "rackDTO") RackDTO rackDTO);
+
+	IdResult updateRack(@WebParam(name = "id") Integer id, @WebParam(name = "rackDTO") RackDTO rackDTO);
+
+	IdResult deleteRack(@WebParam(name = "id") Integer id);
+
+	DTOListResult<RackDTO> getRackList();
+
+	PaginationResult<RackDTO> getRackPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
 	/*************************************************
 	 ****************** Financial ********************
@@ -135,7 +137,7 @@ public interface CmdbuildSoapService {
 	// ==============================//
 
 	// ==============================//
-	// ========= DeviceSpec =======//
+	// ========= DeviceSpec =========//
 	// ==============================//
 
 	// ==============================//
