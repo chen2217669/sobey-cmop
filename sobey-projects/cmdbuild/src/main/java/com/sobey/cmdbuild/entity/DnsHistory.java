@@ -30,12 +30,6 @@ public class DnsHistory extends BasicEntity {
 	public DnsHistory() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "cname_domain", length = 100)
 	public String getCnameDomain() {
 		return this.cnameDomain;

@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,12 +35,6 @@ public class EipHistory extends BasicEntity {
 	@Column(name = "bandwidth")
 	public Integer getBandwidth() {
 		return this.bandwidth;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

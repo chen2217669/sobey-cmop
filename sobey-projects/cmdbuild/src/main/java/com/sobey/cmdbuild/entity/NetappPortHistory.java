@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,12 +30,6 @@ public class NetappPortHistory extends BasicEntity {
 	public NetappPortHistory() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "connected_to")
 	public Integer getConnectedTo() {
 		return this.connectedTo;
@@ -57,7 +51,7 @@ public class NetappPortHistory extends BasicEntity {
 		return this.macAddress;
 	}
 
-	@Column(name = "netApp_controller")
+	@Column(name = "\"netApp_controller\"")
 	public Integer getNetAppController() {
 		return this.netAppController;
 	}

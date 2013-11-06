@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -29,12 +29,6 @@ public class MemoryHistory extends BasicEntity {
 	private Integer server;
 
 	public MemoryHistory() {
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@Column(name = "\"Brand\"")

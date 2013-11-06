@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,12 +30,6 @@ public class HardDiskHistory extends BasicEntity {
 	public HardDiskHistory() {
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "\"Brand\"")
 	public Integer getBrand() {
 		return this.brand;
@@ -58,7 +52,7 @@ public class HardDiskHistory extends BasicEntity {
 		return this.hardDisk;
 	}
 
-	@Column(name = "hardDisk_size")
+	@Column(name = "\"hardDisk_size\"")
 	public Integer getHardDiskSize() {
 		return this.hardDiskSize;
 	}

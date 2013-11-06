@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,14 +22,9 @@ public class EipSpecHistory extends BasicEntity {
 	private Date endDate;
 	private Double price;
 	private String remark;
+	private Integer isp;
 
 	public EipSpecHistory() {
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -54,6 +49,11 @@ public class EipSpecHistory extends BasicEntity {
 		return this.remark;
 	}
 
+	@Column(name = "\"ISP\"")
+	public Integer getIsp() {
+		return isp;
+	}
+
 	public void setEipSpec(EipSpec eipSpec) {
 		this.eipSpec = eipSpec;
 	}
@@ -68,6 +68,10 @@ public class EipSpecHistory extends BasicEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setIsp(Integer isp) {
+		this.isp = isp;
 	}
 
 }

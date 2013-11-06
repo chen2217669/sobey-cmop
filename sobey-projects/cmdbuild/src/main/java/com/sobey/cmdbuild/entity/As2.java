@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "as2", schema = "public")
@@ -41,12 +39,6 @@ public class As2 extends BasicEntity {
 		return this.as2Histories;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "disk_size")
 	public Integer getDiskSize() {
 		return this.diskSize;
@@ -62,7 +54,7 @@ public class As2 extends BasicEntity {
 		return this.ipaddress;
 	}
 
-	@Column(name = "netApp_controller")
+	@Column(name = "\"netApp_controller\"")
 	public Integer getNetAppController() {
 		return this.netAppController;
 	}

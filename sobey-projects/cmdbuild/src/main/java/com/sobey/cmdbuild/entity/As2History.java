@@ -36,12 +36,6 @@ public class As2History extends BasicEntity {
 		return this.as2;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
-	}
-
 	@Column(name = "disk_size")
 	public Integer getDiskSize() {
 		return this.diskSize;
@@ -63,7 +57,7 @@ public class As2History extends BasicEntity {
 		return this.ipaddress;
 	}
 
-	@Column(name = "netApp_controller")
+	@Column(name = "\"netApp_controller\"")
 	public Integer getNetAppController() {
 		return this.netAppController;
 	}

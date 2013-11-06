@@ -1,10 +1,10 @@
 package com.sobey.cmdbuild.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,14 +22,10 @@ public class Es3SpecHistory extends BasicEntity {
 	private Es3Spec es3Spec;
 	private Double price;
 	private String remark;
+	private Integer maxSpace;
+	private Integer iops;
 
 	public Es3SpecHistory() {
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "\"BeginDate\"", nullable = false, length = 29)
-	public Date getBeginDate() {
-		return this.beginDate;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -54,6 +50,16 @@ public class Es3SpecHistory extends BasicEntity {
 		return this.remark;
 	}
 
+	@Column(name = "max_space")
+	public Integer getMaxSpace() {
+		return maxSpace;
+	}
+
+	@Column(name = "iops")
+	public Integer getIops() {
+		return iops;
+	}
+
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
@@ -70,4 +76,11 @@ public class Es3SpecHistory extends BasicEntity {
 		this.remark = remark;
 	}
 
+	public void setMaxSpace(Integer maxSpace) {
+		this.maxSpace = maxSpace;
+	}
+
+	public void setIops(Integer iops) {
+		this.iops = iops;
+	}
 }
