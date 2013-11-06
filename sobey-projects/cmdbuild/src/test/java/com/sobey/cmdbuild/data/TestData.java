@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Company;
+import com.sobey.cmdbuild.entity.Tag;
 import com.sobey.cmdbuild.entity.Tenants;
 import com.sobey.test.data.RandomData;
 
@@ -41,6 +42,20 @@ public class TestData {
 		tenants.setPassword(RandomData.randomName("password"));
 		tenants.setEmail(RandomData.randomName("email"));
 		return tenants;
+	}
+
+	public static Tag randomTag() {
+		Tag tag = new Tag();
+		tag.setId(0);
+		tag.setCode(RandomData.randomName("code"));
+		tag.setDescription(RandomData.randomName("description"));
+		tag.setRemark(RandomData.randomName("remark"));
+		tag.setUser("admin");// 无法插入postgresql,估计和其数据类型有关系,太TMD坑爹了.
+		tag.setBeginDate(new Date());
+		tag.setIdClass(Tag.class.getSimpleName());
+		tag.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+		tag.setTenants(87);
+		return tag;
 	}
 
 }
