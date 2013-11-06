@@ -7,6 +7,7 @@ import javax.jws.WebService;
 
 import com.sobey.cmdbuild.constants.WsConstants;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
+import com.sobey.cmdbuild.webservice.response.dto.TagDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TenantsDTO;
 import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
 import com.sobey.cmdbuild.webservice.response.result.DTOResult;
@@ -67,6 +68,27 @@ public interface CmdbuildSoapService {
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
 	// ==============================//
+	// ============ Tag =============//
+	// ==============================//
+
+	DTOResult<TagDTO> findTag(@WebParam(name = "id") Integer id);
+
+	DTOResult<TagDTO> findTagByCode(@WebParam(name = "code") String code);
+
+	IdResult createTag(@WebParam(name = "tagDTO") TagDTO tagDTO);
+
+	IdResult updateTag(@WebParam(name = "id") Integer id, @WebParam(name = "tagDTO") TagDTO tagDTO);
+
+	IdResult deleteTag(@WebParam(name = "id") Integer id);
+
+	DTOListResult<TagDTO> getTagList();
+
+	DTOListResult<TagDTO> getTagListByTenants(@WebParam(name = "tenantsId") Integer tenantsId);
+
+	PaginationResult<TagDTO> getTagPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
 	// ============ IDC =============//
 	// ==============================//
 
@@ -102,25 +124,6 @@ public interface CmdbuildSoapService {
 	// DTOListResult<RackDTO> getRackList();
 	//
 	// PaginationResult<RackDTO> getRackPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
-	// @WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
-	//
-	// // ==============================//
-	// // ============ Tag =============//
-	// // ==============================//
-	//
-	// DTOResult<TagDTO> findTag(@WebParam(name = "id") Integer id);
-	//
-	// DTOResult<TagDTO> findTagByCode(@WebParam(name = "code") String code);
-	//
-	// IdResult createTag(@WebParam(name = "tagDTO") TagDTO tagDTO);
-	//
-	// IdResult updateTag(@WebParam(name = "id") Integer id, @WebParam(name = "tagDTO") TagDTO tagDTO);
-	//
-	// IdResult deleteTag(@WebParam(name = "id") Integer id);
-	//
-	// DTOListResult<TagDTO> getTagList();
-	//
-	// PaginationResult<TagDTO> getTagPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 	// @WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
 	/*************************************************
