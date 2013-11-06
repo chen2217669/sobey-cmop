@@ -18,6 +18,10 @@ public class IdcDTO {
 	private String description;
 	private Date beginDate;
 	private String remark;
+	private String address;
+	private String city;
+	private String phone;
+	private String zip;
 
 	public Integer getId() {
 		return id;
@@ -57,6 +61,38 @@ public class IdcDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 
 	/**
