@@ -8,6 +8,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.sobey.cmdbuild.constants.WsConstants;
 
+/**
+ * 针对DTO List的返回
+ * 
+ * @author Administrator
+ * 
+ * @param <T>
+ */
 @XmlType(name = "DTOListResult", namespace = WsConstants.NS)
 public class DTOListResult<T> extends WSResult {
 
