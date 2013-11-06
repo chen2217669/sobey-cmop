@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "EipPolicyDTO", namespace = WsConstants.NS)
 public class EipPolicyDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

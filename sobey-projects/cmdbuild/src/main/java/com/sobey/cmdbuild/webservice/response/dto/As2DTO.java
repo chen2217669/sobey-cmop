@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "As2DTO", namespace = WsConstants.NS)
 public class As2DTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

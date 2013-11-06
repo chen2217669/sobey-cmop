@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "FimasDTO", namespace = WsConstants.NS)
 public class FimasDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

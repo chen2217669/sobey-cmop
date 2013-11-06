@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "Es3SpecDTO", namespace = WsConstants.NS)
 public class Es3SpecDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

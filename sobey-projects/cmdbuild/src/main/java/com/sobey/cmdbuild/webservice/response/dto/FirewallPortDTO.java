@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "FirewallPortDTO", namespace = WsConstants.NS)
 public class FirewallPortDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

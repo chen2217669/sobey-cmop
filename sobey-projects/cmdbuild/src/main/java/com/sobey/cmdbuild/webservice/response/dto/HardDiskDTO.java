@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "HardDiskDTO", namespace = WsConstants.NS)
 public class HardDiskDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

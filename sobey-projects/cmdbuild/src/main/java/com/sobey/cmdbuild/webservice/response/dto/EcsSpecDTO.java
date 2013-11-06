@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "EcsSpecDTO", namespace = WsConstants.NS)
 public class EcsSpecDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

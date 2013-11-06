@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "TagDTO", namespace = WsConstants.NS)
 public class TagDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

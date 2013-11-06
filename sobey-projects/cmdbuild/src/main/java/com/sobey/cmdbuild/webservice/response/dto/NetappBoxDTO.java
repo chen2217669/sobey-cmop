@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "NetappBoxDTO", namespace = WsConstants.NS)
 public class NetappBoxDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

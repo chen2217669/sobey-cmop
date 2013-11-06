@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "SwitchesDTO", namespace = WsConstants.NS)
 public class SwitchesDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;
