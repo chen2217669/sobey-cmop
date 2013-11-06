@@ -14,4 +14,6 @@ public interface TagDao extends PagingAndSortingRepository<Tag, Integer>, JpaSpe
 	List<Tag> findAllByStatusAndTenants(Character character, Integer tenantsId);
 
 	Tag findByCodeAndStatus(String code, Character character);
+
+	Tag findByCodeAndStatusAndTenants(String code, Character character, Integer tenantsId);
 }

@@ -70,6 +70,19 @@ public class TagService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据code、tenantsId获得状态为"A"的有效对象
+	 * 
+	 * @param code
+	 *            code
+	 * @param tenantsId
+	 *            tenants Id
+	 * @return
+	 */
+	public Tag findByCodeAndTenants(String code, Integer tenantsId) {
+		return tagDao.findByCodeAndStatusAndTenants(code, CMDBuildConstants.STATUS_ACTIVE, tenantsId);
+	}
+
+	/**
 	 * 获得所有对象集合
 	 * 
 	 * @return List<Tag>
