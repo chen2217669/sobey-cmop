@@ -26,7 +26,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Service
 @Transactional
 public class RackService extends BasicSevcie {
-	
+
 	@Autowired
 	private RackDao rackDao;
 

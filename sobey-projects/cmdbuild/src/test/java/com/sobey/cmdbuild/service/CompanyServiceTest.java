@@ -10,7 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.sobey.cmdbuild.data.CompanyData;
+import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.service.organisation.CompanyService;
 import com.sobey.test.spring.SpringTransactionalTestCase;
@@ -31,7 +31,7 @@ public class CompanyServiceTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void saveCompany() {
-		Company company = CompanyData.randomCompany();
+		Company company = TestData.randomCompany();
 		service.saveOrUpdate(company);
 		assertNotNull(company.getCode());
 	}
