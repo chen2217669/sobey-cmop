@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
-import com.sobey.cmdbuild.data.CompanyData;
+import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
 import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
@@ -26,7 +26,7 @@ import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
 
 /**
- * Cmdbuild SOAP服务的功能测试, 测试主要的接口调用.
+ * Company SOAP服务的功能测试, 测试主要的接口调用.
  * 
  * 使用在Spring applicaitonContext.xml中用<jaxws:client/>，根据CmdbuildWebService接口创建的Client.
  * 
@@ -43,23 +43,23 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 
 	@Test
 	@Ignore
-	public void findCompany() {
-		Integer companyId = 78;
-		DTOResult<CompanyDTO> response = service.findCompany(companyId);
+	public void find() {
+		Integer id = 78;
+		DTOResult<CompanyDTO> response = service.findCompany(id);
 		assertEquals("sobey", response.getDto().getCode());
 	}
 
 	@Test
 	@Ignore
-	public void getCompanies() {
+	public void getList() {
 		DTOListResult<CompanyDTO> result = service.getCompanies();
 		assertEquals("0", result.getCode());
 	}
 
 	@Test
 	@Ignore
-	public void saveCompany() {
-		Company company = CompanyData.randomCompany();
+	public void save() {
+		Company company = TestData.randomCompany();
 		CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
 		IdResult response = service.createCompany(companyDTO);
 		assertNotNull(response.getId());
@@ -67,27 +67,27 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 
 	@Test
 	@Ignore
-	public void updateCompany() {
+	public void update() {
 
-		Integer companyId = 99;
-		DTOResult<CompanyDTO> response = service.findCompany(companyId);
+		Integer id = 99;
+		DTOResult<CompanyDTO> response = service.findCompany(id);
 		CompanyDTO companyDTO = response.getDto();
 		companyDTO.setCode("codeliukai333");
 		companyDTO.setDescription("刘凯目前单身,求一妹子~!");
-		IdResult result = service.updateCompany(companyId, companyDTO);
+		IdResult result = service.updateCompany(id, companyDTO);
 		assertNotNull(result.getId());
 	}
 
 	@Test
 	@Ignore
-	public void deleteCompany() {
-		Integer companyId = 78;
-		IdResult response = service.deleteCompany(companyId);
+	public void delete() {
+		Integer id = 78;
+		IdResult response = service.deleteCompany(id);
 		assertNotNull(response.getId());
 	}
 
 	@Test
-	//@Ignore
+	// @Ignore
 	public void getPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();

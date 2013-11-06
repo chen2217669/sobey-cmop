@@ -26,7 +26,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Service
 @Transactional
 public class TenantsService extends BasicSevcie {
-	
+
 	@Autowired
 	private TenantsDao tenantsDao;
 
