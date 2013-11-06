@@ -2,12 +2,14 @@ package com.sobey.cmdbuild.service.organisation;
 
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Rack;
 import com.sobey.cmdbuild.repository.RackDao;
@@ -24,6 +26,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Service
 @Transactional
 public class RackService extends BasicSevcie {
+	
 	@Autowired
 	private RackDao rackDao;
 
@@ -71,7 +74,7 @@ public class RackService extends BasicSevcie {
 	 * 
 	 * @return List<Rack>
 	 */
-	public List<Rack> getCompanies() {
+	public List<Rack> getRacks() {
 		return rackDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 
@@ -84,8 +87,11 @@ public class RackService extends BasicSevcie {
 	 * @return Page<Rack>
 	 */
 	private Page<Rack> getRackPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<Rack> spec = buildSpecification(searchParams);
+
 		return rackDao.findAll(spec, pageRequest);
 	}
 
@@ -97,30 +103,34 @@ public class RackService extends BasicSevcie {
 	 * @param searchParams
 	 * @return Specification<Rack>
 	 */
-	private Specification<Rack> buildSpecification(Map<String, Object> searchParams) { // 将条件查询放入Map中.查询条件可查询SearchFilter类.
+	private Specification<Rack> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<Rack> spec = DynamicSpecifications.bySearchFilter(filters.values(), Rack.class);
-		return spec;
+
+		return DynamicSpecifications.bySearchFilter(filters.values(), Rack.class);
 	}
 
 	/**
 	 * RackDTO webservice分页查询.
 	 * 
-	 * 将Page<T>重新组织成符合DTO格式的分页格式对象. * @param searchParams 查询语句Map.
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
+	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
-	 *            当前页大小,如果每页为10行
+	 *            当前页大小,如每页为10行
 	 * @return PaginationResult<RackDTO>
 	 */
 	public PaginationResult<RackDTO> getRackDTOPagination(Map<String, Object> searchParams, int pageNumber, int pageSize) {
-		Page<Rack> page = getRackPage(searchParams, pageNumber, pageSize); // 将List<Rack>中的数据转换为List<RackDTO>
+
+		Page<Rack> page = getRackPage(searchParams, pageNumber, pageSize);
+
 		List<RackDTO> dtos = BeanMapper.mapList(page.getContent(), RackDTO.class);
-		PaginationResult<RackDTO> paginationResult = new PaginationResult<RackDTO>(page.getNumber(), page.getSize(),
-				page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(), page.hasPreviousPage(),
-				page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-		return paginationResult;
+
+		return fillPaginationResult(page, dtos);
 	}
 }
