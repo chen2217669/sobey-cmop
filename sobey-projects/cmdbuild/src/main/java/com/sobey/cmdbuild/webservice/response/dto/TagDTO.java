@@ -18,6 +18,7 @@ public class TagDTO {
 	private String description;
 	private Date beginDate;
 	private String remark;
+	private Integer Tenants;
 
 	public Integer getId() {
 		return id;
@@ -57,6 +58,14 @@ public class TagDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Integer getTenants() {
+		return Tenants;
+	}
+
+	public void setTenants(Integer tenants) {
+		Tenants = tenants;
 	}
 
 	/**
