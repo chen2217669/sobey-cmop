@@ -325,7 +325,9 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 		try {
 			Validate.notNull(tagDTO, ERROR.INPUT_NULL);
 			// 验证code是否唯一.如果不为null,则弹出错误.
-			Validate.isTrue(comm.tagService.findByCode(tagDTO.getCode()) == null, ERROR.OBJECT_DUPLICATE);
+			// 此处先判断同一Tenants下是否有相同的code如果有相同的code名称，则不能创建.
+			Validate.isTrue(comm.tagService.findByCodeAndTenants(tagDTO.getCode(), tagDTO.getTenants()) == null,
+					ERROR.OBJECT_DUPLICATE);
 			Tag tag = BeanMapper.map(tagDTO, Tag.class);
 			BeanValidators.validateWithException(validator, tag);
 			comm.tagService.saveOrUpdate(tag);
