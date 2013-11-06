@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Company;
+import com.sobey.cmdbuild.entity.Idc;
+import com.sobey.cmdbuild.entity.Rack;
 import com.sobey.cmdbuild.entity.Tag;
 import com.sobey.cmdbuild.entity.Tenants;
 import com.sobey.test.data.RandomData;
@@ -56,6 +58,37 @@ public class TestData {
 		tag.setStatus(CMDBuildConstants.STATUS_ACTIVE);
 		tag.setTenants(87);
 		return tag;
+	}
+
+	public static Idc randomIdc() {
+		Idc idc = new Idc();
+		idc.setId(0);
+		idc.setCode(RandomData.randomName("code"));
+		idc.setDescription(RandomData.randomName("description"));
+		idc.setRemark(RandomData.randomName("remark"));
+		idc.setUser("admin");// 无法插入postgresql,估计和其数据类型有关系,太TMD坑爹了.
+		idc.setBeginDate(new Date());
+		idc.setIdClass(Idc.class.getSimpleName());
+		idc.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+		idc.setCity(RandomData.randomName("city"));
+		idc.setZip(RandomData.randomName("zip"));
+		idc.setAddress(RandomData.randomName("address"));
+		idc.setPhone(RandomData.randomName("phone"));
+		return idc;
+	}
+
+	public static Rack randomRack() {
+		Rack rack = new Rack();
+		rack.setId(0);
+		rack.setCode(RandomData.randomName("code"));
+		rack.setDescription(RandomData.randomName("description"));
+		rack.setRemark(RandomData.randomName("remark"));
+		rack.setUser("admin");// 无法插入postgresql,估计和其数据类型有关系,太TMD坑爹了.
+		rack.setBeginDate(new Date());
+		rack.setIdClass(Idc.class.getSimpleName());
+		rack.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+		rack.setIdc(110);
+		return rack;
 	}
 
 }
