@@ -18,6 +18,15 @@ public class RackDTO {
 	private String description;
 	private Date beginDate;
 	private String remark;
+	private Integer idc;
+	private Integer brand;
+	private String gdzcSn;
+	private Integer height;
+	private String model;
+	private Integer power;
+	private Double price;
+	private String sn;
+	private Integer unitNumber;
 
 	public Integer getId() {
 		return id;
@@ -57,6 +66,78 @@ public class RackDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Integer getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
+
+	public String getGdzcSn() {
+		return gdzcSn;
+	}
+
+	public void setGdzcSn(String gdzcSn) {
+		this.gdzcSn = gdzcSn;
+	}
+
+	public Integer getHeight() {
+		return height;
+	}
+
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
+
+	public Integer getIdc() {
+		return idc;
+	}
+
+	public void setIdc(Integer idc) {
+		this.idc = idc;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public Integer getPower() {
+		return power;
+	}
+
+	public void setPower(Integer power) {
+		this.power = power;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
+	public Integer getUnitNumber() {
+		return unitNumber;
+	}
+
+	public void setUnitNumber(Integer unitNumber) {
+		this.unitNumber = unitNumber;
 	}
 
 	/**
