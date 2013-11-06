@@ -1,14 +1,18 @@
 package com.sobey.cmdbuild.webservice.response.dto;
 
 import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.sobey.cmdbuild.constants.WsConstants;
 
 @XmlRootElement
 @XmlType(name = "HardDiskDTO", namespace = WsConstants.NS)
 public class HardDiskDTO {
+	
 	private Integer id;
 	private String code;
 	private String description;
