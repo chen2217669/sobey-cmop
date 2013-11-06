@@ -14,9 +14,13 @@ import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.constants.ERROR;
 import com.sobey.cmdbuild.constants.WsConstants;
 import com.sobey.cmdbuild.entity.Company;
+import com.sobey.cmdbuild.entity.Idc;
+import com.sobey.cmdbuild.entity.Rack;
 import com.sobey.cmdbuild.entity.Tag;
 import com.sobey.cmdbuild.entity.Tenants;
 import com.sobey.cmdbuild.webservice.response.dto.CompanyDTO;
+import com.sobey.cmdbuild.webservice.response.dto.IdcDTO;
+import com.sobey.cmdbuild.webservice.response.dto.RackDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TagDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TenantsDTO;
 import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
@@ -409,6 +413,251 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 		try {
 			List<Tag> companies = comm.tagService.getTagsByTenants(tenantsId);
 			List<TagDTO> list = BeanMapper.mapList(companies, TagDTO.class);
+			result.setDtos(list);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOResult<IdcDTO> findIdc(@WebParam(name = "id") Integer id) {
+		DTOResult<IdcDTO> result = new DTOResult<IdcDTO>();
+		try {
+			Validate.notNull(id, ERROR.INPUT_NULL);
+			Idc idc = comm.idcService.findIdc(id);
+			Validate.notNull(idc, ERROR.OBJECT_NULL);
+			IdcDTO idcDTO = BeanMapper.map(idc, IdcDTO.class);
+			result.setDto(idcDTO);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOResult<IdcDTO> findIdcByCode(@WebParam(name = "code") String code) {
+		DTOResult<IdcDTO> result = new DTOResult<IdcDTO>();
+		try {
+			Validate.notNull(code, ERROR.INPUT_NULL);
+			Idc idc = comm.idcService.findByCode(code);
+			Validate.notNull(idc, ERROR.OBJECT_NULL);
+			IdcDTO idcDTO = BeanMapper.map(idc, IdcDTO.class);
+			result.setDto(idcDTO);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult createIdc(@WebParam(name = "idcDTO") IdcDTO idcDTO) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(idcDTO, ERROR.INPUT_NULL);
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(comm.idcService.findByCode(idcDTO.getCode()) == null, ERROR.OBJECT_DUPLICATE);
+			Idc idc = BeanMapper.map(idcDTO, Idc.class);
+			BeanValidators.validateWithException(validator, idc);
+			comm.idcService.saveOrUpdate(idc);
+			return new IdResult(idc.getId());
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult updateIdc(@WebParam(name = "id") Integer id, @WebParam(name = "idcDTO") IdcDTO idcDTO) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(idcDTO, ERROR.INPUT_NULL);
+			Idc idc = comm.idcService.findIdc(id);
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(
+					comm.idcService.findByCode(idcDTO.getCode()) == null || idc.getCode().equals(idcDTO.getCode()),
+					ERROR.OBJECT_DUPLICATE);
+			Idc idcEntity = BeanMapper.map(idcDTO, Idc.class);
+			BeanMapper.copy(idcEntity, idc);
+			idcEntity.setIdClass(Idc.class.getSimpleName());
+			idcEntity.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+			comm.idcService.saveOrUpdate(idcEntity);
+			return new IdResult(idc.getId());
+		} catch (ConstraintViolationException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult deleteIdc(@WebParam(name = "id") Integer id) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(id, ERROR.INPUT_NULL);
+			Idc idc = comm.idcService.findIdc(id);
+			Idc idcEntity = BeanMapper.map(findIdc(id).getDto(), Idc.class);
+			BeanMapper.copy(idcEntity, idc);
+			idcEntity.setIdClass(Idc.class.getSimpleName());
+			idcEntity.setStatus(CMDBuildConstants.STATUS_NON_ACTIVE);
+			comm.idcService.saveOrUpdate(idcEntity);
+			return new IdResult(idc.getId());
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public PaginationResult<IdcDTO> getIdcPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize) {
+		PaginationResult<IdcDTO> result = new PaginationResult<IdcDTO>();
+		try {
+			return comm.idcService.getIdcDTOPagination(searchParams, pageNumber, pageSize);
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOListResult<IdcDTO> getIdcList() {
+		DTOListResult<IdcDTO> result = new DTOListResult<IdcDTO>();
+		try {
+			List<Idc> companies = comm.idcService.getIdcs();
+			List<IdcDTO> list = BeanMapper.mapList(companies, IdcDTO.class);
+			result.setDtos(list);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOResult<RackDTO> findRack(@WebParam(name = "id") Integer id) {
+		DTOResult<RackDTO> result = new DTOResult<RackDTO>();
+		try {
+			Validate.notNull(id, ERROR.INPUT_NULL);
+			Rack rack = comm.rackService.findRack(id);
+			Validate.notNull(rack, ERROR.OBJECT_NULL);
+			RackDTO rackDTO = BeanMapper.map(rack, RackDTO.class);
+			result.setDto(rackDTO);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOResult<RackDTO> findRackByCode(@WebParam(name = "code") String code) {
+		DTOResult<RackDTO> result = new DTOResult<RackDTO>();
+		try {
+			Validate.notNull(code, ERROR.INPUT_NULL);
+			Rack rack = comm.rackService.findByCode(code);
+			Validate.notNull(rack, ERROR.OBJECT_NULL);
+			RackDTO rackDTO = BeanMapper.map(rack, RackDTO.class);
+			result.setDto(rackDTO);
+			return result;
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult createRack(@WebParam(name = "rackDTO") RackDTO rackDTO) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(rackDTO, ERROR.INPUT_NULL);
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(comm.rackService.findByCode(rackDTO.getCode()) == null, ERROR.OBJECT_DUPLICATE);
+			Rack rack = BeanMapper.map(rackDTO, Rack.class);
+			BeanValidators.validateWithException(validator, rack);
+			comm.rackService.saveOrUpdate(rack);
+			return new IdResult(rack.getId());
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult updateRack(@WebParam(name = "id") Integer id, @WebParam(name = "rackDTO") RackDTO rackDTO) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(rackDTO, ERROR.INPUT_NULL);
+			Rack rack = comm.rackService.findRack(id);
+			// 验证code是否唯一.如果不为null,则弹出错误.
+			Validate.isTrue(
+					comm.rackService.findByCode(rackDTO.getCode()) == null || rack.getCode().equals(rackDTO.getCode()),
+					ERROR.OBJECT_DUPLICATE);
+			Rack rackEntity = BeanMapper.map(rackDTO, Rack.class);
+			BeanMapper.copy(rackEntity, rack);
+			rackEntity.setIdClass(Rack.class.getSimpleName());
+			rackEntity.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+			comm.rackService.saveOrUpdate(rackEntity);
+			return new IdResult(rack.getId());
+		} catch (ConstraintViolationException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public IdResult deleteRack(@WebParam(name = "id") Integer id) {
+		IdResult result = new IdResult();
+		try {
+			Validate.notNull(id, ERROR.INPUT_NULL);
+			Rack rack = comm.rackService.findRack(id);
+			Rack rackEntity = BeanMapper.map(findRack(id).getDto(), Rack.class);
+			BeanMapper.copy(rackEntity, rack);
+			rackEntity.setIdClass(Rack.class.getSimpleName());
+			rackEntity.setStatus(CMDBuildConstants.STATUS_NON_ACTIVE);
+			comm.rackService.saveOrUpdate(rackEntity);
+			return new IdResult(rack.getId());
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public PaginationResult<RackDTO> getRackPagination(
+			@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize) {
+		PaginationResult<RackDTO> result = new PaginationResult<RackDTO>();
+		try {
+			return comm.rackService.getRackDTOPagination(searchParams, pageNumber, pageSize);
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
+	}
+
+	@Override
+	public DTOListResult<RackDTO> getRackList() {
+		DTOListResult<RackDTO> result = new DTOListResult<RackDTO>();
+		try {
+			List<Rack> companies = comm.rackService.getRacks();
+			List<RackDTO> list = BeanMapper.mapList(companies, RackDTO.class);
 			result.setDtos(list);
 			return result;
 		} catch (IllegalArgumentException e) {
