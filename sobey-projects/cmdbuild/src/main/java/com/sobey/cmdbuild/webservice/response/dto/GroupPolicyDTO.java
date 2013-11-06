@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "GroupPolicyDTO", namespace = WsConstants.NS)
 public class GroupPolicyDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

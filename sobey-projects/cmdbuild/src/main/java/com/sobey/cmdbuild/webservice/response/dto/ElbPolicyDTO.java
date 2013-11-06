@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "ElbPolicyDTO", namespace = WsConstants.NS)
 public class ElbPolicyDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

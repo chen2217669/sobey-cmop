@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "FirewallDTO", namespace = WsConstants.NS)
 public class FirewallDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

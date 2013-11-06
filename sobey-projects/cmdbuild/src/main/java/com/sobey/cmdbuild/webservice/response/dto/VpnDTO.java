@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "VpnDTO", namespace = WsConstants.NS)
 public class VpnDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

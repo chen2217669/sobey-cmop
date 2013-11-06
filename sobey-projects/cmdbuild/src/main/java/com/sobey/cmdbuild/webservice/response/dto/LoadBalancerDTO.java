@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "LoadBalancerDTO", namespace = WsConstants.NS)
 public class LoadBalancerDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "NicPortDTO", namespace = WsConstants.NS)
 public class NicPortDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

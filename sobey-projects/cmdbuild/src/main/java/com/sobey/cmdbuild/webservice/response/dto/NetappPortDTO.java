@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "NetappPortDTO", namespace = WsConstants.NS)
 public class NetappPortDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

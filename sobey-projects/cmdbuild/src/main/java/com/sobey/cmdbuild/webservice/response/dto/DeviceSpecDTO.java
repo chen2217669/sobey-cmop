@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "DeviceSpecDTO", namespace = WsConstants.NS)
 public class DeviceSpecDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

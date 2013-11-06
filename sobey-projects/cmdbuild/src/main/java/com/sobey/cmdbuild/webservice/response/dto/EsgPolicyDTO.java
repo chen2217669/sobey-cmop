@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "EsgPolicyDTO", namespace = WsConstants.NS)
 public class EsgPolicyDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

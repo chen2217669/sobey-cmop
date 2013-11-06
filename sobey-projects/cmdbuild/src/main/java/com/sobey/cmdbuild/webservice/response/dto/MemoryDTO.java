@@ -12,7 +12,7 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "MemoryDTO", namespace = WsConstants.NS)
 public class MemoryDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;

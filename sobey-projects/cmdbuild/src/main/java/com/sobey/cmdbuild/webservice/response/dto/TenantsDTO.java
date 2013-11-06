@@ -12,12 +12,17 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlRootElement
 @XmlType(name = "TenantsDTO", namespace = WsConstants.NS)
 public class TenantsDTO {
-	
+
 	private Integer id;
 	private String code;
 	private String description;
 	private Date beginDate;
 	private String remark;
+	private String password;
+	private String email;
+	private String phone;
+	private Double accontBalance;
+	private Integer company;
 
 	public Integer getId() {
 		return id;
@@ -57,6 +62,46 @@ public class TenantsDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Double getAccontBalance() {
+		return accontBalance;
+	}
+
+	public void setAccontBalance(Double accontBalance) {
+		this.accontBalance = accontBalance;
+	}
+
+	public Integer getCompany() {
+		return company;
+	}
+
+	public void setCompany(Integer company) {
+		this.company = company;
 	}
 
 	/**
