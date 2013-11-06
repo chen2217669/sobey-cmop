@@ -37,7 +37,7 @@ public class CompanyService extends BasicSevcie {
 	 * 根据ID获得对象
 	 * 
 	 * @param id
-	 * @return
+	 * @return Company
 	 */
 	public Company findCompany(Integer id) {
 		return companyDao.findOne(id);
@@ -47,7 +47,7 @@ public class CompanyService extends BasicSevcie {
 	 * 新增、保存对象
 	 * 
 	 * @param company
-	 * @return
+	 * @return Company
 	 */
 	public Company saveOrUpdate(Company company) {
 		return companyDao.save(company);
@@ -66,7 +66,7 @@ public class CompanyService extends BasicSevcie {
 	 * 根据code获得状态为"A"的有效对象
 	 * 
 	 * @param code
-	 * @return
+	 * @return Company
 	 */
 	public Company findByCode(String code) {
 		return companyDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
@@ -87,7 +87,7 @@ public class CompanyService extends BasicSevcie {
 	 * @param searchParams
 	 * @param pageNumber
 	 * @param pageSize
-	 * @return
+	 * @return Page<Company>
 	 */
 	private Page<Company> getCompanyPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
 
@@ -104,7 +104,7 @@ public class CompanyService extends BasicSevcie {
 	 * 自定义的查询在此进行组合.
 	 * 
 	 * @param searchParams
-	 * @return
+	 * @return Specification<Tenants>
 	 */
 	private Specification<Company> buildSpecification(Map<String, Object> searchParams) {
 
@@ -113,9 +113,7 @@ public class CompanyService extends BasicSevcie {
 
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 
-		Specification<Company> spec = DynamicSpecifications.bySearchFilter(filters.values(), Company.class);
-
-		return spec;
+		return DynamicSpecifications.bySearchFilter(filters.values(), Company.class);
 	}
 
 	/**
@@ -128,8 +126,8 @@ public class CompanyService extends BasicSevcie {
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
-	 *            当前页大小,如果每页为10行
-	 * @return
+	 *            当前页大小,如每页为10行
+	 * @return PaginationResult<CompanyDTO>
 	 */
 	public PaginationResult<CompanyDTO> getCompanyDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
@@ -139,11 +137,7 @@ public class CompanyService extends BasicSevcie {
 		// 将List<Company>中的数据转换为List<CompanyDTO>
 		List<CompanyDTO> dtos = BeanMapper.mapList(page.getContent(), CompanyDTO.class);
 
-		PaginationResult<CompanyDTO> paginationResult = new PaginationResult<CompanyDTO>(page.getNumber(),
-				page.getSize(), page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(),
-				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-
-		return paginationResult;
+		return fillPaginationResult(page, dtos);
 	}
 
 }
