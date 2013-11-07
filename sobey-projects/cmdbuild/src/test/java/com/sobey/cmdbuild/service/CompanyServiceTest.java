@@ -38,7 +38,7 @@ public class CompanyServiceTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void getCompanies() {
-		List<Company> list = service.getCompanies();
+		List<Company> list = service.getCompanyList();
 		System.out.println("列表数据数量:" + list.size());
 		assertNotNull(list);
 	}

@@ -74,7 +74,7 @@ public class RackService extends BasicSevcie {
 	 * 
 	 * @return List<Rack>
 	 */
-	public List<Rack> getRacks() {
+	public List<Rack> getRackList() {
 		return rackDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 

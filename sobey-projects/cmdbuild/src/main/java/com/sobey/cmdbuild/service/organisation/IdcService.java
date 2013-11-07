@@ -74,7 +74,7 @@ public class IdcService extends BasicSevcie {
 	 * 
 	 * @return List<Idc>
 	 */
-	public List<Idc> getIdcs() {
+	public List<Idc> getIdcList() {
 		return idcDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 

@@ -52,7 +52,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<CompanyDTO> result = service.getCompanies();
+		DTOListResult<CompanyDTO> result = service.getCompanyList();
 		assertEquals("0", result.getCode());
 	}
 

@@ -87,7 +87,7 @@ public class TagService extends BasicSevcie {
 	 * 
 	 * @return List<Tag>
 	 */
-	public List<Tag> getTags() {
+	public List<Tag> getTagList() {
 		return tagDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 
@@ -98,7 +98,7 @@ public class TagService extends BasicSevcie {
 	 *            Tenants Id
 	 * @return List<Tag>
 	 */
-	public List<Tag> getTagsByTenants(Integer tenantsId) {
+	public List<Tag> getTagListByTenants(Integer tenantsId) {
 		return tagDao.findAllByStatusAndTenants(CMDBuildConstants.STATUS_ACTIVE, tenantsId);
 	}
 

@@ -77,7 +77,7 @@ public class CompanyService extends BasicSevcie {
 	 * 
 	 * @return
 	 */
-	public List<Company> getCompanies() {
+	public List<Company> getCompanyList() {
 		return companyDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 

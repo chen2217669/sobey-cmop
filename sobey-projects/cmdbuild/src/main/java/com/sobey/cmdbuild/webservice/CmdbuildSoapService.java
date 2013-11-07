@@ -43,7 +43,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteCompany(@WebParam(name = "id") Integer id);
 
-	DTOListResult<CompanyDTO> getCompanies();
+	DTOListResult<CompanyDTO> getCompanyList();
 
 	PaginationResult<CompanyDTO> getCompanyPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,

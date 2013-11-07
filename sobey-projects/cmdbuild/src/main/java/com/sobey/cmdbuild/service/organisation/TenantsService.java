@@ -74,7 +74,7 @@ public class TenantsService extends BasicSevcie {
 	 * 
 	 * @return List<Tenants>
 	 */
-	public List<Tenants> getTenants() {
+	public List<Tenants> getTenantsList() {
 		return tenantsDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
 	}
 

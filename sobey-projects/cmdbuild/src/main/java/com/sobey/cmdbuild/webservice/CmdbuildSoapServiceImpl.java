@@ -147,10 +147,10 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	}
 
 	@Override
-	public DTOListResult<CompanyDTO> getCompanies() {
+	public DTOListResult<CompanyDTO> getCompanyList() {
 		DTOListResult<CompanyDTO> result = new DTOListResult<CompanyDTO>();
 		try {
-			List<Company> companies = comm.companyService.getCompanies();
+			List<Company> companies = comm.companyService.getCompanyList();
 			List<CompanyDTO> dtos = BeanMapper.mapList(companies, CompanyDTO.class);
 			result.setDtos(dtos);
 			return result;
@@ -274,7 +274,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public DTOListResult<TenantsDTO> getTenantsList() {
 		DTOListResult<TenantsDTO> result = new DTOListResult<TenantsDTO>();
 		try {
-			List<Tenants> tenants = comm.tenantsService.getTenants();
+			List<Tenants> tenants = comm.tenantsService.getTenantsList();
 			List<TenantsDTO> list = BeanMapper.mapList(tenants, TenantsDTO.class);
 			result.setDtos(list);
 			return result;
@@ -398,7 +398,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public DTOListResult<TagDTO> getTagList() {
 		DTOListResult<TagDTO> result = new DTOListResult<TagDTO>();
 		try {
-			List<Tag> tags = comm.tagService.getTags();
+			List<Tag> tags = comm.tagService.getTagList();
 			List<TagDTO> list = BeanMapper.mapList(tags, TagDTO.class);
 			result.setDtos(list);
 			return result;
@@ -413,7 +413,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public DTOListResult<TagDTO> getTagListByTenants(@WebParam(name = "tenantsId") Integer tenantsId) {
 		DTOListResult<TagDTO> result = new DTOListResult<TagDTO>();
 		try {
-			List<Tag> tags = comm.tagService.getTagsByTenants(tenantsId);
+			List<Tag> tags = comm.tagService.getTagListByTenants(tenantsId);
 			List<TagDTO> list = BeanMapper.mapList(tags, TagDTO.class);
 			result.setDtos(list);
 			return result;
@@ -535,7 +535,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public DTOListResult<IdcDTO> getIdcList() {
 		DTOListResult<IdcDTO> result = new DTOListResult<IdcDTO>();
 		try {
-			List<Idc> idcs = comm.idcService.getIdcs();
+			List<Idc> idcs = comm.idcService.getIdcList();
 			List<IdcDTO> list = BeanMapper.mapList(idcs, IdcDTO.class);
 			result.setDtos(list);
 			return result;
@@ -658,7 +658,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	public DTOListResult<RackDTO> getRackList() {
 		DTOListResult<RackDTO> result = new DTOListResult<RackDTO>();
 		try {
-			List<Rack> racks = comm.rackService.getRacks();
+			List<Rack> racks = comm.rackService.getRackList();
 			List<RackDTO> list = BeanMapper.mapList(racks, RackDTO.class);
 			result.setDtos(list);
 			return result;
