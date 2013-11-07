@@ -45,4 +45,10 @@ public class BasicSoapSevcie {
 		return result;
 	}
 
+	protected <T extends WSResult> T handleGeneralError(T result, Exception e, String message) {
+		logger.error(message, e.getMessage());
+		result.setError(WSResult.PARAMETER_ERROR, message);
+		return result;
+	}
+
 }
