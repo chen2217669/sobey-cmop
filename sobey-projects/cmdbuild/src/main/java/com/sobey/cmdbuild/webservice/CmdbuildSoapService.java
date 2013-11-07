@@ -35,7 +35,7 @@ public interface CmdbuildSoapService {
 
 	DTOResult<CompanyDTO> findCompany(@WebParam(name = "id") Integer id);
 
-	DTOResult<CompanyDTO> findCompanyByCode(@WebParam(name = "code") String code);
+	DTOResult<CompanyDTO> findCompanyByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	IdResult createCompany(@WebParam(name = "companyDTO") CompanyDTO companyDTO);
 
@@ -43,7 +43,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteCompany(@WebParam(name = "id") Integer id);
 
-	DTOListResult<CompanyDTO> getCompanyList();
+	DTOListResult<CompanyDTO> getCompanyList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	PaginationResult<CompanyDTO> getCompanyPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
@@ -55,7 +55,7 @@ public interface CmdbuildSoapService {
 
 	DTOResult<TenantsDTO> findTenants(@WebParam(name = "id") Integer id);
 
-	DTOResult<TenantsDTO> findTenantsByCode(@WebParam(name = "code") String code);
+	DTOResult<TenantsDTO> findTenantsByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	IdResult createTenants(@WebParam(name = "tenantsDTO") TenantsDTO tenantsDTO);
 
@@ -63,7 +63,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteTenants(@WebParam(name = "id") Integer id);
 
-	DTOListResult<TenantsDTO> getTenantsList();
+	DTOListResult<TenantsDTO> getTenantsList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	PaginationResult<TenantsDTO> getTenantsPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
@@ -75,7 +75,7 @@ public interface CmdbuildSoapService {
 
 	DTOResult<TagDTO> findTag(@WebParam(name = "id") Integer id);
 
-	DTOResult<TagDTO> findTagByCode(@WebParam(name = "code") String code);
+	DTOResult<TagDTO> findTagByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	IdResult createTag(@WebParam(name = "tagDTO") TagDTO tagDTO);
 
@@ -83,7 +83,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteTag(@WebParam(name = "id") Integer id);
 
-	DTOListResult<TagDTO> getTagList();
+	DTOListResult<TagDTO> getTagList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	DTOListResult<TagDTO> getTagListByTenants(@WebParam(name = "tenantsId") Integer tenantsId);
 
@@ -96,7 +96,7 @@ public interface CmdbuildSoapService {
 
 	DTOResult<IdcDTO> findIdc(@WebParam(name = "id") Integer id);
 
-	DTOResult<IdcDTO> findIdcByCode(@WebParam(name = "code") String code);
+	DTOResult<IdcDTO> findIdcByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	IdResult createIdc(@WebParam(name = "idcDTO") IdcDTO idcDTO);
 
@@ -104,7 +104,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteIdc(@WebParam(name = "id") Integer id);
 
-	DTOListResult<IdcDTO> getIdcList();
+	DTOListResult<IdcDTO> getIdcList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	PaginationResult<IdcDTO> getIdcPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
@@ -115,7 +115,7 @@ public interface CmdbuildSoapService {
 
 	DTOResult<RackDTO> findRack(@WebParam(name = "id") Integer id);
 
-	DTOResult<RackDTO> findRackByCode(@WebParam(name = "code") String code);
+	DTOResult<RackDTO> findRackByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	IdResult createRack(@WebParam(name = "rackDTO") RackDTO rackDTO);
 
@@ -123,7 +123,7 @@ public interface CmdbuildSoapService {
 
 	IdResult deleteRack(@WebParam(name = "id") Integer id);
 
-	DTOListResult<RackDTO> getRackList();
+	DTOListResult<RackDTO> getRackList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
 	PaginationResult<RackDTO> getRackPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
