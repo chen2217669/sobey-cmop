@@ -13,50 +13,92 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "ElbDTO", namespace = WsConstants.NS)
 public class ElbDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer id;
+	private Integer ipaddress;
+
+	// Tag Integer 标签ID
+	// Tenants Integer 租户ID
+	// Ipaddress Integer Ipaddress ID(VIP)
+	// isSession Boolean 是否保持会话
+
+	private Boolean isSession;
 	private String remark;
+	private Integer tag;
+	private Integer tenants;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getId() {
+		return id;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getIpaddress() {
+		return ipaddress;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Boolean getIsSession() {
+		return isSession;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getTag() {
+		return tag;
+	}
+
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIpaddress(Integer ipaddress) {
+		this.ipaddress = ipaddress;
+	}
+
+	public void setIsSession(Boolean isSession) {
+		this.isSession = isSession;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setTag(Integer tag) {
+		this.tag = tag;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
 	}
 
 	/**

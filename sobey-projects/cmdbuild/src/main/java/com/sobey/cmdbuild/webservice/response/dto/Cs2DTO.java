@@ -13,50 +13,104 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "Cs2DTO", namespace = WsConstants.NS)
 public class Cs2DTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Double diskSize;
+	private Integer fimas;
+
+	// Ipaddress Integer Ipaddress ID
+	// Tag Integer 标签ID
+	// Tenants Integer 租户ID
+	// Fimas Integer fimasID
+	// DiskSize Double 存储大小(单位:GB)
+
+	private Integer id;
+	private Integer ipaddress;
 	private String remark;
 
-	public Integer getId() {
-		return id;
-	}
+	private Integer tag;
 
-	public void setId(Integer id) {
-		this.id = id;
+	private Integer tenants;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Double getDiskSize() {
+		return diskSize;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getFimas() {
+		return fimas;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getId() {
+		return id;
+	}
+
+	public Integer getIpaddress() {
+		return ipaddress;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getTag() {
+		return tag;
+	}
+
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setDiskSize(Double diskSize) {
+		this.diskSize = diskSize;
+	}
+
+	public void setFimas(Integer fimas) {
+		this.fimas = fimas;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIpaddress(Integer ipaddress) {
+		this.ipaddress = ipaddress;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setTag(Integer tag) {
+		this.tag = tag;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
 	}
 
 	/**
