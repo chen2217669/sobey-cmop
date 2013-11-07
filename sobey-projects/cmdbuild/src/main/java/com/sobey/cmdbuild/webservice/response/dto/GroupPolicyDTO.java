@@ -13,50 +13,62 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "GroupPolicyDTO", namespace = WsConstants.NS)
 public class GroupPolicyDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer id;
 	private String remark;
 
-	public Integer getId() {
-		return id;
-	}
+	// Tenants Integer 租户ID
 
-	public void setId(Integer id) {
-		this.id = id;
+	private Integer tenants;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getBeginDate() {
-		return beginDate;
-	}
-
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getId() {
+		return id;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
 	}
 
 	/**

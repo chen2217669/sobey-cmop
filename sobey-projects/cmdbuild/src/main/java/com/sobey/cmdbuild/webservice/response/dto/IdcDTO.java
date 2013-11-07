@@ -13,82 +13,82 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "IdcDTO", namespace = WsConstants.NS)
 public class IdcDTO {
 
-	private Integer id;
+	private String address;
+	private Date beginDate;
+	private String city;
 	private String code;
 	private String description;
-	private Date beginDate;
-	private String remark;
-	private String address;
-	private String city;
+	private Integer id;
 	private String phone;
+	private String remark;
 	private String zip;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public String getAddress() {
+		return address;
 	}
 
 	public Date getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public String getCode() {
+		return code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public String getRemark() {
+		return remark;
 	}
 
 	public String getZip() {
 		return zip;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public void setZip(String zip) {

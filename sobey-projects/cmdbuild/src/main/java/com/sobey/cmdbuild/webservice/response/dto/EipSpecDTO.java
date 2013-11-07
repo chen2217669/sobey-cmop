@@ -13,46 +13,57 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "EipSpecDTO", namespace = WsConstants.NS)
 public class EipSpecDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer id;
+	// Price Double 单价(每M)
+	private Double price;
+
 	private String remark;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getId() {
+		return id;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Double getPrice() {
+		return price;
+	}
+
+	public String getRemark() {
+		return remark;
 	}
 
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public String getRemark() {
-		return remark;
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public void setRemark(String remark) {

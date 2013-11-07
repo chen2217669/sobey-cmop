@@ -13,50 +13,101 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "DnsDTO", namespace = WsConstants.NS)
 public class DnsDTO {
 
-	private Integer id;
+	private Date beginDate;
+	private String cnameDomain;
 	private String code;
 	private String description;
-	private Date beginDate;
-	private String remark;
+	private String domainName;
 
-	public Integer getId() {
-		return id;
+	private Integer domainType;
+	private Integer id;
+	private String remark;
+	// Tag Integer 标签ID
+	// Tenants Integer 租户ID
+	// DomainType Integer 域名类型 (GSLB,A,CNAME)
+	// DomainName String 域名
+	// CnameDomain String CNAME 域名
+	private Integer tag;
+	private Integer tenants;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public String getCnameDomain() {
+		return cnameDomain;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getDomainName() {
+		return domainName;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getDomainType() {
+		return domainType;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getId() {
+		return id;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getTag() {
+		return tag;
+	}
+
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCnameDomain(String cnameDomain) {
+		this.cnameDomain = cnameDomain;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public void setDomainType(Integer domainType) {
+		this.domainType = domainType;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setTag(Integer tag) {
+		this.tag = tag;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
 	}
 
 	/**
