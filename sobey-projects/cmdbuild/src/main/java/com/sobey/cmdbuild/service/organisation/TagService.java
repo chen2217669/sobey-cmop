@@ -94,17 +94,6 @@ public class TagService extends BasicSevcie {
 	}
 
 	/**
-	 * 获得指定Tenants下所有对象集合
-	 * 
-	 * @param tenantsId
-	 *            Tenants Id
-	 * @return List<Tag>
-	 */
-	public List<Tag> getTagListByTenants(Integer tenantsId) {
-		return tagDao.findAllByStatusAndTenants(CMDBuildConstants.STATUS_ACTIVE, tenantsId);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

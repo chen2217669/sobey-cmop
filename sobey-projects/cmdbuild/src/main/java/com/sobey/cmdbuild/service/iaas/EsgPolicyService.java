@@ -59,25 +59,6 @@ public class EsgPolicyService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return EsgPolicy
-	 */
-	public EsgPolicy findByCode(String code) {
-		return esgPolicyDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<EsgPolicy>
-	 */
-	public List<EsgPolicy> getCompanies() {
-		return esgPolicyDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

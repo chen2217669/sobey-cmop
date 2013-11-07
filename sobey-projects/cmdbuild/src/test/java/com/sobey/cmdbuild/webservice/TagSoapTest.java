@@ -60,14 +60,6 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 
 	@Test
 	@Ignore
-	public void getListByTenants() {
-		Integer tenantsId = 87;
-		DTOListResult<TagDTO> result = service.getTagListByTenants(tenantsId);
-		assertEquals("0", result.getCode());
-	}
-
-	@Test
-	@Ignore
 	public void save() {
 		Tag tag = TestData.randomTag();
 		TagDTO tagDTO = BeanMapper.map(tag, TagDTO.class);

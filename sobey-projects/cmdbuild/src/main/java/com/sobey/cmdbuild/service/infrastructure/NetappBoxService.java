@@ -59,25 +59,6 @@ public class NetappBoxService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return NetappBox
-	 */
-	public NetappBox findByCode(String code) {
-		return netappBoxDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<NetappBox>
-	 */
-	public List<NetappBox> getCompanies() {
-		return netappBoxDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

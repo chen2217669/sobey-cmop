@@ -85,8 +85,6 @@ public interface CmdbuildSoapService {
 
 	DTOListResult<TagDTO> getTagList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
-	DTOListResult<TagDTO> getTagListByTenants(@WebParam(name = "tenantsId") Integer tenantsId);
-
 	PaginationResult<TagDTO> getTagPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 

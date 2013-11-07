@@ -59,25 +59,6 @@ public class EipPolicyService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return EipPolicy
-	 */
-	public EipPolicy findByCode(String code) {
-		return eipPolicyDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<EipPolicy>
-	 */
-	public List<EipPolicy> getCompanies() {
-		return eipPolicyDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

@@ -59,25 +59,6 @@ public class Es3SpecService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return Es3Spec
-	 */
-	public Es3Spec findByCode(String code) {
-		return es3SpecDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<Es3Spec>
-	 */
-	public List<Es3Spec> getCompanies() {
-		return es3SpecDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

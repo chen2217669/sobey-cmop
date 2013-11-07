@@ -59,25 +59,6 @@ public class EipSpecService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return EipSpec
-	 */
-	public EipSpec findByCode(String code) {
-		return eipSpecDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<EipSpec>
-	 */
-	public List<EipSpec> getCompanies() {
-		return eipSpecDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

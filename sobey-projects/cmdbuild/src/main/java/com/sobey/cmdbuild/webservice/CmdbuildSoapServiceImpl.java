@@ -423,21 +423,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	}
 
 	@Override
-	public DTOListResult<TagDTO> getTagListByTenants(@WebParam(name = "tenantsId") Integer tenantsId) {
-		DTOListResult<TagDTO> result = new DTOListResult<TagDTO>();
-		try {
-			List<Tag> tags = comm.tagService.getTagListByTenants(tenantsId);
-			List<TagDTO> list = BeanMapper.mapList(tags, TagDTO.class);
-			result.setDtos(list);
-			return result;
-		} catch (IllegalArgumentException e) {
-			return handleParameterError(result, e);
-		} catch (RuntimeException e) {
-			return handleGeneralError(result, e);
-		}
-	}
-
-	@Override
 	public DTOResult<IdcDTO> findIdc(@WebParam(name = "id") Integer id) {
 		DTOResult<IdcDTO> result = new DTOResult<IdcDTO>();
 		try {

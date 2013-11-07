@@ -59,25 +59,6 @@ public class HardDiskService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return HardDisk
-	 */
-	public HardDisk findByCode(String code) {
-		return hardDiskDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<HardDisk>
-	 */
-	public List<HardDisk> getCompanies() {
-		return hardDiskDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

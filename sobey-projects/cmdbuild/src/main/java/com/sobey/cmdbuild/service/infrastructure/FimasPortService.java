@@ -59,25 +59,6 @@ public class FimasPortService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return FimasPort
-	 */
-	public FimasPort findByCode(String code) {
-		return fimasPortDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<FimasPort>
-	 */
-	public List<FimasPort> getCompanies() {
-		return fimasPortDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

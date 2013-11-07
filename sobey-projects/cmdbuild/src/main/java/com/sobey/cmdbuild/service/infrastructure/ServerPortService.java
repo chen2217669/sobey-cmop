@@ -59,25 +59,6 @@ public class ServerPortService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return ServerPort
-	 */
-	public ServerPort findByCode(String code) {
-		return serverPortDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<ServerPort>
-	 */
-	public List<ServerPort> getCompanies() {
-		return serverPortDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

@@ -59,25 +59,6 @@ public class NetappControllerService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return NetappController
-	 */
-	public NetappController findByCode(String code) {
-		return netappControllerDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<NetappController>
-	 */
-	public List<NetappController> getCompanies() {
-		return netappControllerDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

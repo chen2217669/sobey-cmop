@@ -59,25 +59,6 @@ public class ConsumptionsService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return Consumptions
-	 */
-	public Consumptions findByCode(String code) {
-		return consumptionsDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<Consumptions>
-	 */
-	public List<Consumptions> getCompanies() {
-		return consumptionsDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams
