@@ -25,9 +25,15 @@ public class EcsSpecHistory extends BasicEntity {
 	private Date endDate;
 	private Integer memory;
 	private Double price;
+	private Integer brand;
 	private String remark;
 
 	public EcsSpecHistory() {
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
 	}
 
 	@Column(name = "cpu_number")
@@ -73,6 +79,10 @@ public class EcsSpecHistory extends BasicEntity {
 
 	public void setDiskSize(Integer diskSize) {
 		this.diskSize = diskSize;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	public void setEcsSpec(EcsSpec ecsSpec) {

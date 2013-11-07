@@ -22,8 +22,14 @@ public class EcsSpec extends BasicEntity {
 	private Integer memory;
 	private Double price;
 	private String remark;
+	private Integer brand;
 
 	public EcsSpec() {
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
 	}
 
 	@Column(name = "cpu_number")
@@ -78,6 +84,10 @@ public class EcsSpec extends BasicEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 }

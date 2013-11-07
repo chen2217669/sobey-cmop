@@ -21,6 +21,7 @@ public class Es3Spec extends BasicEntity {
 	private String remark;
 	private Integer maxSpace;
 	private Integer iops;
+	private Integer brand;
 
 	public Es3Spec() {
 	}
@@ -28,6 +29,15 @@ public class Es3Spec extends BasicEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "es3Spec")
 	public Set<Es3SpecHistory> getEs3SpecHistories() {
 		return this.es3SpecHistories;
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	@Column(name = "\"Price\"", precision = 17, scale = 17)
