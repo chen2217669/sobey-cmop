@@ -18,7 +18,7 @@ public class TagDTO {
 	private String description;
 	private Date beginDate;
 	private String remark;
-	private Integer Tenants;
+	private Integer tenants;
 
 	public Integer getId() {
 		return id;
@@ -61,11 +61,11 @@ public class TagDTO {
 	}
 
 	public Integer getTenants() {
-		return Tenants;
+		return tenants;
 	}
 
 	public void setTenants(Integer tenants) {
-		Tenants = tenants;
+		this.tenants = tenants;
 	}
 
 	/**
