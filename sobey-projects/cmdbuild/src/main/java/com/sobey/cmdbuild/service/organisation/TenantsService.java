@@ -41,6 +41,23 @@ public class TenantsService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return
+	 */
+	public Tenants findTenants(Map<String, Object> searchParams) {
+		return tenantsDao.findOne(buildSpecification(searchParams));
+	}
+
+	/**
 	 * 新增、保存对象
 	 * 
 	 * @param tenants
@@ -60,22 +77,20 @@ public class TenantsService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return Tenants
-	 */
-	public Tenants findByCode(String code) {
-		return tenantsDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
 	 * @return List<Tenants>
 	 */
-	public List<Tenants> getTenantsList() {
-		return tenantsDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<Tenants> getTenantsList(Map<String, Object> searchParams) {
+		return tenantsDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -96,7 +111,7 @@ public class TenantsService extends BasicSevcie {
 	}
 
 	/**
-	 * 创建动态查询条件组合.
+	 * 创建动态查询条件组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * 自定义的查询在此进行组合.
 	 * 

@@ -41,6 +41,23 @@ public class TagService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return
+	 */
+	public Tag findTag(Map<String, Object> searchParams) {
+		return tagDao.findOne(buildSpecification(searchParams));
+	}
+
+	/**
 	 * 新增、保存对象
 	 * 
 	 * @param tag
@@ -60,35 +77,20 @@ public class TagService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return Tag
-	 */
-	public Tag findByCode(String code) {
-		return tagDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 根据code、tenantsId获得状态为"A"的有效对象
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
-	 * @param code
-	 *            code
-	 * @param tenantsId
-	 *            tenants Id
-	 * @return
-	 */
-	public Tag findByCodeAndTenants(String code, Integer tenantsId) {
-		return tagDao.findByCodeAndStatusAndTenants(code, CMDBuildConstants.STATUS_ACTIVE, tenantsId);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
 	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
 	 * @return List<Tag>
 	 */
-	public List<Tag> getTagList() {
-		return tagDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<Tag> getTagList(Map<String, Object> searchParams) {
+		return tagDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -122,7 +124,7 @@ public class TagService extends BasicSevcie {
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<Tag>
