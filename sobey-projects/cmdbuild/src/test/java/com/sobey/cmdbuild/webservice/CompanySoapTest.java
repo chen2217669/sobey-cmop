@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Company;
@@ -44,15 +45,22 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void find() {
-		Integer id = 78;
+
+		Integer id = 85;
 		DTOResult<CompanyDTO> response = service.findCompany(id);
-		assertEquals("sobey", response.getDto().getCode());
+		assertEquals("code9701", response.getDto().getCode());
+
+		Map<String, Object> searchParams = Maps.newHashMap();
+		searchParams.put("EQ_zip", "zip");
+		DTOResult<CompanyDTO> responseParams = service.findCompanyByParams(searchParams);
+		assertEquals("code9701", responseParams.getDto().getCode());
 	}
 
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<CompanyDTO> result = service.getCompanyList();
+		Map<String, Object> searchParams = Maps.newHashMap();
+		DTOListResult<CompanyDTO> result = service.getCompanyList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 
@@ -87,7 +95,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void getPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
