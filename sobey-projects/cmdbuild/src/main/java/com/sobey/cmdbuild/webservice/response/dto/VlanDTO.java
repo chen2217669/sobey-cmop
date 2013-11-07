@@ -13,50 +13,92 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "VlanDTO", namespace = WsConstants.NS)
 public class VlanDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private String gateway;
+	private Integer id;
+
+	// IDC Integer IDC Id
+	// Segment String 网段
+	// Netmask String 子网掩码
+	// Gateway String 网关
+
+	private Integer idc;
+	private String netmask;
 	private String remark;
+	private String segment;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getGateway() {
+		return gateway;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getIdc() {
+		return idc;
+	}
+
+	public String getNetmask() {
+		return netmask;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public String getSegment() {
+		return segment;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setGateway(String gateway) {
+		this.gateway = gateway;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIdc(Integer idc) {
+		this.idc = idc;
+	}
+
+	public void setNetmask(String netmask) {
+		this.netmask = netmask;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setSegment(String segment) {
+		this.segment = segment;
 	}
 
 	/**
