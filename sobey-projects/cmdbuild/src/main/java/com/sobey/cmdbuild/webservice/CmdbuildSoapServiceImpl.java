@@ -54,11 +54,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 	 */
 	private static final String DEFAULT_USER = "admin";
 
-	/**
-	 * CMDBuild的系统用户名
-	 */
-	private static final String SYSTEM_USER = "system";
-
 	@Override
 	public DTOResult<LookUpDTO> findLookUp(@WebParam(name = "id") Integer id) {
 
@@ -94,10 +89,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			LookUp lookUp = comm.lookUpService.findLookUp(searchParams);
 
-			// Lookup因为是系统表,所以没有触发器,只能手动设置数据.
-			lookUp.setUser(SYSTEM_USER);
-			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
-
 			Validate.notNull(lookUp, ERROR.OBJECT_NULL);
 
 			result.setDto(BeanMapper.map(lookUp, LookUpDTO.class));
@@ -108,112 +99,6 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 			return handleParameterError(result, e);
 		} catch (RuntimeException e) {
 			return handleGeneralError(result, e, ERROR.MORE_RESULT);
-		}
-	}
-
-	@Override
-	public IdResult createLookUp(@WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO) {
-
-		IdResult result = new IdResult();
-
-		try {
-
-			Validate.notNull(lookUpDTO, ERROR.INPUT_NULL);
-
-			Map<String, Object> searchParams = Maps.newHashMap();
-			searchParams.put("EQ_description", lookUpDTO.getDescription());
-			searchParams.put("EQ_type", lookUpDTO.getType());
-
-			// 验证description是否唯一.如果不为null,则弹出错误.
-			// 此处先判断同一Type下是否有相同的description.如果有相同的description名称，则不能创建.
-			Validate.isTrue(comm.lookUpService.findLookUp(searchParams) == null, ERROR.OBJECT_DUPLICATE);
-
-			LookUp lookUp = BeanMapper.map(lookUpDTO, LookUp.class);
-			lookUp.setUser(SYSTEM_USER);
-			lookUp.setIdClass(LookUp.class.getSimpleName());
-			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
-
-			BeanValidators.validateWithException(validator, lookUp);
-
-			comm.lookUpService.saveOrUpdate(lookUp);
-
-			return new IdResult(lookUp.getId());
-
-		} catch (ConstraintViolationException e) {
-			String message = StringUtils.join(BeanValidators.extractPropertyAndMessageAsList(e, " "), "\n");
-			return handleParameterError(result, e, message);
-		} catch (IllegalArgumentException e) {
-			return handleParameterError(result, e);
-		} catch (RuntimeException e) {
-			return handleGeneralError(result, e);
-		}
-	}
-
-	@Override
-	public IdResult updateLookUp(@WebParam(name = "id") Integer id, @WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO) {
-
-		IdResult result = new IdResult();
-
-		try {
-
-			Validate.notNull(lookUpDTO, ERROR.INPUT_NULL);
-
-			LookUp lookUp = comm.lookUpService.findLookUp(id);
-
-			Map<String, Object> searchParams = Maps.newHashMap();
-			searchParams.put("EQ_description", lookUpDTO.getDescription());
-			searchParams.put("EQ_type", lookUpDTO.getType());
-
-			// 验证description是否唯一.如果不为null,则弹出错误.
-			// 此处先判断同一Type下是否有相同的description.如果有相同的description名称，则不能创建.
-			Validate.isTrue(
-					comm.lookUpService.findLookUp(searchParams) == null
-							|| lookUp.getDescription().equals(lookUpDTO.getDescription()), ERROR.OBJECT_DUPLICATE);
-
-			// 将DTO对象转换至Entity对象,并将Entity拷贝至根据ID查询得到的Entity对象中
-			BeanMapper.copy(BeanMapper.map(lookUpDTO, LookUp.class), lookUp);
-
-			lookUp.setUser(SYSTEM_USER);
-			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
-			lookUp.setIdClass(LookUp.class.getSimpleName());
-
-			// 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException.
-			BeanValidators.validateWithException(validator, lookUp);
-
-			comm.lookUpService.saveOrUpdate(lookUp);
-
-			return new IdResult(lookUp.getId());
-
-		} catch (ConstraintViolationException e) {
-			String message = StringUtils.join(BeanValidators.extractPropertyAndMessageAsList(e, " "), "\n");
-			return handleParameterError(result, e, message);
-		} catch (IllegalArgumentException e) {
-			return handleParameterError(result, e);
-		} catch (RuntimeException e) {
-			return handleGeneralError(result, e);
-		}
-	}
-
-	@Override
-	public IdResult deleteLookUp(@WebParam(name = "id") Integer id) {
-
-		IdResult result = new IdResult();
-
-		try {
-
-			Validate.notNull(id, ERROR.INPUT_NULL);
-
-			LookUp lookUp = comm.lookUpService.findLookUp(id);
-			lookUp.setStatus(CMDBuildConstants.STATUS_NON_ACTIVE);
-
-			comm.lookUpService.saveOrUpdate(lookUp);
-
-			return new IdResult(lookUp.getId());
-
-		} catch (IllegalArgumentException e) {
-			return handleParameterError(result, e);
-		} catch (RuntimeException e) {
-			return handleGeneralError(result, e);
 		}
 	}
 

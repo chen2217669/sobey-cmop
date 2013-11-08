@@ -1,9 +1,7 @@
 package com.sobey.cmdbuild.data;
 
-import com.sobey.cmdbuild.constants.LookUpEnum;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.entity.Idc;
-import com.sobey.cmdbuild.entity.LookUp;
 import com.sobey.cmdbuild.entity.Rack;
 import com.sobey.cmdbuild.entity.Tag;
 import com.sobey.cmdbuild.entity.Tenants;
@@ -73,20 +71,6 @@ public class TestData {
 		rack.setRemark(RandomData.randomName("remark"));
 		rack.setIdc(110);
 		return rack;
-	}
-
-	public static LookUp randomLookUp() {
-		LookUp lookUp = new LookUp();
-		// lookUp.setId(0);
-		lookUp.setId(85);
-		lookUp.setCode(RandomData.randomName("code"));
-		lookUp.setDescription(RandomData.randomName("description"));
-
-		lookUp.setDescription("2.4K");
-		lookUp.setType(LookUpEnum.IOPS.name());
-		lookUp.setNumber(4);
-		lookUp.setIsDefault(false);
-		return lookUp;
 	}
 
 }

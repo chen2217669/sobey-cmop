@@ -18,14 +18,10 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.constants.LookUpEnum;
-import com.sobey.cmdbuild.data.TestData;
-import com.sobey.cmdbuild.entity.LookUp;
 import com.sobey.cmdbuild.webservice.response.dto.LookUpDTO;
 import com.sobey.cmdbuild.webservice.response.result.DTOListResult;
 import com.sobey.cmdbuild.webservice.response.result.DTOResult;
-import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
-import com.sobey.core.mapper.BeanMapper;
 
 /**
  * LookUp SOAP服务的功能测试, 测试主要的接口调用.
@@ -67,34 +63,6 @@ public class LookUpSoapTest extends BaseFunctionalTestCase {
 		DTOListResult<LookUpDTO> result = service.getLookUpList(searchParams);
 		System.out.println("获得集合数量:" + result.getDtos().size());
 		assertEquals("0", result.getCode());
-	}
-
-	@Test
-	// @Ignore
-	public void save() {
-		LookUp LookUp = TestData.randomLookUp();
-		LookUpDTO LookUpDTO = BeanMapper.map(LookUp, LookUpDTO.class);
-		IdResult response = service.createLookUp(LookUpDTO);
-		assertNotNull(response.getId());
-	}
-
-	@Test
-	@Ignore
-	public void update() {
-		Integer id = 70;
-		DTOResult<LookUpDTO> response = service.findLookUp(id);
-		LookUpDTO LookUpDTO = response.getDto();
-		LookUpDTO.setDescription("冬天来了啊");
-		IdResult result = service.updateLookUp(id, LookUpDTO);
-		assertNotNull(result.getId());
-	}
-
-	@Test
-	@Ignore
-	public void delete() {
-		Integer id = 70;
-		IdResult response = service.deleteTag(id);
-		assertNotNull(response.getId());
 	}
 
 	@Test

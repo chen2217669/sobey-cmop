@@ -31,23 +31,13 @@ import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 @WebService(name = "CmdbuildService", targetNamespace = WsConstants.NS)
 public interface CmdbuildSoapService {
 
-	/*************************************************
-	 *************** 系统默认表 ********************
-	 *************************************************/
-
 	// ==============================//
 	// =========== LookUp ===========//
-	// ==============================//
+	// == 系统默认表,只读取,不写入 ==//
 
 	DTOResult<LookUpDTO> findLookUp(@WebParam(name = "id") Integer id);
 
 	DTOResult<LookUpDTO> findLookUpByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
-
-	IdResult createLookUp(@WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO);
-
-	IdResult updateLookUp(@WebParam(name = "id") Integer id, @WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO);
-
-	IdResult deleteLookUp(@WebParam(name = "id") Integer id);
 
 	DTOListResult<LookUpDTO> getLookUpList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
