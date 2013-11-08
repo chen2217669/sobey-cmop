@@ -50,9 +50,14 @@ import com.sobey.core.mapper.BeanMapper;
 public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements CmdbuildSoapService {
 
 	/**
-	 * cmdbuild的默认超级用户名
+	 * CMDBuild的默认超级用户名
 	 */
 	private static final String DEFAULT_USER = "admin";
+
+	/**
+	 * CMDBuild的系统用户名
+	 */
+	private static final String SYSTEM_USER = "system";
 
 	@Override
 	public DTOResult<LookUpDTO> findLookUp(@WebParam(name = "id") Integer id) {
@@ -89,6 +94,10 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 			LookUp lookUp = comm.lookUpService.findLookUp(searchParams);
 
+			// Lookup因为是系统表,所以没有触发器,只能手动设置数据.
+			lookUp.setUser(SYSTEM_USER);
+			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+
 			Validate.notNull(lookUp, ERROR.OBJECT_NULL);
 
 			result.setDto(BeanMapper.map(lookUp, LookUpDTO.class));
@@ -120,6 +129,9 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 			Validate.isTrue(comm.lookUpService.findLookUp(searchParams) == null, ERROR.OBJECT_DUPLICATE);
 
 			LookUp lookUp = BeanMapper.map(lookUpDTO, LookUp.class);
+			lookUp.setUser(SYSTEM_USER);
+			lookUp.setIdClass(LookUp.class.getSimpleName());
+			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
 
 			BeanValidators.validateWithException(validator, lookUp);
 
@@ -161,7 +173,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 			// 将DTO对象转换至Entity对象,并将Entity拷贝至根据ID查询得到的Entity对象中
 			BeanMapper.copy(BeanMapper.map(lookUpDTO, LookUp.class), lookUp);
 
-			lookUp.setUser(DEFAULT_USER);
+			lookUp.setUser(SYSTEM_USER);
 			lookUp.setStatus(CMDBuildConstants.STATUS_ACTIVE);
 			lookUp.setIdClass(LookUp.class.getSimpleName());
 
