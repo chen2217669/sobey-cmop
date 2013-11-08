@@ -846,6 +846,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 
 	@Override
 	public DTOListResult<ConsumptionsDTO> reportConsumptions(Map<String, Object> searchParams) {
+		// TODO 待完成
 		return null;
 	}
 
