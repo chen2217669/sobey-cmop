@@ -23,6 +23,15 @@ public class TenantsDTO {
 	private String password;
 	private String phone;
 	private String remark;
+	private CompanyDTO companyDTO;
+
+	public CompanyDTO getCompanyDTO() {
+		return companyDTO;
+	}
+
+	public void setCompanyDTO(CompanyDTO companyDTO) {
+		this.companyDTO = companyDTO;
+	}
 
 	public Double getAccontBalance() {
 		return accontBalance;

@@ -19,6 +19,23 @@ public class TagDTO {
 	private Integer id;
 	private String remark;
 	private Integer tenants;
+	private TenantsDTO tenantsDTO;
+
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
+	}
+
+	public TenantsDTO getTenantsDTO() {
+		return tenantsDTO;
+	}
+
+	public void setTenantsDTO(TenantsDTO tenantsDTO) {
+		this.tenantsDTO = tenantsDTO;
+	}
 
 	public Date getBeginDate() {
 		return beginDate;
@@ -40,10 +57,6 @@ public class TagDTO {
 		return remark;
 	}
 
-	public Integer getTenants() {
-		return tenants;
-	}
-
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
@@ -62,10 +75,6 @@ public class TagDTO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public void setTenants(Integer tenants) {
-		tenants = tenants;
 	}
 
 	/**

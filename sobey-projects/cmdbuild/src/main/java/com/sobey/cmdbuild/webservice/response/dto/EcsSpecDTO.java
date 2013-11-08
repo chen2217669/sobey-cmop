@@ -18,16 +18,19 @@ public class EcsSpecDTO {
 	private Integer cpuNumber;
 	private String description;
 	private String diskSize;
-
-	// Memory String 内存大小
-	// CpuNumber Integer CPU数量
-	// DiskSize String 硬盘存储大小
-	// Price Double 单价
-
 	private Integer id;
 	private String memory;
 	private Double price;
 	private String remark;
+	private Integer brand;
+
+	public Integer getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
 
 	public Date getBeginDate() {
 		return beginDate;

@@ -17,8 +17,16 @@ public class Es3SpecDTO {
 	private String code;
 	private String description;
 	private Integer id;
-	// Price Double 每GB的单价
 	private Double price;
+	private Integer brand;
+
+	public Integer getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
 
 	private String remark;
 

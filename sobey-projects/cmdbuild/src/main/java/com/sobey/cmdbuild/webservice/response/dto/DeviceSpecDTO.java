@@ -18,19 +18,7 @@ public class DeviceSpecDTO {
 	private String code;
 	private String cpuModel;
 	private Integer cpuNumber;
-
 	private String description;
-	// DeviceType Integer 设备类型Id(switch、server等)
-	// Brand Integer 品牌ID
-	// Power Integer 设备功耗ID
-	// Maintenance Integer 维护策略ID
-	// Hight Integer 设备规格ID
-	// RAMNumber Integer 内存数量
-	// CPUNumber Integer CPU数量
-	// NICNumber Integer 网卡插槽数量
-	// HDNumber Integer 硬盘数量
-	// Price Double 价格
-	// CPUModel String CPU型号
 	private Integer deviceType;
 	private Integer hdnumber;
 	private Integer hight;

@@ -17,8 +17,16 @@ public class EipSpecDTO {
 	private String code;
 	private String description;
 	private Integer id;
-	// Price Double 单价(每M)
 	private Double price;
+	private Integer brand;
+
+	public Integer getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
 
 	private String remark;
 

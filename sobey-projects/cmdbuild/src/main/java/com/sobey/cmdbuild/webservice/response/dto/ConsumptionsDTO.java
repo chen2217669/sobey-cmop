@@ -18,13 +18,18 @@ public class ConsumptionsDTO {
 	private String description;
 	private Integer id;
 	private String remark;
-
 	private Date serviceEnd;
 	private Date serviceStart;
-	// Tenants Integer 租户Id
-	// ServiceStart Date 服务开始时间
-	// ServiceEnd Date 服务结束时间
 	private Integer tenants;
+	private TenantsDTO tenantsDTO;
+
+	public TenantsDTO getTenantsDTO() {
+		return tenantsDTO;
+	}
+
+	public void setTenantsDTO(TenantsDTO tenantsDTO) {
+		this.tenantsDTO = tenantsDTO;
+	}
 
 	public Date getBeginDate() {
 		return beginDate;

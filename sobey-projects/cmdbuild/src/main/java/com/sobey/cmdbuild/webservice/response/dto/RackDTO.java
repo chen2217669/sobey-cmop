@@ -27,6 +27,15 @@ public class RackDTO {
 	private String remark;
 	private String sn;
 	private Integer unitNumber;
+	private IdcDTO idcDTO;
+
+	public IdcDTO getIdcDTO() {
+		return idcDTO;
+	}
+
+	public void setIdcDTO(IdcDTO idcDTO) {
+		this.idcDTO = idcDTO;
+	}
 
 	public Date getBeginDate() {
 		return beginDate;
