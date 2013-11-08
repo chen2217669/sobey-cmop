@@ -13,6 +13,7 @@ import com.sobey.cmdbuild.webservice.response.dto.EcsSpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.EipSpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.Es3SpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.IdcDTO;
+import com.sobey.cmdbuild.webservice.response.dto.LookUpDTO;
 import com.sobey.cmdbuild.webservice.response.dto.RackDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TagDTO;
 import com.sobey.cmdbuild.webservice.response.dto.TenantsDTO;
@@ -29,6 +30,29 @@ import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
  */
 @WebService(name = "CmdbuildService", targetNamespace = WsConstants.NS)
 public interface CmdbuildSoapService {
+
+	/*************************************************
+	 *************** 系统默认表 ********************
+	 *************************************************/
+
+	// ==============================//
+	// =========== LookUp ===========//
+	// ==============================//
+
+	DTOResult<LookUpDTO> findLookUp(@WebParam(name = "id") Integer id);
+
+	DTOResult<LookUpDTO> findLookUpByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
+
+	IdResult createLookUp(@WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO);
+
+	IdResult updateLookUp(@WebParam(name = "id") Integer id, @WebParam(name = "lookUpDTO") LookUpDTO lookUpDTO);
+
+	IdResult deleteLookUp(@WebParam(name = "id") Integer id);
+
+	DTOListResult<LookUpDTO> getLookUpList(@WebParam(name = "searchParams") Map<String, Object> searchParams);
+
+	PaginationResult<LookUpDTO> getLookUpPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
+			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
 	/*************************************************
 	 *************** Organisation ********************
