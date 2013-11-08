@@ -43,6 +43,7 @@ import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.beanvalidator.BeanValidators;
 import com.sobey.core.mapper.BeanMapper;
+import com.sobey.core.utils.MathsUtil;
 
 @WebService(serviceName = "CmdbuildService", endpointInterface = "com.sobey.cmdbuild.webservice.CmdbuildSoapService", targetNamespace = WsConstants.NS)
 // 查看webservice的日志.
@@ -1212,7 +1213,7 @@ public class CmdbuildSoapServiceImpl extends BasicSoapSevcie implements Cmdbuild
 				return null;
 			}
 
-			tenants.setAccontBalance(tenants.getAccontBalance() - consumptions.getSpending());
+			tenants.setAccontBalance(MathsUtil.sub(tenants.getAccontBalance(), consumptions.getSpending()));
 
 			// 保存信息
 			comm.tenantsService.saveOrUpdate(tenants);
