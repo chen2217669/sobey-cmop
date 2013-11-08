@@ -135,6 +135,10 @@ public interface CmdbuildSoapService {
 	 ****************** Financial ********************
 	 *************************************************/
 
+	// ==============================//
+	// ========= Consumptions =======//
+	// ==============================//
+
 	DTOResult<ConsumptionsDTO> findConsumptions(@WebParam(name = "id") Integer id);
 
 	DTOResult<ConsumptionsDTO> findConsumptionsByParams(
@@ -175,6 +179,10 @@ public interface CmdbuildSoapService {
 	 */
 	DTOListResult<ConsumptionsDTO> reportConsumptions(@WebParam(name = "searchParams") Map<String, Object> searchParams);
 
+	// ==============================//
+	// ========= DeviceSpec =========//
+	// ==============================//
+
 	DTOResult<DeviceSpecDTO> findDeviceSpec(@WebParam(name = "id") Integer id);
 
 	DTOResult<DeviceSpecDTO> findDeviceSpecByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -192,6 +200,10 @@ public interface CmdbuildSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// =========== EcsSpec ==========//
+	// ==============================//
+
 	DTOResult<EcsSpecDTO> findEcsSpec(@WebParam(name = "id") Integer id);
 
 	DTOResult<EcsSpecDTO> findEcsSpecByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -208,6 +220,10 @@ public interface CmdbuildSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// =========== EipSpec ==========//
+	// ==============================//
+
 	DTOResult<EipSpecDTO> findEipSpec(@WebParam(name = "id") Integer id);
 
 	DTOResult<EipSpecDTO> findEipSpecByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -223,6 +239,10 @@ public interface CmdbuildSoapService {
 	PaginationResult<EipSpecDTO> getEipSpecPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ============ Es3Spec =========//
+	// ==============================//
 
 	DTOResult<Es3SpecDTO> findEs3Spec(@WebParam(name = "id") Integer id);
 
