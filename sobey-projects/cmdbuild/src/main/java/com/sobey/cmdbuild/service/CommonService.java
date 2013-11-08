@@ -42,6 +42,7 @@ import com.sobey.cmdbuild.service.infrastructure.SwitchesService;
 import com.sobey.cmdbuild.service.infrastructure.VlanService;
 import com.sobey.cmdbuild.service.organisation.CompanyService;
 import com.sobey.cmdbuild.service.organisation.IdcService;
+import com.sobey.cmdbuild.service.organisation.LookUpService;
 import com.sobey.cmdbuild.service.organisation.RackService;
 import com.sobey.cmdbuild.service.organisation.TagService;
 import com.sobey.cmdbuild.service.organisation.TenantsService;
@@ -56,10 +57,10 @@ import com.sobey.cmdbuild.service.organisation.TenantsService;
 public class CommonService {
 
 	@Autowired
-	public CompanyService companyService;
+	public As2Service as2Service;
 
 	@Autowired
-	public As2Service as2Service;
+	public CompanyService companyService;
 
 	@Autowired
 	public ConsumptionsService consumptionsService;
@@ -80,31 +81,28 @@ public class CommonService {
 	public EcsSpecService ecsSpecService;
 
 	@Autowired
-	public EipService eipService;
+	public EipPolicyService eipPolicyService;
 
 	@Autowired
-	public EipPolicyService eipPolicyService;
+	public EipService eipService;
 
 	@Autowired
 	public EipSpecService eipSpecService;
 
 	@Autowired
-	public ElbService elbService;
+	public ElbPolicyService elbPolicyService;
 
 	@Autowired
-	public ElbPolicyService elbPolicyService;
+	public ElbService elbService;
 
 	@Autowired
 	public Es3SpecService es3SpecService;
 
 	@Autowired
-	public EsgService esgService;
-
-	@Autowired
 	public EsgPolicyService esgPolicyService;
 
 	@Autowired
-	public FimasService fimasService;
+	public EsgService esgService;
 
 	@Autowired
 	public FimasBoxService fimasBoxService;
@@ -113,10 +111,13 @@ public class CommonService {
 	public FimasPortService fimasPortService;
 
 	@Autowired
-	public FirewallService firewallService;
+	public FimasService fimasService;
 
 	@Autowired
 	public FirewallPortService firewallPortService;
+
+	@Autowired
+	public FirewallService firewallService;
 
 	@Autowired
 	public GroupPolicyService groupPolicyService;
@@ -131,10 +132,13 @@ public class CommonService {
 	public IpaddressService ipaddressService;
 
 	@Autowired
+	public LoadBalancerPortService loadBalancerPortService;
+
+	@Autowired
 	public LoadBalancerService loadBalancerService;
 
 	@Autowired
-	public LoadBalancerPortService loadBalancerPortService;
+	public LookUpService lookUpService;
 
 	@Autowired
 	public MemoryService memoryService;
@@ -149,19 +153,19 @@ public class CommonService {
 	public NetappPortService netappPortService;
 
 	@Autowired
-	public NicService nicService;
+	public NicPortService nicPortService;
 
 	@Autowired
-	public NicPortService nicPortService;
+	public NicService nicService;
 
 	@Autowired
 	public RackService rackService;
 
 	@Autowired
-	public ServerService serverService;
+	public ServerPortService serverPortService;
 
 	@Autowired
-	public ServerPortService serverPortService;
+	public ServerService serverService;
 
 	@Autowired
 	public SwitchesService switchesService;
