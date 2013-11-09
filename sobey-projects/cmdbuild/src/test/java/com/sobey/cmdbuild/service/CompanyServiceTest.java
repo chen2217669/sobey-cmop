@@ -3,6 +3,7 @@ package com.sobey.cmdbuild.service;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.service.organisation.CompanyService;
@@ -38,7 +40,9 @@ public class CompanyServiceTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void getCompanies() {
-		List<Company> list = service.getCompanies();
+		Map<String, Object> searchParams = Maps.newHashMap();
+		searchParams.put("EQ_zip", "zip1801");
+		List<Company> list = service.getCompanyList(searchParams);
 		System.out.println("列表数据数量:" + list.size());
 		assertNotNull(list);
 	}

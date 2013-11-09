@@ -41,6 +41,23 @@ public class RackService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return
+	 */
+	public Rack findRack(Map<String, Object> searchParams) {
+		return rackDao.findOne(buildSpecification(searchParams));
+	}
+
+	/**
 	 * 新增、保存对象
 	 * 
 	 * @param rack
@@ -60,22 +77,20 @@ public class RackService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return Rack
-	 */
-	public Rack findByCode(String code) {
-		return rackDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
 	 * @return List<Rack>
 	 */
-	public List<Rack> getRacks() {
-		return rackDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<Rack> getRackList(Map<String, Object> searchParams) {
+		return rackDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -98,7 +113,7 @@ public class RackService extends BasicSevcie {
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<Rack>

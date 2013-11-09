@@ -59,25 +59,6 @@ public class Cs2Service extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return Cs2
-	 */
-	public Cs2 findByCode(String code) {
-		return cs2Dao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<Cs2>
-	 */
-	public List<Cs2> getCompanies() {
-		return cs2Dao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

@@ -13,46 +13,65 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "Es3SpecDTO", namespace = WsConstants.NS)
 public class Es3SpecDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
-	private String remark;
+	private Integer id;
+	private Double price;
+	private Integer brand;
 
-	public Integer getId() {
-		return id;
+	public Integer getBrand() {
+		return brand;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
+
+	private String remark;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getId() {
+		return id;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Double getPrice() {
+		return price;
+	}
+
+	public String getRemark() {
+		return remark;
 	}
 
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public String getRemark() {
-		return remark;
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public void setRemark(String remark) {

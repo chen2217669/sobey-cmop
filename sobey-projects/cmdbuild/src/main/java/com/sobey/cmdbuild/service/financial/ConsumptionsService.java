@@ -27,7 +27,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class ConsumptionsService extends BasicSevcie {
 	@Autowired
-	private ConsumptionsDao consumptionsDao;
+	private ConsumptionsDao ConsumptionsDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,17 +36,34 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @return Consumptions
 	 */
 	public Consumptions findConsumptions(Integer id) {
-		return consumptionsDao.findOne(id);
+		return ConsumptionsDao.findOne(id);
+	}
+
+	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return Consumptions
+	 */
+	public Consumptions findConsumptions(Map<String, Object> searchParams) {
+		return ConsumptionsDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param consumptions
+	 * @param Consumptions
 	 * @return Consumptions
 	 */
-	public Consumptions saveOrUpdate(Consumptions consumptions) {
-		return consumptionsDao.save(consumptions);
+	public Consumptions saveOrUpdate(Consumptions Consumptions) {
+		return ConsumptionsDao.save(Consumptions);
 	}
 
 	/**
@@ -55,26 +72,23 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteConsumptions(Integer id) {
-		consumptionsDao.delete(id);
+		ConsumptionsDao.delete(id);
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return Consumptions
-	 */
-	public Consumptions findByCode(String code) {
-		return consumptionsDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
-	 * @return List<Consumptions>
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map * @return List<Consumptions>
 	 */
-	public List<Consumptions> getCompanies() {
-		return consumptionsDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<Consumptions> getConsumptionsList(Map<String, Object> searchParams) {
+		return ConsumptionsDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -88,29 +102,30 @@ public class ConsumptionsService extends BasicSevcie {
 	private Page<Consumptions> getConsumptionsPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
 		Specification<Consumptions> spec = buildSpecification(searchParams);
-		return consumptionsDao.findAll(spec, pageRequest);
+		return ConsumptionsDao.findAll(spec, pageRequest);
 	}
 
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<Consumptions>
 	 */
-	private Specification<Consumptions> buildSpecification(Map<String, Object> searchParams) { // 将条件查询放入Map中.查询条件可查询SearchFilter类.
+	private Specification<Consumptions> buildSpecification(Map<String, Object> searchParams) {
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<Consumptions> spec = DynamicSpecifications.bySearchFilter(filters.values(), Consumptions.class);
-		return spec;
+		return DynamicSpecifications.bySearchFilter(filters.values(), Consumptions.class);
 	}
 
 	/**
 	 * ConsumptionsDTO webservice分页查询.
 	 * 
-	 * 将Page<T>重新组织成符合DTO格式的分页格式对象. * @param searchParams 查询语句Map.
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
+	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
@@ -119,11 +134,8 @@ public class ConsumptionsService extends BasicSevcie {
 	 */
 	public PaginationResult<ConsumptionsDTO> getConsumptionsDTOPagination(Map<String, Object> searchParams,
 			int pageNumber, int pageSize) {
-		Page<Consumptions> page = getConsumptionsPage(searchParams, pageNumber, pageSize); // 将List<Consumptions>中的数据转换为List<ConsumptionsDTO>
+		Page<Consumptions> page = getConsumptionsPage(searchParams, pageNumber, pageSize);
 		List<ConsumptionsDTO> dtos = BeanMapper.mapList(page.getContent(), ConsumptionsDTO.class);
-		PaginationResult<ConsumptionsDTO> paginationResult = new PaginationResult<ConsumptionsDTO>(page.getNumber(),
-				page.getSize(), page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(),
-				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-		return paginationResult;
+		return fillPaginationResult(page, dtos);
 	}
 }

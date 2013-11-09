@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Tag;
@@ -52,15 +53,8 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<TagDTO> result = service.getTagList();
-		assertEquals("0", result.getCode());
-	}
-
-	@Test
-	@Ignore
-	public void getListByTenants() {
-		Integer tenantsId = 87;
-		DTOListResult<TagDTO> result = service.getTagListByTenants(tenantsId);
+		Map<String, Object> searchParams = Maps.newHashMap();
+		DTOListResult<TagDTO> result = service.getTagList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 
@@ -74,18 +68,20 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	@Ignore
+	// @Ignore
 	public void update() {
-		Integer id = 102;
+		Integer id = 108;
 		DTOResult<TagDTO> response = service.findTag(id);
 		TagDTO tagDTO = response.getDto();
+		tagDTO.setCode("code137");
 		tagDTO.setDescription("冬天来了啊");
+		tagDTO.setTenants(90);
 		IdResult result = service.updateTag(id, tagDTO);
 		assertNotNull(result.getId());
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void delete() {
 		Integer id = 102;
 		IdResult response = service.deleteTag(id);

@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Idc;
@@ -52,7 +53,8 @@ public class IdcSoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<IdcDTO> result = service.getIdcList();
+		Map<String, Object> searchParams = Maps.newHashMap();
+		DTOListResult<IdcDTO> result = service.getIdcList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 

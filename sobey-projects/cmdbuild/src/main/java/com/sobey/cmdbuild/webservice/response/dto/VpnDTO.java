@@ -13,50 +13,92 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "VpnDTO", namespace = WsConstants.NS)
 public class VpnDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer id;
 	private String remark;
 
-	public Integer getId() {
-		return id;
-	}
+	// Tag Integer 标签ID
+	// Tenants Integer 租户ID
+	// VPNName String VPN用户名称
+	// VPNPassword String VPN用户密码
 
-	public void setId(Integer id) {
-		this.id = id;
+	private Integer tag;
+	private Integer tenants;
+	private String vpnName;
+	private String vpnPassword;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getBeginDate() {
-		return beginDate;
-	}
-
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getId() {
+		return id;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getTag() {
+		return tag;
+	}
+
+	public Integer getTenants() {
+		return tenants;
+	}
+
+	public String getVpnName() {
+		return vpnName;
+	}
+
+	public String getVpnPassword() {
+		return vpnPassword;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setTag(Integer tag) {
+		this.tag = tag;
+	}
+
+	public void setTenants(Integer tenants) {
+		this.tenants = tenants;
+	}
+
+	public void setVpnName(String vpnName) {
+		this.vpnName = vpnName;
+	}
+
+	public void setVpnPassword(String vpnPassword) {
+		this.vpnPassword = vpnPassword;
 	}
 
 	/**

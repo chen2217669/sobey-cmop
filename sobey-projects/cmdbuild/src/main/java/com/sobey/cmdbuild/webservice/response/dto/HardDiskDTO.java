@@ -13,50 +13,112 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "HardDiskDTO", namespace = WsConstants.NS)
 public class HardDiskDTO {
 
-	private Integer id;
+	private Date beginDate;
+	private Integer brand;
 	private String code;
 	private String description;
-	private Date beginDate;
-	private String remark;
+	private Integer fimas;
 
-	public Integer getId() {
-		return id;
+	// IDC Integer IDC ID
+	// Server Integer Server ID
+	// Fimas Integer Fimas ID
+	// Brand Integer Brand ID
+	// RotationalSpeed Integer RotationalSpeed ID
+	// HardDisk Size Integer 磁盘大小(GB)
+
+	private Integer hardDiskSize;
+	private Integer id;
+	private Integer idc;
+	private String remark;
+	private Integer rotationalSpeed;
+	private Integer server;
+
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getBrand() {
+		return brand;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getFimas() {
+		return fimas;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getHardDiskSize() {
+		return hardDiskSize;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getId() {
+		return id;
+	}
+
+	public Integer getIdc() {
+		return idc;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getRotationalSpeed() {
+		return rotationalSpeed;
+	}
+
+	public Integer getServer() {
+		return server;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setFimas(Integer fimas) {
+		this.fimas = fimas;
+	}
+
+	public void setHardDiskSize(Integer hardDiskSize) {
+		this.hardDiskSize = hardDiskSize;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIdc(Integer idc) {
+		this.idc = idc;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setRotationalSpeed(Integer rotationalSpeed) {
+		this.rotationalSpeed = rotationalSpeed;
+	}
+
+	public void setServer(Integer server) {
+		this.server = server;
 	}
 
 	/**

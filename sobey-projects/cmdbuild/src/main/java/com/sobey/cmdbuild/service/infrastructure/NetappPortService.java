@@ -59,25 +59,6 @@ public class NetappPortService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return NetappPort
-	 */
-	public NetappPort findByCode(String code) {
-		return netappPortDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<NetappPort>
-	 */
-	public List<NetappPort> getCompanies() {
-		return netappPortDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

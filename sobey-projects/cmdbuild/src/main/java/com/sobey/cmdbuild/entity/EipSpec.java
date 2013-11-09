@@ -20,6 +20,7 @@ public class EipSpec extends BasicEntity {
 	private Double price;
 	private String remark;
 	private Integer isp;
+	private Integer brand;
 
 	public EipSpec() {
 	}
@@ -27,6 +28,11 @@ public class EipSpec extends BasicEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "eipSpec")
 	public Set<EipSpecHistory> getEipSpecHistories() {
 		return this.eipSpecHistories;
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
 	}
 
 	@Column(name = "\"Price\"", precision = 17, scale = 17)
@@ -58,6 +64,10 @@ public class EipSpec extends BasicEntity {
 
 	public void setIsp(Integer isp) {
 		this.isp = isp;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 }

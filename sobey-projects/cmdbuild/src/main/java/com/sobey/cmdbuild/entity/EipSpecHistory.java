@@ -23,8 +23,14 @@ public class EipSpecHistory extends BasicEntity {
 	private Double price;
 	private String remark;
 	private Integer isp;
+	private Integer brand;
 
 	public EipSpecHistory() {
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,6 +58,10 @@ public class EipSpecHistory extends BasicEntity {
 	@Column(name = "\"ISP\"")
 	public Integer getIsp() {
 		return isp;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	public void setEipSpec(EipSpec eipSpec) {

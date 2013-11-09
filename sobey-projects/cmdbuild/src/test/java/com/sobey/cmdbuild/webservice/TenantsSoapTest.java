@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Tenants;
@@ -52,12 +53,13 @@ public class TenantsSoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<TenantsDTO> result = service.getTenantsList();
+		Map<String, Object> searchParams = Maps.newHashMap();
+		DTOListResult<TenantsDTO> result = service.getTenantsList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 
 	@Test
-	@Ignore
+	// @Ignore
 	public void save() {
 		Tenants tenants = TestData.randomTenants();
 		TenantsDTO TenantsDTO = BeanMapper.map(tenants, TenantsDTO.class);
@@ -86,7 +88,7 @@ public class TenantsSoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void getPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();

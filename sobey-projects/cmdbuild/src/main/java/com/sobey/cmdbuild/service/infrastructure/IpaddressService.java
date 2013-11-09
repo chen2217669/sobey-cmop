@@ -59,25 +59,6 @@ public class IpaddressService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return Ipaddress
-	 */
-	public Ipaddress findByCode(String code) {
-		return ipaddressDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<Ipaddress>
-	 */
-	public List<Ipaddress> getCompanies() {
-		return ipaddressDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

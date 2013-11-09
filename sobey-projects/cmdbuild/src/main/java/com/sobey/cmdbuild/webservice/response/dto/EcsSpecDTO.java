@@ -13,46 +13,91 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "EcsSpecDTO", namespace = WsConstants.NS)
 public class EcsSpecDTO {
 
-	private Integer id;
-	private String code;
-	private String description;
 	private Date beginDate;
+	private String code;
+	private Integer cpuNumber;
+	private String description;
+	private String diskSize;
+	private Integer id;
+	private String memory;
+	private Double price;
 	private String remark;
+	private Integer brand;
 
-	public Integer getId() {
-		return id;
+	public Integer getBrand() {
+		return brand;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	public Date getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public String getCode() {
+		return code;
+	}
+
+	public Integer getCpuNumber() {
+		return cpuNumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getDiskSize() {
+		return diskSize;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getMemory() {
+		return memory;
+	}
+
+	public Double getPrice() {
+		return price;
 	}
 
 	public String getRemark() {
 		return remark;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setCpuNumber(Integer cpuNumber) {
+		this.cpuNumber = cpuNumber;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setDiskSize(String diskSize) {
+		this.diskSize = diskSize;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setMemory(String memory) {
+		this.memory = memory;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public void setRemark(String remark) {

@@ -27,7 +27,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class Es3SpecService extends BasicSevcie {
 	@Autowired
-	private Es3SpecDao es3SpecDao;
+	private Es3SpecDao Es3SpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,17 +36,34 @@ public class Es3SpecService extends BasicSevcie {
 	 * @return Es3Spec
 	 */
 	public Es3Spec findEs3Spec(Integer id) {
-		return es3SpecDao.findOne(id);
+		return Es3SpecDao.findOne(id);
+	}
+
+	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return Es3Spec
+	 */
+	public Es3Spec findEs3Spec(Map<String, Object> searchParams) {
+		return Es3SpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param es3Spec
+	 * @param Es3Spec
 	 * @return Es3Spec
 	 */
-	public Es3Spec saveOrUpdate(Es3Spec es3Spec) {
-		return es3SpecDao.save(es3Spec);
+	public Es3Spec saveOrUpdate(Es3Spec Es3Spec) {
+		return Es3SpecDao.save(Es3Spec);
 	}
 
 	/**
@@ -55,26 +72,23 @@ public class Es3SpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteEs3Spec(Integer id) {
-		es3SpecDao.delete(id);
+		Es3SpecDao.delete(id);
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return Es3Spec
-	 */
-	public Es3Spec findByCode(String code) {
-		return es3SpecDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
-	 * @return List<Es3Spec>
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map * @return List<Es3Spec>
 	 */
-	public List<Es3Spec> getCompanies() {
-		return es3SpecDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<Es3Spec> getEs3SpecList(Map<String, Object> searchParams) {
+		return Es3SpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -88,29 +102,30 @@ public class Es3SpecService extends BasicSevcie {
 	private Page<Es3Spec> getEs3SpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
 		Specification<Es3Spec> spec = buildSpecification(searchParams);
-		return es3SpecDao.findAll(spec, pageRequest);
+		return Es3SpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<Es3Spec>
 	 */
-	private Specification<Es3Spec> buildSpecification(Map<String, Object> searchParams) { // 将条件查询放入Map中.查询条件可查询SearchFilter类.
+	private Specification<Es3Spec> buildSpecification(Map<String, Object> searchParams) {
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<Es3Spec> spec = DynamicSpecifications.bySearchFilter(filters.values(), Es3Spec.class);
-		return spec;
+		return DynamicSpecifications.bySearchFilter(filters.values(), Es3Spec.class);
 	}
 
 	/**
 	 * Es3SpecDTO webservice分页查询.
 	 * 
-	 * 将Page<T>重新组织成符合DTO格式的分页格式对象. * @param searchParams 查询语句Map.
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
+	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
@@ -119,11 +134,8 @@ public class Es3SpecService extends BasicSevcie {
 	 */
 	public PaginationResult<Es3SpecDTO> getEs3SpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
-		Page<Es3Spec> page = getEs3SpecPage(searchParams, pageNumber, pageSize); // 将List<Es3Spec>中的数据转换为List<Es3SpecDTO>
+		Page<Es3Spec> page = getEs3SpecPage(searchParams, pageNumber, pageSize);
 		List<Es3SpecDTO> dtos = BeanMapper.mapList(page.getContent(), Es3SpecDTO.class);
-		PaginationResult<Es3SpecDTO> paginationResult = new PaginationResult<Es3SpecDTO>(page.getNumber(),
-				page.getSize(), page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(),
-				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-		return paginationResult;
+		return fillPaginationResult(page, dtos);
 	}
 }

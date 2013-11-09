@@ -13,46 +13,147 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "DeviceSpecDTO", namespace = WsConstants.NS)
 public class DeviceSpecDTO {
 
-	private Integer id;
-	private String code;
-	private String description;
 	private Date beginDate;
+	private Integer brand;
+	private String code;
+	private String cpuModel;
+	private Integer cpuNumber;
+	private String description;
+	private Integer deviceType;
+	private Integer hdnumber;
+	private Integer hight;
+	private Integer id;
+	private Integer maintenance;
+	private Integer nicNumber;
+	private Integer power;
+	private Double price;
+
+	private Integer ramNumber;
+
 	private String remark;
 
-	public Integer getId() {
-		return id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getBrand() {
+		return brand;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public String getCpuModel() {
+		return cpuModel;
+	}
+
+	public Integer getCpuNumber() {
+		return cpuNumber;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getDeviceType() {
+		return deviceType;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getHdnumber() {
+		return hdnumber;
+	}
+
+	public Integer getHight() {
+		return hight;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public Integer getMaintenance() {
+		return maintenance;
+	}
+
+	public Integer getNicNumber() {
+		return nicNumber;
+	}
+
+	public Integer getPower() {
+		return power;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public Integer getRamNumber() {
+		return ramNumber;
+	}
+
+	public String getRemark() {
+		return remark;
 	}
 
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public String getRemark() {
-		return remark;
+	public void setBrand(Integer brand) {
+		this.brand = brand;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setCpuModel(String cpuModel) {
+		this.cpuModel = cpuModel;
+	}
+
+	public void setCpuNumber(Integer cpuNumber) {
+		this.cpuNumber = cpuNumber;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setDeviceType(Integer deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public void setHdnumber(Integer hdnumber) {
+		this.hdnumber = hdnumber;
+	}
+
+	public void setHight(Integer hight) {
+		this.hight = hight;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setMaintenance(Integer maintenance) {
+		this.maintenance = maintenance;
+	}
+
+	public void setNicNumber(Integer nicNumber) {
+		this.nicNumber = nicNumber;
+	}
+
+	public void setPower(Integer power) {
+		this.power = power;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setRamNumber(Integer ramNumber) {
+		this.ramNumber = ramNumber;
 	}
 
 	public void setRemark(String remark) {

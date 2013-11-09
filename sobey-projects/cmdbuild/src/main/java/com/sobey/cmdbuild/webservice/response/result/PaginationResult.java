@@ -20,15 +20,54 @@ public class PaginationResult<T> extends WSResult {
 
 	// -- PaginationResult基本属性 --//
 
+	/**
+	 * 当前页面的数量，最小值为1
+	 */
 	private int getNumber;
+
+	/**
+	 * 每页大小
+	 */
 	private int getSize;
+
+	/**
+	 * 总页数
+	 */
 	private int getTotalPages;
+
+	/**
+	 * 当前页面上的元素的数量
+	 */
 	private int getNumberOfElements;
+
+	/**
+	 * 元素的总量
+	 */
 	private int getTotalElements;
+
+	/**
+	 * 是否有上一页
+	 */
 	private boolean hasPreviousPage;
+
+	/**
+	 * 是否首页
+	 */
 	private boolean isFirstPage;
+
+	/**
+	 * 是否有下一页
+	 */
 	private boolean hasNextPage;
+
+	/**
+	 * 是否末页
+	 */
 	private boolean isLastPage;
+
+	/**
+	 * 对象集合
+	 */
 	private List<T> getContent;
 
 	public PaginationResult() {

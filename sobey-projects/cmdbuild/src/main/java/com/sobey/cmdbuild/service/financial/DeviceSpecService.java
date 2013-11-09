@@ -27,7 +27,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class DeviceSpecService extends BasicSevcie {
 	@Autowired
-	private DeviceSpecDao deviceSpecDao;
+	private DeviceSpecDao DeviceSpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,17 +36,34 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @return DeviceSpec
 	 */
 	public DeviceSpec findDeviceSpec(Integer id) {
-		return deviceSpecDao.findOne(id);
+		return DeviceSpecDao.findOne(id);
+	}
+
+	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return DeviceSpec
+	 */
+	public DeviceSpec findDeviceSpec(Map<String, Object> searchParams) {
+		return DeviceSpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param deviceSpec
+	 * @param DeviceSpec
 	 * @return DeviceSpec
 	 */
-	public DeviceSpec saveOrUpdate(DeviceSpec deviceSpec) {
-		return deviceSpecDao.save(deviceSpec);
+	public DeviceSpec saveOrUpdate(DeviceSpec DeviceSpec) {
+		return DeviceSpecDao.save(DeviceSpec);
 	}
 
 	/**
@@ -55,26 +72,23 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteDeviceSpec(Integer id) {
-		deviceSpecDao.delete(id);
+		DeviceSpecDao.delete(id);
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
+	 * 根据自定义动态查询条件获得对象集合.
 	 * 
-	 * @param code
-	 * @return DeviceSpec
-	 */
-	public DeviceSpec findByCode(String code) {
-		return deviceSpecDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
 	 * 
-	 * @return List<DeviceSpec>
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map * @return List<DeviceSpec>
 	 */
-	public List<DeviceSpec> getCompanies() {
-		return deviceSpecDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
+	public List<DeviceSpec> getDeviceSpecList(Map<String, Object> searchParams) {
+		return DeviceSpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -88,29 +102,30 @@ public class DeviceSpecService extends BasicSevcie {
 	private Page<DeviceSpec> getDeviceSpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
 		Specification<DeviceSpec> spec = buildSpecification(searchParams);
-		return deviceSpecDao.findAll(spec, pageRequest);
+		return DeviceSpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<DeviceSpec>
 	 */
-	private Specification<DeviceSpec> buildSpecification(Map<String, Object> searchParams) { // 将条件查询放入Map中.查询条件可查询SearchFilter类.
+	private Specification<DeviceSpec> buildSpecification(Map<String, Object> searchParams) {
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<DeviceSpec> spec = DynamicSpecifications.bySearchFilter(filters.values(), DeviceSpec.class);
-		return spec;
+		return DynamicSpecifications.bySearchFilter(filters.values(), DeviceSpec.class);
 	}
 
 	/**
 	 * DeviceSpecDTO webservice分页查询.
 	 * 
-	 * 将Page<T>重新组织成符合DTO格式的分页格式对象. * @param searchParams 查询语句Map.
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
+	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
@@ -119,11 +134,8 @@ public class DeviceSpecService extends BasicSevcie {
 	 */
 	public PaginationResult<DeviceSpecDTO> getDeviceSpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
-		Page<DeviceSpec> page = getDeviceSpecPage(searchParams, pageNumber, pageSize); // 将List<DeviceSpec>中的数据转换为List<DeviceSpecDTO>
+		Page<DeviceSpec> page = getDeviceSpecPage(searchParams, pageNumber, pageSize);
 		List<DeviceSpecDTO> dtos = BeanMapper.mapList(page.getContent(), DeviceSpecDTO.class);
-		PaginationResult<DeviceSpecDTO> paginationResult = new PaginationResult<DeviceSpecDTO>(page.getNumber(),
-				page.getSize(), page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(),
-				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-		return paginationResult;
+		return fillPaginationResult(page, dtos);
 	}
 }

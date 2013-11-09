@@ -13,50 +13,102 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "EsgPolicyDTO", namespace = WsConstants.NS)
 public class EsgPolicyDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer esg;
+	private Integer id;
+
+	// ESG Integer ESG ID
+	// SourceIP String 源IP
+	// TargetIP String 目标IP
+	// Port String 端口
+	// Protocol Integer 协议ID
+
+	private String port;
+	private String protocol;
 	private String remark;
+	private String sourceIP;
+	private String targetIP;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getEsg() {
+		return esg;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public String getPort() {
+		return port;
+	}
+
+	public String getProtocol() {
+		return protocol;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public String getSourceIP() {
+		return sourceIP;
+	}
+
+	public String getTargetIP() {
+		return targetIP;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setEsg(Integer esg) {
+		this.esg = esg;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setSourceIP(String sourceIP) {
+		this.sourceIP = sourceIP;
+	}
+
+	public void setTargetIP(String targetIP) {
+		this.targetIP = targetIP;
 	}
 
 	/**

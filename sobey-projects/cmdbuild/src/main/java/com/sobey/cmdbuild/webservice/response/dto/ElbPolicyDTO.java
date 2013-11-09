@@ -13,50 +13,92 @@ import com.sobey.cmdbuild.constants.WsConstants;
 @XmlType(name = "ElbPolicyDTO", namespace = WsConstants.NS)
 public class ElbPolicyDTO {
 
-	private Integer id;
+	private Date beginDate;
 	private String code;
 	private String description;
-	private Date beginDate;
+	private Integer elb;
+	private Integer id;
+
+	// ELB Integer ELB ID
+	// SourcePort Integer 源端口
+	// TargetPort Integer 目标端口
+	// Protocol Integer 协议ID
+
+	private Integer protocol;
 	private String remark;
+	private Integer sourcePort;
+	private Integer targetPort;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getElb() {
+		return elb;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public Integer getProtocol() {
+		return protocol;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
+	public Integer getSourcePort() {
+		return sourcePort;
+	}
+
+	public Integer getTargetPort() {
+		return targetPort;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setElb(Integer elb) {
+		this.elb = elb;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setProtocol(Integer protocol) {
+		this.protocol = protocol;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public void setSourcePort(Integer sourcePort) {
+		this.sourcePort = sourcePort;
+	}
+
+	public void setTargetPort(Integer targetPort) {
+		this.targetPort = targetPort;
 	}
 
 	/**

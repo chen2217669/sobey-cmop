@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
 import com.sobey.cmdbuild.entity.Rack;
@@ -52,7 +53,8 @@ public class RackSoapTest extends BaseFunctionalTestCase {
 	@Test
 	@Ignore
 	public void getList() {
-		DTOListResult<RackDTO> result = service.getRackList();
+		Map<String, Object> searchParams = Maps.newHashMap();
+		DTOListResult<RackDTO> result = service.getRackList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 

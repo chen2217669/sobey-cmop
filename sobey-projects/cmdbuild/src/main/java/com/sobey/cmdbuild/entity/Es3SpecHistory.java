@@ -24,6 +24,7 @@ public class Es3SpecHistory extends BasicEntity {
 	private String remark;
 	private Integer maxSpace;
 	private Integer iops;
+	private Integer brand;
 
 	public Es3SpecHistory() {
 	}
@@ -32,6 +33,11 @@ public class Es3SpecHistory extends BasicEntity {
 	@Column(name = "\"EndDate\"", nullable = false, length = 29)
 	public Date getEndDate() {
 		return this.endDate;
+	}
+
+	@Column(name = "\"Brand\"")
+	public Integer getBrand() {
+		return brand;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,6 +72,10 @@ public class Es3SpecHistory extends BasicEntity {
 
 	public void setEs3Spec(Es3Spec es3Spec) {
 		this.es3Spec = es3Spec;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	public void setPrice(Double price) {

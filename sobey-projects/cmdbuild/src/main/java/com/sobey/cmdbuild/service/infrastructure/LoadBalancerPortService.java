@@ -59,25 +59,6 @@ public class LoadBalancerPortService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return LoadBalancerPort
-	 */
-	public LoadBalancerPort findByCode(String code) {
-		return loadBalancerPortDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<LoadBalancerPort>
-	 */
-	public List<LoadBalancerPort> getCompanies() {
-		return loadBalancerPortDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams

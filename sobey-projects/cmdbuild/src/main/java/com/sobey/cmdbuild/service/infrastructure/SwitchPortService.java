@@ -59,25 +59,6 @@ public class SwitchPortService extends BasicSevcie {
 	}
 
 	/**
-	 * 根据code获得状态为"A"的有效对象
-	 * 
-	 * @param code
-	 * @return SwitchPort
-	 */
-	public SwitchPort findByCode(String code) {
-		return switchPortDao.findByCodeAndStatus(code, CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
-	 * 获得所有对象集合
-	 * 
-	 * @return List<SwitchPort>
-	 */
-	public List<SwitchPort> getCompanies() {
-		return switchPortDao.findAllByStatus(CMDBuildConstants.STATUS_ACTIVE);
-	}
-
-	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams
