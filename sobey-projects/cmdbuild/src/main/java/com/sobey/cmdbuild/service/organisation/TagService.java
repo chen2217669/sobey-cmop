@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.organisation;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Tag;
 import com.sobey.cmdbuild.repository.TagDao;
@@ -26,7 +24,6 @@ import com.sobey.core.persistence.SearchFilter;
 @Service
 @Transactional
 public class TagService extends BasicSevcie {
-
 	@Autowired
 	private TagDao tagDao;
 
@@ -51,7 +48,7 @@ public class TagService extends BasicSevcie {
 	 * 
 	 * @param searchParams
 	 *            动态查询条件Map
-	 * @return
+	 * @return Tag
 	 */
 	public Tag findTag(Map<String, Object> searchParams) {
 		return tagDao.findOne(buildSpecification(searchParams));
@@ -60,7 +57,7 @@ public class TagService extends BasicSevcie {
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param tag
+	 * @param Tag
 	 * @return Tag
 	 */
 	public Tag saveOrUpdate(Tag tag) {
@@ -86,8 +83,7 @@ public class TagService extends BasicSevcie {
 	 * </pre>
 	 * 
 	 * @param searchParams
-	 *            动态查询条件Map
-	 * @return List<Tag>
+	 *            动态查询条件Map * @return List<Tag>
 	 */
 	public List<Tag> getTagList(Map<String, Object> searchParams) {
 		return tagDao.findAll(buildSpecification(searchParams));

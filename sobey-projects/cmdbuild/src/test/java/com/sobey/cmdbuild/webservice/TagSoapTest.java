@@ -39,17 +39,6 @@ import com.sobey.core.mapper.BeanMapper;
 @ContextConfiguration(locations = { "/applicationContext-soap-client.xml" })
 public class TagSoapTest extends BaseFunctionalTestCase {
 
-	@Autowired
-	private CmdbuildSoapService service;
-
-	@Test
-	@Ignore
-	public void find() {
-		Integer id = 102;
-		DTOResult<TagDTO> response = service.findTag(id);
-		assertEquals("sobey", response.getDto().getCode());
-	}
-
 	@Test
 	@Ignore
 	public void getList() {
@@ -59,7 +48,7 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void save() {
 		Tag tag = TestData.randomTag();
 		TagDTO tagDTO = BeanMapper.map(tag, TagDTO.class);
@@ -70,12 +59,12 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	@Test
 	// @Ignore
 	public void update() {
-		Integer id = 108;
+		Integer id = 220;
 		DTOResult<TagDTO> response = service.findTag(id);
 		TagDTO tagDTO = response.getDto();
 		tagDTO.setCode("code137");
 		tagDTO.setDescription("冬天来了啊");
-		tagDTO.setTenants(90);
+		tagDTO.setTenants(217);
 		IdResult result = service.updateTag(id, tagDTO);
 		assertNotNull(result.getId());
 	}

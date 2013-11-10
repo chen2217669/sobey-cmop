@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.financial;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Es3Spec;
 import com.sobey.cmdbuild.repository.Es3SpecDao;
@@ -27,7 +25,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class Es3SpecService extends BasicSevcie {
 	@Autowired
-	private Es3SpecDao Es3SpecDao;
+	private Es3SpecDao es3SpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,7 +34,7 @@ public class Es3SpecService extends BasicSevcie {
 	 * @return Es3Spec
 	 */
 	public Es3Spec findEs3Spec(Integer id) {
-		return Es3SpecDao.findOne(id);
+		return es3SpecDao.findOne(id);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class Es3SpecService extends BasicSevcie {
 	 * @return Es3Spec
 	 */
 	public Es3Spec findEs3Spec(Map<String, Object> searchParams) {
-		return Es3SpecDao.findOne(buildSpecification(searchParams));
+		return es3SpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
@@ -62,8 +60,8 @@ public class Es3SpecService extends BasicSevcie {
 	 * @param Es3Spec
 	 * @return Es3Spec
 	 */
-	public Es3Spec saveOrUpdate(Es3Spec Es3Spec) {
-		return Es3SpecDao.save(Es3Spec);
+	public Es3Spec saveOrUpdate(Es3Spec es3Spec) {
+		return es3SpecDao.save(es3Spec);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class Es3SpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteEs3Spec(Integer id) {
-		Es3SpecDao.delete(id);
+		es3SpecDao.delete(id);
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class Es3SpecService extends BasicSevcie {
 	 *            动态查询条件Map * @return List<Es3Spec>
 	 */
 	public List<Es3Spec> getEs3SpecList(Map<String, Object> searchParams) {
-		return Es3SpecDao.findAll(buildSpecification(searchParams));
+		return es3SpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -100,9 +98,12 @@ public class Es3SpecService extends BasicSevcie {
 	 * @return Page<Es3Spec>
 	 */
 	private Page<Es3Spec> getEs3SpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<Es3Spec> spec = buildSpecification(searchParams);
-		return Es3SpecDao.findAll(spec, pageRequest);
+
+		return es3SpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -114,8 +115,11 @@ public class Es3SpecService extends BasicSevcie {
 	 * @return Specification<Es3Spec>
 	 */
 	private Specification<Es3Spec> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		return DynamicSpecifications.bySearchFilter(filters.values(), Es3Spec.class);
 	}
 
@@ -134,8 +138,11 @@ public class Es3SpecService extends BasicSevcie {
 	 */
 	public PaginationResult<Es3SpecDTO> getEs3SpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
+
 		Page<Es3Spec> page = getEs3SpecPage(searchParams, pageNumber, pageSize);
+
 		List<Es3SpecDTO> dtos = BeanMapper.mapList(page.getContent(), Es3SpecDTO.class);
+
 		return fillPaginationResult(page, dtos);
 	}
 }

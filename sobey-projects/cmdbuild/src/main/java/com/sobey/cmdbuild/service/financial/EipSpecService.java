@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.financial;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.EipSpec;
 import com.sobey.cmdbuild.repository.EipSpecDao;
@@ -27,7 +25,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class EipSpecService extends BasicSevcie {
 	@Autowired
-	private EipSpecDao EipSpecDao;
+	private EipSpecDao eipSpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,7 +34,7 @@ public class EipSpecService extends BasicSevcie {
 	 * @return EipSpec
 	 */
 	public EipSpec findEipSpec(Integer id) {
-		return EipSpecDao.findOne(id);
+		return eipSpecDao.findOne(id);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class EipSpecService extends BasicSevcie {
 	 * @return EipSpec
 	 */
 	public EipSpec findEipSpec(Map<String, Object> searchParams) {
-		return EipSpecDao.findOne(buildSpecification(searchParams));
+		return eipSpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
@@ -62,8 +60,8 @@ public class EipSpecService extends BasicSevcie {
 	 * @param EipSpec
 	 * @return EipSpec
 	 */
-	public EipSpec saveOrUpdate(EipSpec EipSpec) {
-		return EipSpecDao.save(EipSpec);
+	public EipSpec saveOrUpdate(EipSpec eipSpec) {
+		return eipSpecDao.save(eipSpec);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class EipSpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteEipSpec(Integer id) {
-		EipSpecDao.delete(id);
+		eipSpecDao.delete(id);
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class EipSpecService extends BasicSevcie {
 	 *            动态查询条件Map * @return List<EipSpec>
 	 */
 	public List<EipSpec> getEipSpecList(Map<String, Object> searchParams) {
-		return EipSpecDao.findAll(buildSpecification(searchParams));
+		return eipSpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -100,9 +98,12 @@ public class EipSpecService extends BasicSevcie {
 	 * @return Page<EipSpec>
 	 */
 	private Page<EipSpec> getEipSpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<EipSpec> spec = buildSpecification(searchParams);
-		return EipSpecDao.findAll(spec, pageRequest);
+
+		return eipSpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -114,8 +115,11 @@ public class EipSpecService extends BasicSevcie {
 	 * @return Specification<EipSpec>
 	 */
 	private Specification<EipSpec> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		return DynamicSpecifications.bySearchFilter(filters.values(), EipSpec.class);
 	}
 
@@ -134,8 +138,11 @@ public class EipSpecService extends BasicSevcie {
 	 */
 	public PaginationResult<EipSpecDTO> getEipSpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
+
 		Page<EipSpec> page = getEipSpecPage(searchParams, pageNumber, pageSize);
+
 		List<EipSpecDTO> dtos = BeanMapper.mapList(page.getContent(), EipSpecDTO.class);
+
 		return fillPaginationResult(page, dtos);
 	}
 }

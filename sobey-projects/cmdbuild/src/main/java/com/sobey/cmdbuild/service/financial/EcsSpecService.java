@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.financial;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.EcsSpec;
 import com.sobey.cmdbuild.repository.EcsSpecDao;
@@ -27,7 +25,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class EcsSpecService extends BasicSevcie {
 	@Autowired
-	private EcsSpecDao EcsSpecDao;
+	private EcsSpecDao ecsSpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,7 +34,7 @@ public class EcsSpecService extends BasicSevcie {
 	 * @return EcsSpec
 	 */
 	public EcsSpec findEcsSpec(Integer id) {
-		return EcsSpecDao.findOne(id);
+		return ecsSpecDao.findOne(id);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class EcsSpecService extends BasicSevcie {
 	 * @return EcsSpec
 	 */
 	public EcsSpec findEcsSpec(Map<String, Object> searchParams) {
-		return EcsSpecDao.findOne(buildSpecification(searchParams));
+		return ecsSpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
@@ -62,8 +60,8 @@ public class EcsSpecService extends BasicSevcie {
 	 * @param EcsSpec
 	 * @return EcsSpec
 	 */
-	public EcsSpec saveOrUpdate(EcsSpec EcsSpec) {
-		return EcsSpecDao.save(EcsSpec);
+	public EcsSpec saveOrUpdate(EcsSpec ecsSpec) {
+		return ecsSpecDao.save(ecsSpec);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class EcsSpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteEcsSpec(Integer id) {
-		EcsSpecDao.delete(id);
+		ecsSpecDao.delete(id);
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class EcsSpecService extends BasicSevcie {
 	 *            动态查询条件Map * @return List<EcsSpec>
 	 */
 	public List<EcsSpec> getEcsSpecList(Map<String, Object> searchParams) {
-		return EcsSpecDao.findAll(buildSpecification(searchParams));
+		return ecsSpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -100,9 +98,12 @@ public class EcsSpecService extends BasicSevcie {
 	 * @return Page<EcsSpec>
 	 */
 	private Page<EcsSpec> getEcsSpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<EcsSpec> spec = buildSpecification(searchParams);
-		return EcsSpecDao.findAll(spec, pageRequest);
+
+		return ecsSpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -114,8 +115,11 @@ public class EcsSpecService extends BasicSevcie {
 	 * @return Specification<EcsSpec>
 	 */
 	private Specification<EcsSpec> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		return DynamicSpecifications.bySearchFilter(filters.values(), EcsSpec.class);
 	}
 
@@ -134,8 +138,11 @@ public class EcsSpecService extends BasicSevcie {
 	 */
 	public PaginationResult<EcsSpecDTO> getEcsSpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
+
 		Page<EcsSpec> page = getEcsSpecPage(searchParams, pageNumber, pageSize);
+
 		List<EcsSpecDTO> dtos = BeanMapper.mapList(page.getContent(), EcsSpecDTO.class);
+
 		return fillPaginationResult(page, dtos);
 	}
 }

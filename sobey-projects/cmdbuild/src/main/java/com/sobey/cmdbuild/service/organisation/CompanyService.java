@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.organisation;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.repository.CompanyDao;
@@ -22,14 +20,10 @@ import com.sobey.core.persistence.SearchFilter;
 
 /**
  * Company的service类.
- * 
- * @author Administrator
- * 
  */
 @Service
 @Transactional
 public class CompanyService extends BasicSevcie {
-
 	@Autowired
 	private CompanyDao companyDao;
 
@@ -54,7 +48,7 @@ public class CompanyService extends BasicSevcie {
 	 * 
 	 * @param searchParams
 	 *            动态查询条件Map
-	 * @return
+	 * @return Company
 	 */
 	public Company findCompany(Map<String, Object> searchParams) {
 		return companyDao.findOne(buildSpecification(searchParams));
@@ -63,7 +57,7 @@ public class CompanyService extends BasicSevcie {
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param company
+	 * @param Company
 	 * @return Company
 	 */
 	public Company saveOrUpdate(Company company) {
@@ -89,8 +83,7 @@ public class CompanyService extends BasicSevcie {
 	 * </pre>
 	 * 
 	 * @param searchParams
-	 *            动态查询条件Map
-	 * @return List<Company>
+	 *            动态查询条件Map * @return List<Company>
 	 */
 	public List<Company> getCompanyList(Map<String, Object> searchParams) {
 		return companyDao.findAll(buildSpecification(searchParams));
@@ -114,16 +107,15 @@ public class CompanyService extends BasicSevcie {
 	}
 
 	/**
-	 * 创建动态查询条件组合.默认获得状态为"A"的有效对象.
+	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
-	 * @return Specification<Tenants>
+	 * @return Specification<Company>
 	 */
 	private Specification<Company> buildSpecification(Map<String, Object> searchParams) {
 
-		// 将条件查询放入Map中.查询条件可查询SearchFilter类.
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
@@ -149,10 +141,8 @@ public class CompanyService extends BasicSevcie {
 
 		Page<Company> page = getCompanyPage(searchParams, pageNumber, pageSize);
 
-		// 将List<Company>中的数据转换为List<CompanyDTO>
 		List<CompanyDTO> dtos = BeanMapper.mapList(page.getContent(), CompanyDTO.class);
 
 		return fillPaginationResult(page, dtos);
 	}
-
 }

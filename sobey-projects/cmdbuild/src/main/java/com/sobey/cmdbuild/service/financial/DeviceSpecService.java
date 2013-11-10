@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.financial;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.DeviceSpec;
 import com.sobey.cmdbuild.repository.DeviceSpecDao;
@@ -27,7 +25,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class DeviceSpecService extends BasicSevcie {
 	@Autowired
-	private DeviceSpecDao DeviceSpecDao;
+	private DeviceSpecDao deviceSpecDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,7 +34,7 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @return DeviceSpec
 	 */
 	public DeviceSpec findDeviceSpec(Integer id) {
-		return DeviceSpecDao.findOne(id);
+		return deviceSpecDao.findOne(id);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @return DeviceSpec
 	 */
 	public DeviceSpec findDeviceSpec(Map<String, Object> searchParams) {
-		return DeviceSpecDao.findOne(buildSpecification(searchParams));
+		return deviceSpecDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
@@ -62,8 +60,8 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @param DeviceSpec
 	 * @return DeviceSpec
 	 */
-	public DeviceSpec saveOrUpdate(DeviceSpec DeviceSpec) {
-		return DeviceSpecDao.save(DeviceSpec);
+	public DeviceSpec saveOrUpdate(DeviceSpec deviceSpec) {
+		return deviceSpecDao.save(deviceSpec);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteDeviceSpec(Integer id) {
-		DeviceSpecDao.delete(id);
+		deviceSpecDao.delete(id);
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class DeviceSpecService extends BasicSevcie {
 	 *            动态查询条件Map * @return List<DeviceSpec>
 	 */
 	public List<DeviceSpec> getDeviceSpecList(Map<String, Object> searchParams) {
-		return DeviceSpecDao.findAll(buildSpecification(searchParams));
+		return deviceSpecDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -100,9 +98,12 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @return Page<DeviceSpec>
 	 */
 	private Page<DeviceSpec> getDeviceSpecPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<DeviceSpec> spec = buildSpecification(searchParams);
-		return DeviceSpecDao.findAll(spec, pageRequest);
+
+		return deviceSpecDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -114,8 +115,11 @@ public class DeviceSpecService extends BasicSevcie {
 	 * @return Specification<DeviceSpec>
 	 */
 	private Specification<DeviceSpec> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		return DynamicSpecifications.bySearchFilter(filters.values(), DeviceSpec.class);
 	}
 
@@ -134,8 +138,11 @@ public class DeviceSpecService extends BasicSevcie {
 	 */
 	public PaginationResult<DeviceSpecDTO> getDeviceSpecDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
+
 		Page<DeviceSpec> page = getDeviceSpecPage(searchParams, pageNumber, pageSize);
+
 		List<DeviceSpecDTO> dtos = BeanMapper.mapList(page.getContent(), DeviceSpecDTO.class);
+
 		return fillPaginationResult(page, dtos);
 	}
 }

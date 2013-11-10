@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.infrastructure;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.HardDisk;
 import com.sobey.cmdbuild.repository.HardDiskDao;
@@ -40,9 +38,26 @@ public class HardDiskService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据自定义动态查询条件获得对象.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map
+	 * @return HardDisk
+	 */
+	public HardDisk findHardDisk(Map<String, Object> searchParams) {
+		return hardDiskDao.findOne(buildSpecification(searchParams));
+	}
+
+	/**
 	 * 新增、保存对象
 	 * 
-	 * @param hardDisk
+	 * @param HardDisk
 	 * @return HardDisk
 	 */
 	public HardDisk saveOrUpdate(HardDisk hardDisk) {
@@ -59,6 +74,22 @@ public class HardDiskService extends BasicSevcie {
 	}
 
 	/**
+	 * 根据自定义动态查询条件获得对象集合.
+	 * 
+	 * 将条件查询放入searchParams中. 查询条件可查询{@link SearchFilter}类.
+	 * 
+	 * <pre>
+	 * searchParams.put(&quot;EQ_status&quot;, 'A');
+	 * </pre>
+	 * 
+	 * @param searchParams
+	 *            动态查询条件Map * @return List<HardDisk>
+	 */
+	public List<HardDisk> getHardDiskList(Map<String, Object> searchParams) {
+		return hardDiskDao.findAll(buildSpecification(searchParams));
+	}
+
+	/**
 	 * Spring-data-jpa自带的分页查询
 	 * 
 	 * @param searchParams
@@ -67,31 +98,38 @@ public class HardDiskService extends BasicSevcie {
 	 * @return Page<HardDisk>
 	 */
 	private Page<HardDisk> getHardDiskPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<HardDisk> spec = buildSpecification(searchParams);
+
 		return hardDiskDao.findAll(spec, pageRequest);
 	}
 
 	/**
 	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<HardDisk>
 	 */
-	private Specification<HardDisk> buildSpecification(Map<String, Object> searchParams) { // 将条件查询放入Map中.查询条件可查询SearchFilter类.
+	private Specification<HardDisk> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		Specification<HardDisk> spec = DynamicSpecifications.bySearchFilter(filters.values(), HardDisk.class);
-		return spec;
+
+		return DynamicSpecifications.bySearchFilter(filters.values(), HardDisk.class);
 	}
 
 	/**
 	 * HardDiskDTO webservice分页查询.
 	 * 
-	 * 将Page<T>重新组织成符合DTO格式的分页格式对象. * @param searchParams 查询语句Map.
+	 * 将Page<T>重新组织成符合DTO格式的分页格式对象.
 	 * 
+	 * @param searchParams
+	 *            查询语句Map.
 	 * @param pageNumber
 	 *            当前页数,最小为1.
 	 * @param pageSize
@@ -100,11 +138,11 @@ public class HardDiskService extends BasicSevcie {
 	 */
 	public PaginationResult<HardDiskDTO> getHardDiskDTOPagination(Map<String, Object> searchParams, int pageNumber,
 			int pageSize) {
-		Page<HardDisk> page = getHardDiskPage(searchParams, pageNumber, pageSize); // 将List<HardDisk>中的数据转换为List<HardDiskDTO>
+
+		Page<HardDisk> page = getHardDiskPage(searchParams, pageNumber, pageSize);
+
 		List<HardDiskDTO> dtos = BeanMapper.mapList(page.getContent(), HardDiskDTO.class);
-		PaginationResult<HardDiskDTO> paginationResult = new PaginationResult<HardDiskDTO>(page.getNumber(),
-				page.getSize(), page.getTotalPages(), page.getNumberOfElements(), page.getNumberOfElements(),
-				page.hasPreviousPage(), page.isFirstPage(), page.hasNextPage(), page.isLastPage(), dtos);
-		return paginationResult;
+
+		return fillPaginationResult(page, dtos);
 	}
 }
