@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.financial;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -63,8 +65,8 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		System.out.println(id + ">>>>>>>>>>>>>");
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetEs3SpecList() {
@@ -77,8 +79,8 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testCreateEs3Spec() {
@@ -93,8 +95,8 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		code = es3Spec.getCode();// 设置code
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testUpdateEs3Spec() {
@@ -111,8 +113,8 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testDeleteEs3Spec() {
@@ -121,8 +123,8 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		assertNotNull(response.getId());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetEs3SpecPagination() {

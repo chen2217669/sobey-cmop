@@ -62,7 +62,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	//@Ignore
+	// @Ignore
 	public void save() {
 		Company company = TestData.randomCompany();
 		CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);

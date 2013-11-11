@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.financial;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,10 +37,10 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 	public void testAll() {
 		testCreateConsumptions();
 		testFindConsumptions();
-		//testGetConsumptionsList();
-		//testGetConsumptionsPagination();
+		// testGetConsumptionsList();
+		// testGetConsumptionsPagination();
 		testUpdateConsumptions();
-		//testDeleteConsumptions();
+		// testDeleteConsumptions();
 
 	}
 
@@ -63,8 +65,8 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		System.out.println(id + ">>>>>>>>>>>>>");
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetConsumptionsList() {
@@ -78,14 +80,14 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 		assertEquals("0", result.getCode());
 
 	}
-	
+
 	// @Test
 	// @Ignore
 	public void testCreateConsumptions() {
 
 		Consumptions consumptions = TestData.randomConsumptions();
-		
-		//consumptions.setCode("code108367");
+
+		// consumptions.setCode("code108367");
 
 		ConsumptionsDTO consumptionsDTO = BeanMapper.map(consumptions, ConsumptionsDTO.class);
 
@@ -95,8 +97,8 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		code = consumptions.getCode();// 设置code
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testUpdateConsumptions() {
@@ -114,7 +116,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 		assertEquals("0", result.getCode());
 
 	}
-	
+
 	// @Test
 	// @Ignore
 	public void testDeleteConsumptions() {
@@ -123,8 +125,8 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		assertNotNull(response.getId());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetConsumptionsPagination() {

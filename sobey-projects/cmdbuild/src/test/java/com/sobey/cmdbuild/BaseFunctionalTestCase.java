@@ -36,7 +36,7 @@ public class BaseFunctionalTestCase {
 
 	private static Logger logger = LoggerFactory.getLogger(BaseFunctionalTestCase.class);
 
-	 @Autowired
+	@Autowired
 	protected InfrastructureSoapService infrastructureService;
 
 	@Autowired

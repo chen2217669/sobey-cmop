@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.financial;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +40,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 		testGetDeviceSpecList();
 		testGetDeviceSpecPagination();
 		testUpdateDeviceSpec();
-		//testDeleteDeviceSpec();
+		// testDeleteDeviceSpec();
 
 	}
 
@@ -64,7 +66,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 		System.out.println(id + ">>>>>>>>>>>>>");
 
 	}
-	
+
 	// @Test
 	// @Ignore
 	public void testGetDeviceSpecList() {
@@ -77,14 +79,14 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
-	 @Test
+	}
+
+	@Test
 	// @Ignore
 	public void testCreateDeviceSpec() {
 
 		DeviceSpec deviceSpec = TestData.randomDeviceSpec();
-		//deviceSpec.setCode("code7473");
+		// deviceSpec.setCode("code7473");
 
 		DeviceSpecDTO deviceSpecDTO = BeanMapper.map(deviceSpec, DeviceSpecDTO.class);
 
@@ -94,8 +96,8 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		code = deviceSpec.getCode();// 设置code
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testUpdateDeviceSpec() {
@@ -123,8 +125,8 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		assertNotNull(response.getId());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetDeviceSpecPagination() {
