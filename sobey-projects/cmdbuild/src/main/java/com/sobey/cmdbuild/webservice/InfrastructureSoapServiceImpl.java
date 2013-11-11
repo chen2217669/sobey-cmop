@@ -1,5 +1,6 @@
 package com.sobey.cmdbuild.webservice;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -1257,6 +1258,8 @@ public class InfrastructureSoapServiceImpl extends BasicSoapSevcie implements In
 			Ipaddress ipaddress = BeanMapper.map(ipaddressDTO, Ipaddress.class);
 
 			BeanValidators.validateWithException(validator, ipaddress);
+
+			ipaddress.setIpaddressStatus(50);// 设置状态为未使用
 
 			comm.ipaddressService.saveOrUpdate(ipaddress);
 
@@ -3797,26 +3800,119 @@ public class InfrastructureSoapServiceImpl extends BasicSoapSevcie implements In
 	}
 
 	@Override
-	public IdResult allocateIPAddress(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public IdResult allocateIPAddress(@WebParam(name = "id") Integer id) {
+
+		IdResult result = new IdResult();
+
+		try {
+
+			Validate.notNull(id, ERROR.INPUT_NULL);
+
+			Ipaddress ipaddress = comm.ipaddressService.findIpaddress(id);
+
+			Validate.notNull(ipaddress, ERROR.OBJECT_NULL);
+
+			ipaddress.setIpaddressStatus(49);// 设置状态为使用
+
+			comm.ipaddressService.saveOrUpdate(ipaddress);
+
+			result.setId(ipaddress.getId());
+
+			return result;
+
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
 	}
 
 	@Override
-	public List<IdResult> insertIPAddress(List<IpaddressDTO> ipaddressDTOList) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IdResult> insertIPAddress(@WebParam(name = "IpaddressDTOList") List<IpaddressDTO> ipaddressDTOList) {
+
+		IdResult result = new IdResult();
+
+		List<IdResult> results = new ArrayList<IdResult>();
+
+		// 先判断对象是否为空
+		try {
+
+			Validate.notNull(ipaddressDTOList, ERROR.INPUT_NULL);
+
+			Validate.isTrue(ipaddressDTOList.size() > 0, ERROR.INPUT_NULL);
+
+		} catch (IllegalArgumentException e) {
+			results.add(handleParameterError(result, e));
+			return results;
+		} catch (RuntimeException e) {
+			results.add(handleGeneralError(result, e));
+			return results;
+		}
+
+		for (IpaddressDTO ipaddressDTO : ipaddressDTOList) {
+
+			try {
+
+				Map<String, Object> searchParams = Maps.newHashMap();
+
+				searchParams.put("EQ_code", ipaddressDTO.getCode());
+
+				// 验证code是否唯一.如果不为null,添加错误
+				Validate.isTrue(comm.ipaddressService.findIpaddress(searchParams) == null, ERROR.OBJECT_DUPLICATE);
+
+				Ipaddress ipaddress = BeanMapper.map(ipaddressDTO, Ipaddress.class);
+
+				BeanValidators.validateWithException(validator, ipaddress);
+
+				ipaddress.setIpaddressStatus(50);// 设置状态为未使用
+
+				comm.ipaddressService.saveOrUpdate(ipaddress);
+
+				result.setId(0);
+				results.add(result);
+
+			} catch (IllegalArgumentException e) {
+				results.add(handleParameterError(result, e));
+			} catch (RuntimeException e) {
+				results.add(handleGeneralError(result, e));
+			}
+
+		}
+
+		return results;
 	}
 
 	@Override
 	public IdResult initIPAddress(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		IdResult result = new IdResult();
+
+		try {
+
+			Validate.notNull(id, ERROR.INPUT_NULL);
+
+			Ipaddress ipaddress = comm.ipaddressService.findIpaddress(id);
+
+			Validate.notNull(ipaddress, ERROR.OBJECT_NULL);
+
+			ipaddress.setIpaddressStatus(50);// 设置状态为未使用
+
+			comm.ipaddressService.saveOrUpdate(ipaddress);
+
+			result.setId(ipaddress.getId());
+
+			return result;
+
+		} catch (IllegalArgumentException e) {
+			return handleParameterError(result, e);
+		} catch (RuntimeException e) {
+			return handleGeneralError(result, e);
+		}
 	}
 
 	@Override
 	public List<IdResult> insertVlan(List<VlanDTO> vlanDTOList) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
