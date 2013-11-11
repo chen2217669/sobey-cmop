@@ -53,13 +53,13 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<ConsumptionsDTO> responseParams = service.findConsumptionsByParams(searchParams);
+		DTOResult<ConsumptionsDTO> responseParams = financialSoapService.findConsumptionsByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<ConsumptionsDTO> response = service.findConsumptions(id);
+		DTOResult<ConsumptionsDTO> response = financialSoapService.findConsumptions(id);
 
 		assertNotNull(response);
 
@@ -73,7 +73,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<ConsumptionsDTO> result = service.getConsumptionsList(searchParams);
+		DTOListResult<ConsumptionsDTO> result = financialSoapService.getConsumptionsList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
@@ -91,7 +91,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		ConsumptionsDTO consumptionsDTO = BeanMapper.map(consumptions, ConsumptionsDTO.class);
 
-		IdResult response = service.createConsumptions(consumptionsDTO);
+		IdResult response = financialSoapService.createConsumptions(consumptionsDTO);
 
 		assertNotNull(response.getId());
 
@@ -103,7 +103,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testUpdateConsumptions() {
 
-		DTOResult<ConsumptionsDTO> response = service.findConsumptions(id);
+		DTOResult<ConsumptionsDTO> response = financialSoapService.findConsumptions(id);
 
 		ConsumptionsDTO consumptionsDTO = response.getDto();
 
@@ -111,7 +111,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		consumptionsDTO.setDescription(RandomData.randomName("update"));
 
-		IdResult result = service.updateConsumptions(id, consumptionsDTO);
+		IdResult result = financialSoapService.updateConsumptions(id, consumptionsDTO);
 
 		assertEquals("0", result.getCode());
 
@@ -121,7 +121,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testDeleteConsumptions() {
 
-		IdResult response = service.deleteConsumptions(id);
+		IdResult response = financialSoapService.deleteConsumptions(id);
 
 		assertNotNull(response.getId());
 
@@ -133,7 +133,7 @@ public class ConsumptionsSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<ConsumptionsDTO> result = service.getConsumptionsPagination(searchParams, 1, 10);
+		PaginationResult<ConsumptionsDTO> result = financialSoapService.getConsumptionsPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 

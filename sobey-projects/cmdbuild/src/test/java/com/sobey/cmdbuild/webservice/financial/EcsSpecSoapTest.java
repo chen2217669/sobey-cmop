@@ -52,13 +52,13 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<EcsSpecDTO> responseParams = service.findEcsSpecByParams(searchParams);
+		DTOResult<EcsSpecDTO> responseParams = financialSoapService.findEcsSpecByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<EcsSpecDTO> response = service.findEcsSpec(id);
+		DTOResult<EcsSpecDTO> response = financialSoapService.findEcsSpec(id);
 
 		assertNotNull(response);
 
@@ -72,7 +72,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<EcsSpecDTO> result = service.getEcsSpecList(searchParams);
+		DTOListResult<EcsSpecDTO> result = financialSoapService.getEcsSpecList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
@@ -88,7 +88,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 
 		EcsSpecDTO ecsSpecDTO = BeanMapper.map(ecsSpec, EcsSpecDTO.class);
 
-		IdResult response = service.createEcsSpec(ecsSpecDTO);
+		IdResult response = financialSoapService.createEcsSpec(ecsSpecDTO);
 
 		assertNotNull(response.getId());
 
@@ -100,7 +100,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testUpdateEcsSpec() {
 
-		DTOResult<EcsSpecDTO> response = service.findEcsSpec(id);
+		DTOResult<EcsSpecDTO> response = financialSoapService.findEcsSpec(id);
 
 		EcsSpecDTO ecsSpecDTO = response.getDto();
 
@@ -108,7 +108,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 
 		ecsSpecDTO.setDescription(RandomData.randomName("update"));
 
-		IdResult result = service.updateEcsSpec(id, ecsSpecDTO);
+		IdResult result = financialSoapService.updateEcsSpec(id, ecsSpecDTO);
 
 		assertEquals("0", result.getCode());
 
@@ -118,7 +118,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testDeleteEcsSpec() {
 
-		IdResult response = service.deleteEcsSpec(id);
+		IdResult response = financialSoapService.deleteEcsSpec(id);
 
 		assertNotNull(response.getId());
 
@@ -130,7 +130,7 @@ public class EcsSpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<EcsSpecDTO> result = service.getEcsSpecPagination(searchParams, 1, 10);
+		PaginationResult<EcsSpecDTO> result = financialSoapService.getEcsSpecPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 

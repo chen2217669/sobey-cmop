@@ -53,13 +53,13 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<DeviceSpecDTO> responseParams = service.findDeviceSpecByParams(searchParams);
+		DTOResult<DeviceSpecDTO> responseParams = financialSoapService.findDeviceSpecByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<DeviceSpecDTO> response = service.findDeviceSpec(id);
+		DTOResult<DeviceSpecDTO> response = financialSoapService.findDeviceSpec(id);
 
 		assertNotNull(response);
 
@@ -73,7 +73,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<DeviceSpecDTO> result = service.getDeviceSpecList(searchParams);
+		DTOListResult<DeviceSpecDTO> result = financialSoapService.getDeviceSpecList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
@@ -90,7 +90,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		DeviceSpecDTO deviceSpecDTO = BeanMapper.map(deviceSpec, DeviceSpecDTO.class);
 
-		IdResult response = service.createDeviceSpec(deviceSpecDTO);
+		IdResult response = financialSoapService.createDeviceSpec(deviceSpecDTO);
 
 		assertNotNull(response.getId());
 
@@ -102,7 +102,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testUpdateDeviceSpec() {
 
-		DTOResult<DeviceSpecDTO> response = service.findDeviceSpec(id);
+		DTOResult<DeviceSpecDTO> response = financialSoapService.findDeviceSpec(id);
 
 		DeviceSpecDTO deviceSpecDTO = response.getDto();
 
@@ -112,7 +112,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		deviceSpecDTO.setDescription(RandomData.randomName("description"));
 
-		IdResult result = service.updateDeviceSpec(id, deviceSpecDTO);
+		IdResult result = financialSoapService.updateDeviceSpec(id, deviceSpecDTO);
 
 		assertEquals("0", result.getCode());
 
@@ -121,7 +121,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testDeleteDeviceSpec() {
 
-		IdResult response = service.deleteDeviceSpec(id);
+		IdResult response = financialSoapService.deleteDeviceSpec(id);
 
 		assertNotNull(response.getId());
 
@@ -133,7 +133,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<DeviceSpecDTO> result = service.getDeviceSpecPagination(searchParams, 1, 10);
+		PaginationResult<DeviceSpecDTO> result = financialSoapService.getDeviceSpecPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 

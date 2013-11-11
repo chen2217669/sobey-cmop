@@ -43,12 +43,12 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	public void find() {
 
 		Integer id = 85;
-		DTOResult<CompanyDTO> response = service.findCompany(id);
+		DTOResult<CompanyDTO> response = cmdbuildSoapService.findCompany(id);
 		assertEquals("code9701", response.getDto().getCode());
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 		searchParams.put("EQ_zip", "zip");
-		DTOResult<CompanyDTO> responseParams = service.findCompanyByParams(searchParams);
+		DTOResult<CompanyDTO> responseParams = cmdbuildSoapService.findCompanyByParams(searchParams);
 		assertEquals("code9701", responseParams.getDto().getCode());
 	}
 
@@ -56,7 +56,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void getList() {
 		Map<String, Object> searchParams = Maps.newHashMap();
-		DTOListResult<CompanyDTO> result = service.getCompanyList(searchParams);
+		DTOListResult<CompanyDTO> result = cmdbuildSoapService.getCompanyList(searchParams);
 		System.out.println("获得集合数量:" + result.getDtos().size());
 		assertEquals("0", result.getCode());
 	}
@@ -66,7 +66,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	public void save() {
 		Company company = TestData.randomCompany();
 		CompanyDTO companyDTO = BeanMapper.map(company, CompanyDTO.class);
-		IdResult response = service.createCompany(companyDTO);
+		IdResult response = cmdbuildSoapService.createCompany(companyDTO);
 		assertNotNull(response.getId());
 	}
 
@@ -75,11 +75,11 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	public void update() {
 
 		Integer id = 86;
-		DTOResult<CompanyDTO> response = service.findCompany(id);
+		DTOResult<CompanyDTO> response = cmdbuildSoapService.findCompany(id);
 		CompanyDTO companyDTO = response.getDto();
 		companyDTO.setCode("coder");
 		companyDTO.setDescription("我是超人啊~!");
-		IdResult result = service.updateCompany(id, companyDTO);
+		IdResult result = cmdbuildSoapService.updateCompany(id, companyDTO);
 		assertNotNull(result.getId());
 	}
 
@@ -87,7 +87,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void delete() {
 		Integer id = 138;
-		IdResult response = service.deleteCompany(id);
+		IdResult response = cmdbuildSoapService.deleteCompany(id);
 		assertNotNull(response.getId());
 	}
 
@@ -103,7 +103,7 @@ public class CompanySoapTest extends BaseFunctionalTestCase {
 		 */
 		// searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
 
-		PaginationResult<CompanyDTO> result = service.getCompanyPagination(searchParams, 1, 10);
+		PaginationResult<CompanyDTO> result = cmdbuildSoapService.getCompanyPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());

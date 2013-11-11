@@ -42,7 +42,7 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void getList() {
 		Map<String, Object> searchParams = Maps.newHashMap();
-		DTOListResult<TagDTO> result = service.getTagList(searchParams);
+		DTOListResult<TagDTO> result = cmdbuildSoapService.getTagList(searchParams);
 		assertEquals("0", result.getCode());
 	}
 
@@ -51,7 +51,7 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	public void save() {
 		Tag tag = TestData.randomTag();
 		TagDTO tagDTO = BeanMapper.map(tag, TagDTO.class);
-		IdResult response = service.createTag(tagDTO);
+		IdResult response = cmdbuildSoapService.createTag(tagDTO);
 		assertNotNull(response.getId());
 	}
 
@@ -59,12 +59,12 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void update() {
 		Integer id = 220;
-		DTOResult<TagDTO> response = service.findTag(id);
+		DTOResult<TagDTO> response = cmdbuildSoapService.findTag(id);
 		TagDTO tagDTO = response.getDto();
 		tagDTO.setCode("code137");
 		tagDTO.setDescription("冬天来了啊");
 		tagDTO.setTenants(217);
-		IdResult result = service.updateTag(id, tagDTO);
+		IdResult result = cmdbuildSoapService.updateTag(id, tagDTO);
 		assertNotNull(result.getId());
 	}
 
@@ -72,7 +72,7 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void delete() {
 		Integer id = 102;
-		IdResult response = service.deleteTag(id);
+		IdResult response = cmdbuildSoapService.deleteTag(id);
 		assertNotNull(response.getId());
 	}
 
@@ -84,7 +84,7 @@ public class TagSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_company", 87);
 
-		PaginationResult<TagDTO> result = service.getTagPagination(searchParams, 1, 10);
+		PaginationResult<TagDTO> result = cmdbuildSoapService.getTagPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());

@@ -53,13 +53,13 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<Es3SpecDTO> responseParams = service.findEs3SpecByParams(searchParams);
+		DTOResult<Es3SpecDTO> responseParams = financialSoapService.findEs3SpecByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<Es3SpecDTO> response = service.findEs3Spec(id);
+		DTOResult<Es3SpecDTO> response = financialSoapService.findEs3Spec(id);
 
 		assertNotNull(response);
 
@@ -73,7 +73,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<Es3SpecDTO> result = service.getEs3SpecList(searchParams);
+		DTOListResult<Es3SpecDTO> result = financialSoapService.getEs3SpecList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
@@ -89,7 +89,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		Es3SpecDTO es3SpecDTO = BeanMapper.map(es3Spec, Es3SpecDTO.class);
 
-		IdResult response = service.createEs3Spec(es3SpecDTO);
+		IdResult response = financialSoapService.createEs3Spec(es3SpecDTO);
 
 		assertNotNull(response.getId());
 
@@ -101,7 +101,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testUpdateEs3Spec() {
 
-		DTOResult<Es3SpecDTO> response = service.findEs3Spec(id);
+		DTOResult<Es3SpecDTO> response = financialSoapService.findEs3Spec(id);
 
 		Es3SpecDTO es3SpecDTO = response.getDto();
 
@@ -109,7 +109,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		es3SpecDTO.setDescription(RandomData.randomName("update"));
 
-		IdResult result = service.updateEs3Spec(id, es3SpecDTO);
+		IdResult result = financialSoapService.updateEs3Spec(id, es3SpecDTO);
 
 		assertEquals("0", result.getCode());
 
@@ -119,7 +119,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testDeleteEs3Spec() {
 
-		IdResult response = service.deleteEs3Spec(id);
+		IdResult response = financialSoapService.deleteEs3Spec(id);
 
 		assertNotNull(response.getId());
 
@@ -131,7 +131,7 @@ public class Es3SpecSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<Es3SpecDTO> result = service.getEs3SpecPagination(searchParams, 1, 10);
+		PaginationResult<Es3SpecDTO> result = financialSoapService.getEs3SpecPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 
