@@ -11,10 +11,10 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<sobey-cmop.version>0.0.1-SNAPSHOT</sobey-cmop.version>
-		<spring.version>3.2.4.RELEASE</spring.version>
-		<hibernate.version>4.2.6.Final</hibernate.version>
+		<spring.version>3.2.5.RELEASE</spring.version>
+		<hibernate.version>4.2.7.Final</hibernate.version>
 		<mybatis.version>3.2.3</mybatis.version>
-		<spring-data-jpa.version>1.4.1.RELEASE</spring-data-jpa.version>
+		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
 		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<shiro.version>1.2.2</shiro.version>

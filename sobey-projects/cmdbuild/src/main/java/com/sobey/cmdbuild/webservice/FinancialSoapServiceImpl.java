@@ -223,8 +223,11 @@ public class FinancialSoapServiceImpl extends BasicSoapSevcie implements Financi
 
 	@Override
 	public IdResult settleConsumptions(Integer cid, Integer tid) {
+
 		IdResult result = new IdResult();
+
 		try {
+
 			Validate.notNull(cid, ERROR.INPUT_NULL);
 			Validate.notNull(tid, ERROR.INPUT_NULL);
 
@@ -232,14 +235,15 @@ public class FinancialSoapServiceImpl extends BasicSoapSevcie implements Financi
 			Validate.notNull(tenants, ERROR.OBJECT_NULL);
 
 			Consumptions consumptions = comm.consumptionsService.findConsumptions(cid);
+
 			Validate.notNull(consumptions, ERROR.OBJECT_NULL);
 
+			// 更新租户的余额.
 			tenants.setAccontBalance(MathsUtil.sub(tenants.getAccontBalance(), consumptions.getSpending()));
 
-			// 更新订单状态为活跃
-			consumptions.setStatus(CMDBuildConstants.STATUS_ACTIVE);
+			// TODO更新订单状态为"完成",从lookup中读取"完成"状态的ID.
+			consumptions.setConsumptionsStatus(42);
 
-			// 保存信息
 			comm.tenantsService.saveOrUpdate(tenants);
 
 			comm.consumptionsService.saveOrUpdate(consumptions);

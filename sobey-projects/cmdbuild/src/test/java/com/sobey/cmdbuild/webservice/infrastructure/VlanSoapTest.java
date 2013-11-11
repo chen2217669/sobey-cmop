@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.infrastructure;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)

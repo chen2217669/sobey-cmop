@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.financial;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +40,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 		testGetDeviceSpecList();
 		testGetDeviceSpecPagination();
 		testUpdateDeviceSpec();
-		//testDeleteDeviceSpec();
+		// testDeleteDeviceSpec();
 
 	}
 
@@ -51,56 +53,56 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<DeviceSpecDTO> responseParams = service.findDeviceSpecByParams(searchParams);
+		DTOResult<DeviceSpecDTO> responseParams = financialSoapService.findDeviceSpecByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<DeviceSpecDTO> response = service.findDeviceSpec(id);
+		DTOResult<DeviceSpecDTO> response = financialSoapService.findDeviceSpec(id);
 
 		assertNotNull(response);
 
 		System.out.println(id + ">>>>>>>>>>>>>");
 
 	}
-	
+
 	// @Test
 	// @Ignore
 	public void testGetDeviceSpecList() {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<DeviceSpecDTO> result = service.getDeviceSpecList(searchParams);
+		DTOListResult<DeviceSpecDTO> result = financialSoapService.getDeviceSpecList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
-	 @Test
+	}
+
+	@Test
 	// @Ignore
 	public void testCreateDeviceSpec() {
 
 		DeviceSpec deviceSpec = TestData.randomDeviceSpec();
-		//deviceSpec.setCode("code7473");
+		// deviceSpec.setCode("code7473");
 
 		DeviceSpecDTO deviceSpecDTO = BeanMapper.map(deviceSpec, DeviceSpecDTO.class);
 
-		IdResult response = service.createDeviceSpec(deviceSpecDTO);
+		IdResult response = financialSoapService.createDeviceSpec(deviceSpecDTO);
 
 		assertNotNull(response.getId());
 
 		code = deviceSpec.getCode();// 设置code
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testUpdateDeviceSpec() {
 
-		DTOResult<DeviceSpecDTO> response = service.findDeviceSpec(id);
+		DTOResult<DeviceSpecDTO> response = financialSoapService.findDeviceSpec(id);
 
 		DeviceSpecDTO deviceSpecDTO = response.getDto();
 
@@ -110,7 +112,7 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 
 		deviceSpecDTO.setDescription(RandomData.randomName("description"));
 
-		IdResult result = service.updateDeviceSpec(id, deviceSpecDTO);
+		IdResult result = financialSoapService.updateDeviceSpec(id, deviceSpecDTO);
 
 		assertEquals("0", result.getCode());
 
@@ -119,19 +121,19 @@ public class DeviceSpecSoapTest extends BaseFunctionalTestCase {
 	// @Ignore
 	public void testDeleteDeviceSpec() {
 
-		IdResult response = service.deleteDeviceSpec(id);
+		IdResult response = financialSoapService.deleteDeviceSpec(id);
 
 		assertNotNull(response.getId());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetDeviceSpecPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<DeviceSpecDTO> result = service.getDeviceSpecPagination(searchParams, 1, 10);
+		PaginationResult<DeviceSpecDTO> result = financialSoapService.getDeviceSpecPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 

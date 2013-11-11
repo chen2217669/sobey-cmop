@@ -173,7 +173,7 @@ public class TestData {
 		eip.setCode(RandomData.randomName("code10"));
 		eip.setDescription(RandomData.randomName("description"));
 		eip.setPrice(RandomData.randomDouble());
-		
+
 		eip.setRemark(RandomData.randomName("remark"));
 		eip.setBrand(0);
 

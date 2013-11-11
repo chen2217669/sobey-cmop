@@ -39,14 +39,14 @@ public class LookUpSoapTest extends BaseFunctionalTestCase {
 	@Ignore
 	public void find() {
 		Integer id = 70;
-		DTOResult<LookUpDTO> response = service.findLookUp(id);
+		DTOResult<LookUpDTO> response = cmdbuildSoapService.findLookUp(id);
 		assertEquals("CentOS 6.4 64bit", response.getDto().getDescription());
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 		searchParams.put("EQ_type", LookUpEnum.Image.name());
 		searchParams.put("EQ_description", "CentOS 6.4 64bit");
 
-		DTOResult<LookUpDTO> responseParams = service.findLookUpByParams(searchParams);
+		DTOResult<LookUpDTO> responseParams = cmdbuildSoapService.findLookUpByParams(searchParams);
 		assertEquals("CentOS 6.4 64bit", responseParams.getDto().getDescription());
 	}
 
@@ -56,7 +56,7 @@ public class LookUpSoapTest extends BaseFunctionalTestCase {
 		Map<String, Object> searchParams = Maps.newHashMap();
 		searchParams.put("EQ_type", LookUpEnum.Image.name());
 
-		DTOListResult<LookUpDTO> result = service.getLookUpList(searchParams);
+		DTOListResult<LookUpDTO> result = cmdbuildSoapService.getLookUpList(searchParams);
 		System.out.println("获得集合数量:" + result.getDtos().size());
 		assertEquals("0", result.getCode());
 	}
@@ -67,7 +67,7 @@ public class LookUpSoapTest extends BaseFunctionalTestCase {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<LookUpDTO> result = service.getLookUpPagination(searchParams, 2, 10);
+		PaginationResult<LookUpDTO> result = cmdbuildSoapService.getLookUpPagination(searchParams, 2, 10);
 
 		assertNotNull(result.getGetTotalElements());
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());

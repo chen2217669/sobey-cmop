@@ -70,7 +70,7 @@ public class InfrastructureSoapServiceImpl extends BasicSoapSevcie implements In
 	 * CMDBuild的默认超级用户名
 	 */
 	private static final String DEFAULT_USER = "admin";
-	
+
 	@Override
 	public DTOResult<FimasDTO> findFimas(@WebParam(name = "id") Integer id) {
 		DTOResult<FimasDTO> result = new DTOResult<FimasDTO>();

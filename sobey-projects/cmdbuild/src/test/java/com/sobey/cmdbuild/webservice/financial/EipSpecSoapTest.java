@@ -2,14 +2,17 @@ package com.sobey.cmdbuild.webservice.financial;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
 import com.google.common.collect.Maps;
 import com.sobey.cmdbuild.BaseFunctionalTestCase;
 import com.sobey.cmdbuild.data.TestData;
@@ -20,7 +23,6 @@ import com.sobey.cmdbuild.webservice.response.result.DTOResult;
 import com.sobey.cmdbuild.webservice.response.result.IdResult;
 import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 import com.sobey.core.mapper.BeanMapper;
-import com.sobey.core.utils.TableNameUtil;
 import com.sobey.test.data.RandomData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +40,7 @@ public class EipSpecSoapTest extends BaseFunctionalTestCase {
 		testGetEipSpecList();
 		testGetEipSpecPagination();
 		testUpdateEipSpec();
-		//testDeleteEipSpec();
+		// testDeleteEipSpec();
 
 	}
 
@@ -51,34 +53,34 @@ public class EipSpecSoapTest extends BaseFunctionalTestCase {
 
 		searchParams.put("EQ_code", code);
 
-		DTOResult<EipSpecDTO> responseParams = service.findEipSpecByParams(searchParams);
+		DTOResult<EipSpecDTO> responseParams = financialSoapService.findEipSpecByParams(searchParams);
 
 		assertEquals(code, responseParams.getDto().getCode());
 
 		id = responseParams.getDto().getId();// 设置id
 
-		DTOResult<EipSpecDTO> response = service.findEipSpec(id);
+		DTOResult<EipSpecDTO> response = financialSoapService.findEipSpec(id);
 
 		assertNotNull(response);
 
 		System.out.println(id + ">>>>>>>>>>>>>");
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetEipSpecList() {
 
 		Map<String, Object> searchParams = Maps.newHashMap();
 
-		DTOListResult<EipSpecDTO> result = service.getEipSpecList(searchParams);
+		DTOListResult<EipSpecDTO> result = financialSoapService.getEipSpecList(searchParams);
 
 		System.out.println("返回的查询结果数量:" + result.getDtos().size());
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testCreateEipSpec() {
@@ -87,19 +89,19 @@ public class EipSpecSoapTest extends BaseFunctionalTestCase {
 
 		EipSpecDTO eipSpecDTO = BeanMapper.map(eipSpec, EipSpecDTO.class);
 
-		IdResult response = service.createEipSpec(eipSpecDTO);
+		IdResult response = financialSoapService.createEipSpec(eipSpecDTO);
 
 		assertNotNull(response.getId());
 
 		code = eipSpec.getCode();// 设置code
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testUpdateEipSpec() {
 
-		DTOResult<EipSpecDTO> response = service.findEipSpec(id);
+		DTOResult<EipSpecDTO> response = financialSoapService.findEipSpec(id);
 
 		EipSpecDTO eipSpecDTO = response.getDto();
 
@@ -107,29 +109,29 @@ public class EipSpecSoapTest extends BaseFunctionalTestCase {
 
 		eipSpecDTO.setDescription(RandomData.randomName("update"));
 
-		IdResult result = service.updateEipSpec(id, eipSpecDTO);
+		IdResult result = financialSoapService.updateEipSpec(id, eipSpecDTO);
 
 		assertEquals("0", result.getCode());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testDeleteEipSpec() {
 
-		IdResult response = service.deleteEipSpec(id);
+		IdResult response = financialSoapService.deleteEipSpec(id);
 
 		assertNotNull(response.getId());
 
-	} 
-	
+	}
+
 	// @Test
 	// @Ignore
 	public void testGetEipSpecPagination() {
 
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		PaginationResult<EipSpecDTO> result = service.getEipSpecPagination(searchParams, 1, 10);
+		PaginationResult<EipSpecDTO> result = financialSoapService.getEipSpecPagination(searchParams, 1, 10);
 
 		assertNotNull(result.getGetTotalElements());
 
