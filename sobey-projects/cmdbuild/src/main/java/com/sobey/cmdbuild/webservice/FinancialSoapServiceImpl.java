@@ -223,11 +223,11 @@ public class FinancialSoapServiceImpl extends BasicSoapSevcie implements Financi
 
 	@Override
 	public IdResult settleConsumptions(Integer cid, Integer tid) {
-		
+
 		IdResult result = new IdResult();
-		
+
 		try {
-			
+
 			Validate.notNull(cid, ERROR.INPUT_NULL);
 			Validate.notNull(tid, ERROR.INPUT_NULL);
 

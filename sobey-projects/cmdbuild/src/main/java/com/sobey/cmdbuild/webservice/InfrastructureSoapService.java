@@ -35,6 +35,14 @@ import com.sobey.cmdbuild.webservice.response.result.PaginationResult;
 @WebService(name = "InfrastructureService", targetNamespace = WsConstants.NS)
 public interface InfrastructureSoapService {
 
+	/*************************************************
+	 *************** Infrastructure ********************
+	 *************************************************/
+
+	// ==============================//
+	// =========== Fimas ===========//
+	// ==============================//
+
 	DTOResult<FimasDTO> findFimas(@WebParam(name = "id") Integer id);
 
 	DTOResult<FimasDTO> findFimasByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -49,6 +57,10 @@ public interface InfrastructureSoapService {
 
 	PaginationResult<FimasDTO> getFimasPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========== FimasBox ==========//
+	// ==============================//
 
 	DTOResult<FimasBoxDTO> findFimasBox(@WebParam(name = "id") Integer id);
 
@@ -65,6 +77,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<FimasBoxDTO> getFimasBoxPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========== FimasPort =========//
+	// ==============================//
 
 	DTOResult<FimasPortDTO> findFimasPort(@WebParam(name = "id") Integer id);
 
@@ -83,6 +99,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// ========== Firewall ==========//
+	// ==============================//
+
 	DTOResult<FirewallDTO> findFirewall(@WebParam(name = "id") Integer id);
 
 	DTOResult<FirewallDTO> findFirewallByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -98,6 +118,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<FirewallDTO> getFirewallPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ======== FirewallPort ========//
+	// ==============================//
 
 	DTOResult<FirewallPortDTO> findFirewallPort(@WebParam(name = "id") Integer id);
 
@@ -117,6 +141,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// ========== HardDisk ==========//
+	// ==============================//
+
 	DTOResult<HardDiskDTO> findHardDisk(@WebParam(name = "id") Integer id);
 
 	DTOResult<HardDiskDTO> findHardDiskByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -132,6 +160,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<HardDiskDTO> getHardDiskPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========== Ipaddress =========//
+	// ==============================//
 
 	DTOResult<IpaddressDTO> findIpaddress(@WebParam(name = "id") Integer id);
 
@@ -177,6 +209,10 @@ public interface InfrastructureSoapService {
 	 */
 	IdResult initIPAddress(@WebParam(name = "id") Integer id);
 
+	// ==============================//
+	// ======== LoadBalancer ========//
+	// ==============================//
+
 	DTOResult<LoadBalancerDTO> findLoadBalancer(@WebParam(name = "id") Integer id);
 
 	DTOResult<LoadBalancerDTO> findLoadBalancerByParams(
@@ -194,6 +230,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<LoadBalancerDTO> getLoadBalancerPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ====== LoadBalancerPort ======//
+	// ==============================//
 
 	DTOResult<LoadBalancerPortDTO> findLoadBalancerPort(@WebParam(name = "id") Integer id);
 
@@ -214,6 +254,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// =========== Memory ===========//
+	// ==============================//
+
 	DTOResult<MemoryDTO> findMemory(@WebParam(name = "id") Integer id);
 
 	DTOResult<MemoryDTO> findMemoryByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -228,6 +272,10 @@ public interface InfrastructureSoapService {
 
 	PaginationResult<MemoryDTO> getMemoryPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========== NetappBox =========//
+	// ==============================//
 
 	DTOResult<NetappBoxDTO> findNetappBox(@WebParam(name = "id") Integer id);
 
@@ -245,6 +293,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<NetappBoxDTO> getNetappBoxPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ====== NetappController ======//
+	// ==============================//
 
 	DTOResult<NetappControllerDTO> findNetappController(@WebParam(name = "id") Integer id);
 
@@ -265,6 +317,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// ========== NetappPort ========//
+	// ==============================//
+
 	DTOResult<NetappPortDTO> findNetappPort(@WebParam(name = "id") Integer id);
 
 	DTOResult<NetappPortDTO> findNetappPortByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -282,6 +338,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// ============== Nic ===========//
+	// ==============================//
+
 	DTOResult<NicDTO> findNic(@WebParam(name = "id") Integer id);
 
 	DTOResult<NicDTO> findNicByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -296,6 +356,10 @@ public interface InfrastructureSoapService {
 
 	PaginationResult<NicDTO> getNicPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ============ NicPort =========//
+	// ==============================//
 
 	DTOResult<NicPortDTO> findNicPort(@WebParam(name = "id") Integer id);
 
@@ -313,6 +377,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// ============ Server ==========//
+	// ==============================//
+
 	DTOResult<ServerDTO> findServer(@WebParam(name = "id") Integer id);
 
 	DTOResult<ServerDTO> findServerByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -327,6 +395,10 @@ public interface InfrastructureSoapService {
 
 	PaginationResult<ServerDTO> getServerPagination(@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========== ServerPort ========//
+	// ==============================//
 
 	DTOResult<ServerPortDTO> findServerPort(@WebParam(name = "id") Integer id);
 
@@ -345,6 +417,10 @@ public interface InfrastructureSoapService {
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
 
+	// ==============================//
+	// =========== Switches =========//
+	// ==============================//
+
 	DTOResult<SwitchesDTO> findSwitches(@WebParam(name = "id") Integer id);
 
 	DTOResult<SwitchesDTO> findSwitchesByParams(@WebParam(name = "searchParams") Map<String, Object> searchParams);
@@ -360,6 +436,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<SwitchesDTO> getSwitchesPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ========= SwitchPort =========//
+	// ==============================//
 
 	DTOResult<SwitchPortDTO> findSwitchPort(@WebParam(name = "id") Integer id);
 
@@ -377,6 +457,10 @@ public interface InfrastructureSoapService {
 	PaginationResult<SwitchPortDTO> getSwitchPortPagination(
 			@WebParam(name = "searchParams") Map<String, Object> searchParams,
 			@WebParam(name = "pageNumber") Integer pageNumber, @WebParam(name = "pageSize") Integer pageSize);
+
+	// ==============================//
+	// ============ Vlan ============//
+	// ==============================//
 
 	DTOResult<VlanDTO> findVlan(@WebParam(name = "id") Integer id);
 
