@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.organisation;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Tenants;
 import com.sobey.cmdbuild.repository.TenantsDao;
@@ -26,7 +24,6 @@ import com.sobey.core.persistence.SearchFilter;
 @Service
 @Transactional
 public class TenantsService extends BasicSevcie {
-
 	@Autowired
 	private TenantsDao tenantsDao;
 
@@ -51,7 +48,7 @@ public class TenantsService extends BasicSevcie {
 	 * 
 	 * @param searchParams
 	 *            动态查询条件Map
-	 * @return
+	 * @return Tenants
 	 */
 	public Tenants findTenants(Map<String, Object> searchParams) {
 		return tenantsDao.findOne(buildSpecification(searchParams));
@@ -60,7 +57,7 @@ public class TenantsService extends BasicSevcie {
 	/**
 	 * 新增、保存对象
 	 * 
-	 * @param tenants
+	 * @param Tenants
 	 * @return Tenants
 	 */
 	public Tenants saveOrUpdate(Tenants tenants) {
@@ -86,8 +83,7 @@ public class TenantsService extends BasicSevcie {
 	 * </pre>
 	 * 
 	 * @param searchParams
-	 *            动态查询条件Map
-	 * @return List<Tenants>
+	 *            动态查询条件Map * @return List<Tenants>
 	 */
 	public List<Tenants> getTenantsList(Map<String, Object> searchParams) {
 		return tenantsDao.findAll(buildSpecification(searchParams));
@@ -111,9 +107,9 @@ public class TenantsService extends BasicSevcie {
 	}
 
 	/**
-	 * 创建动态查询条件组合.默认获得状态为"A"的有效对象.
+	 * 创建动态查询条件组合.
 	 * 
-	 * 自定义的查询在此进行组合.
+	 * 自定义的查询在此进行组合.默认获得状态为"A"的有效对象.
 	 * 
 	 * @param searchParams
 	 * @return Specification<Tenants>

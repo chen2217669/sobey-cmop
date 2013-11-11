@@ -1,5 +1,6 @@
 package com.sobey.test.data;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +19,26 @@ public class RandomData {
 	 */
 	public static long randomId() {
 		return random.nextLong();
+	}
+
+	/**
+	 * 随机int
+	 * 
+	 * @return
+	 */
+	public static int randomInt() {
+		return random.nextInt(10000);
+	}
+
+	/**
+	 * 随机double
+	 * 
+	 * @return
+	 */
+	public static double randomDouble() {
+		double d = random.nextDouble() * 1000;
+		BigDecimal b1 = new BigDecimal(Double.toString(d));
+		return b1.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 	/**

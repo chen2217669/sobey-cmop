@@ -12,6 +12,7 @@ import com.sobey.cmdbuild.webservice.response.dto.DeviceSpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.EcsSpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.EipSpecDTO;
 import com.sobey.cmdbuild.webservice.response.dto.Es3SpecDTO;
+import com.sobey.cmdbuild.webservice.response.dto.FimasPortDTO;
 import com.sobey.cmdbuild.webservice.response.dto.IdcDTO;
 import com.sobey.cmdbuild.webservice.response.dto.LookUpDTO;
 import com.sobey.cmdbuild.webservice.response.dto.RackDTO;

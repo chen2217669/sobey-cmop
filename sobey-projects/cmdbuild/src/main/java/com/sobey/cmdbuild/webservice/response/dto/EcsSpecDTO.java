@@ -14,26 +14,22 @@ import com.sobey.cmdbuild.constants.WsConstants;
 public class EcsSpecDTO {
 
 	private Date beginDate;
+	private Integer brand;
 	private String code;
 	private Integer cpuNumber;
 	private String description;
 	private String diskSize;
 	private Integer id;
-	private String memory;
+	private Integer memory;
 	private Double price;
 	private String remark;
-	private Integer brand;
-
-	public Integer getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Integer brand) {
-		this.brand = brand;
-	}
 
 	public Date getBeginDate() {
 		return beginDate;
+	}
+
+	public Integer getBrand() {
+		return brand;
 	}
 
 	public String getCode() {
@@ -56,7 +52,7 @@ public class EcsSpecDTO {
 		return id;
 	}
 
-	public String getMemory() {
+	public Integer getMemory() {
 		return memory;
 	}
 
@@ -70,6 +66,10 @@ public class EcsSpecDTO {
 
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
+	}
+
+	public void setBrand(Integer brand) {
+		this.brand = brand;
 	}
 
 	public void setCode(String code) {
@@ -92,7 +92,7 @@ public class EcsSpecDTO {
 		this.id = id;
 	}
 
-	public void setMemory(String memory) {
+	public void setMemory(Integer memory) {
 		this.memory = memory;
 	}
 

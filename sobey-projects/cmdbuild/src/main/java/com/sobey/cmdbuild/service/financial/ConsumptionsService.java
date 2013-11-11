@@ -2,14 +2,12 @@ package com.sobey.cmdbuild.service.financial;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sobey.cmdbuild.constants.CMDBuildConstants;
 import com.sobey.cmdbuild.entity.Consumptions;
 import com.sobey.cmdbuild.repository.ConsumptionsDao;
@@ -27,7 +25,7 @@ import com.sobey.core.persistence.SearchFilter;
 @Transactional
 public class ConsumptionsService extends BasicSevcie {
 	@Autowired
-	private ConsumptionsDao ConsumptionsDao;
+	private ConsumptionsDao consumptionsDao;
 
 	/**
 	 * 根据ID获得对象
@@ -36,7 +34,7 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @return Consumptions
 	 */
 	public Consumptions findConsumptions(Integer id) {
-		return ConsumptionsDao.findOne(id);
+		return consumptionsDao.findOne(id);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @return Consumptions
 	 */
 	public Consumptions findConsumptions(Map<String, Object> searchParams) {
-		return ConsumptionsDao.findOne(buildSpecification(searchParams));
+		return consumptionsDao.findOne(buildSpecification(searchParams));
 	}
 
 	/**
@@ -62,8 +60,8 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @param Consumptions
 	 * @return Consumptions
 	 */
-	public Consumptions saveOrUpdate(Consumptions Consumptions) {
-		return ConsumptionsDao.save(Consumptions);
+	public Consumptions saveOrUpdate(Consumptions consumptions) {
+		return consumptionsDao.save(consumptions);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @param id
 	 */
 	public void deleteConsumptions(Integer id) {
-		ConsumptionsDao.delete(id);
+		consumptionsDao.delete(id);
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class ConsumptionsService extends BasicSevcie {
 	 *            动态查询条件Map * @return List<Consumptions>
 	 */
 	public List<Consumptions> getConsumptionsList(Map<String, Object> searchParams) {
-		return ConsumptionsDao.findAll(buildSpecification(searchParams));
+		return consumptionsDao.findAll(buildSpecification(searchParams));
 	}
 
 	/**
@@ -100,9 +98,12 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @return Page<Consumptions>
 	 */
 	private Page<Consumptions> getConsumptionsPage(Map<String, Object> searchParams, int pageNumber, int pageSize) {
+
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+
 		Specification<Consumptions> spec = buildSpecification(searchParams);
-		return ConsumptionsDao.findAll(spec, pageRequest);
+
+		return consumptionsDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -114,8 +115,11 @@ public class ConsumptionsService extends BasicSevcie {
 	 * @return Specification<Consumptions>
 	 */
 	private Specification<Consumptions> buildSpecification(Map<String, Object> searchParams) {
+
 		searchParams.put("EQ_status", CMDBuildConstants.STATUS_ACTIVE);
+
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+
 		return DynamicSpecifications.bySearchFilter(filters.values(), Consumptions.class);
 	}
 
@@ -134,8 +138,11 @@ public class ConsumptionsService extends BasicSevcie {
 	 */
 	public PaginationResult<ConsumptionsDTO> getConsumptionsDTOPagination(Map<String, Object> searchParams,
 			int pageNumber, int pageSize) {
+
 		Page<Consumptions> page = getConsumptionsPage(searchParams, pageNumber, pageSize);
+
 		List<ConsumptionsDTO> dtos = BeanMapper.mapList(page.getContent(), ConsumptionsDTO.class);
+
 		return fillPaginationResult(page, dtos);
 	}
 }
