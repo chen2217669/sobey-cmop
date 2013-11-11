@@ -23,19 +23,4 @@ public class CMDBuildConstants {
 	 */
 	public static final Character STATUS_NON_ACTIVE = 'N';
 
-	/**
-	 * 'E' 执行 69
-	 */
-	public static final Character EXECUTION = 'E';
-
-	/**
-	 * 'C' 完成 67
-	 */
-	public static final Character COMPLETE = 'C';
-
-	/**
-	 * 'M' 到期 77
-	 */
-	public static final Character MATURITY = 'M';
-
 }

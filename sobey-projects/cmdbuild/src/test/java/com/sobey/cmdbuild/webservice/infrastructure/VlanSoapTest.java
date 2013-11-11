@@ -3,7 +3,9 @@ package com.sobey.cmdbuild.webservice.infrastructure;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -138,4 +140,32 @@ public class VlanSoapTest extends BaseFunctionalTestCase {
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());
 
 	}
+
+	/**
+	 * 批量添加Vlan
+	 */
+	// @Test
+	// @Ignore
+	public void testInsertVlan() {
+
+		List<VlanDTO> list = new ArrayList<VlanDTO>();
+
+		for (int i = 0; i < 10; i++) {
+
+			Vlan vlan = TestData.randomVlan();
+
+			VlanDTO vlanDTO = BeanMapper.map(vlan, VlanDTO.class);
+
+			list.add(vlanDTO);
+
+		}
+
+		List<IdResult> results = infrastructureService.insertVlan(list);
+
+		for (IdResult idResult : results) {
+			assertEquals("0", idResult.getCode());
+		}
+
+	}
+
 }

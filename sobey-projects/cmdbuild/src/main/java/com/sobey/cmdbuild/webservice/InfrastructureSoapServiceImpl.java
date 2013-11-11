@@ -3911,8 +3911,55 @@ public class InfrastructureSoapServiceImpl extends BasicSoapSevcie implements In
 	}
 
 	@Override
-	public List<IdResult> insertVlan(List<VlanDTO> vlanDTOList) {
-		return null;
+	public List<IdResult> insertVlan(@WebParam(name = "VlanDTOList") List<VlanDTO> vlanDTOList) {
+		IdResult result = new IdResult();
+
+		List<IdResult> results = new ArrayList<IdResult>();
+
+		// 先判断对象是否为空
+		try {
+
+			Validate.notNull(vlanDTOList, ERROR.INPUT_NULL);
+
+			Validate.isTrue(vlanDTOList.size() > 0, ERROR.INPUT_NULL);
+
+		} catch (IllegalArgumentException e) {
+			results.add(handleParameterError(result, e));
+			return results;
+		} catch (RuntimeException e) {
+			results.add(handleGeneralError(result, e));
+			return results;
+		}
+
+		for (VlanDTO vlanDTO : vlanDTOList) {
+
+			try {
+
+				Map<String, Object> searchParams = Maps.newHashMap();
+
+				searchParams.put("EQ_code", vlanDTO.getCode());
+
+				// 验证code是否唯一.如果不为null,添加错误
+				Validate.isTrue(comm.vlanService.findVlan(searchParams) == null, ERROR.OBJECT_DUPLICATE);
+
+				Vlan vlan = BeanMapper.map(vlanDTO, Vlan.class);
+
+				BeanValidators.validateWithException(validator, vlan);
+
+				comm.vlanService.saveOrUpdate(vlan);
+
+				result.setId(0);
+				results.add(result);
+
+			} catch (IllegalArgumentException e) {
+				results.add(handleParameterError(result, e));
+			} catch (RuntimeException e) {
+				results.add(handleGeneralError(result, e));
+			}
+
+		}
+
+		return results;
 	}
 
 }
