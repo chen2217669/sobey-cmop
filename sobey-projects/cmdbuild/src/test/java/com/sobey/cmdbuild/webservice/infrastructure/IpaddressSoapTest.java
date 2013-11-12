@@ -3,7 +3,9 @@ package com.sobey.cmdbuild.webservice.infrastructure;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -138,4 +140,55 @@ public class IpaddressSoapTest extends BaseFunctionalTestCase {
 		System.out.println("返回的查询结果数量:" + result.getGetTotalElements());
 
 	}
+
+	/**
+	 * 批量添加测试，预期返回结果，如果某个添加成功的会返回对应错误
+	 */
+	// @Test
+	// @Ignore
+	public void testInsertIPAddress() {
+
+		List<IpaddressDTO> list = new ArrayList<IpaddressDTO>();
+
+		for (int i = 0; i < 10; i++) {
+
+			Ipaddress ipaddress = TestData.randomIpaddress();
+
+			IpaddressDTO ipaddressDTO = BeanMapper.map(ipaddress, IpaddressDTO.class);
+
+			list.add(ipaddressDTO);
+
+		}
+
+		List<IdResult> results = infrastructureService.insertIPAddress(list);
+
+		for (IdResult idResult : results) {
+			assertEquals("0", idResult.getCode());
+		}
+
+	}
+
+	// @Test
+	// @Ignore
+	public void testInitIPAddress() {
+
+		int id = 0;// Ipaddress对象的id
+
+		IdResult results = infrastructureService.initIPAddress(id);// 设置状态为未使用
+
+		assertEquals("0", results.getCode());
+
+	}
+
+	// @Test
+	// @Ignore
+	public void testAllocateIPAddress() {
+
+		int id = 0;// Ipaddress对象的id
+
+		IdResult results = infrastructureService.allocateIPAddress(id);// 设置状态为使用
+
+		assertEquals("0", results.getCode());
+	}
+
 }
