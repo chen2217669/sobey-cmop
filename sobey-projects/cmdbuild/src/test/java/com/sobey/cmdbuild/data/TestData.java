@@ -1,6 +1,8 @@
 package com.sobey.cmdbuild.data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.sobey.cmdbuild.entity.Company;
 import com.sobey.cmdbuild.entity.Consumptions;
@@ -278,6 +280,14 @@ public class TestData {
 		ipaddress.setCode(RandomData.randomName("code"));
 		ipaddress.setDescription(RandomData.randomName("description"));
 		return ipaddress;
+	}
+
+	public static List<Ipaddress> randomIpaddressList(int loopNum) {
+		List<Ipaddress> list = new ArrayList<Ipaddress>();
+		for (int i = 0; i < loopNum; i++) {
+			list.add(randomIpaddress());
+		}
+		return list;
 	}
 
 	public static LoadBalancer randomLoadBalancer() {
